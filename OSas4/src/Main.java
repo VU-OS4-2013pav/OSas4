@@ -5,7 +5,7 @@ public class Main {
 
 		System.out.println("Hello OS!!!!");
 		System.out.println("Hello OS!!!!");
-
+		int i = 1;
 
 	}
 
