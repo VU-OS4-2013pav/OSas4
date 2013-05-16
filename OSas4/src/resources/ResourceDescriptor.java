@@ -43,7 +43,9 @@ public class ResourceDescriptor {
 			for(i=0; i<VienkartiniuResursuSarasuSarasas.list.size(); i++) {
 				if (VienkartiniuResursuSarasuSarasas.list.get(i).vardas == name) {
 					VienkartiniuResursuSarasuSarasas.list.get(i).resourceList.add(new ResourceDescriptor(name, usable, father, inf));
-					break;
+					System.out.println("asdafjnag");
+					break; 
+					
 				}
 			}
 
