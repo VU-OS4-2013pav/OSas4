@@ -1,2 +1,11 @@
 ./bin/
 *.class
+/Main.java
+
+bin/
+
+bin/**/*
+
+/*.class
+
+.class

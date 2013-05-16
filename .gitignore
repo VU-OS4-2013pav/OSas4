@@ -1,2 +1,4 @@
 /Main.java
 bin/
+bin/
+*.class
