@@ -1,10 +1,9 @@
 package Procesai;
 
+import resources.HDDresource;
+import resources.KanaluIrenginys;
+import resources.VartotojoAtmintis;
+
 
 public class BeginEnd extends ProcessBase {
-	public void run() {
-		Sarasai.st.add("bla");
-		System.out.println(Sarasai.st.get(0));
-		System.out.println("blablabla");
-	}
 }
