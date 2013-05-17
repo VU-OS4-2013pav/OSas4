@@ -1,5 +1,5 @@
 package resourcesINFO;
 
-public class INFOchanDev {
+public class INFOchanDev extends INFO {
 
 }

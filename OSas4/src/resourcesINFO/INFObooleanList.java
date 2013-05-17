@@ -1,5 +1,5 @@
 package resourcesINFO;
 
-public class INFObooleanList {
+public class INFObooleanList extends INFO {
 
 }

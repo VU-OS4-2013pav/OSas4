@@ -1,5 +1,5 @@
 package resourcesINFO;
 
-public class INFOstring {
+public class INFOstring extends INFO {
 
 }
