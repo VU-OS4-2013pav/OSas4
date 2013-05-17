@@ -3,17 +3,20 @@ package resources;
 import java.util.ArrayList;
 import java.util.List;
 
+import Procesai.PPS;
+import Procesai.ProcessBase;
+
 import resourcesINFO.INFO;
 
 public class ResourceDescriptor {
-	static int resourceID = 0;
-	int nameI;
-	String nameO;
-	boolean usedOnce = false; //false - daugkartiniai
-	int nameFather;
-	List<ProcessNeedsResource> lps = new ArrayList<ProcessNeedsResource>();
+	public static int resourceID = 0;
+	public int nameI;
+	public String nameO;
+	public boolean usedOnce = false; //false - daugkartiniai
+	public int nameFather;
+	public List<ProcessNeedsResource> lps = new ArrayList<ProcessNeedsResource>();
 	// TODO (?) paskirstytojo laukas
-	INFO info;
+	public INFO info;
 	
 	public ResourceDescriptor(String name, boolean usable, int father, INFO inf, int id) {
 		nameI = id;
@@ -51,6 +54,37 @@ public class ResourceDescriptor {
 			}
 
 			
+		}
+		
+	}
+	
+	public static void prasytiResurso(String isorinis, int kas, int kiek) {
+		for (int i = 0; i < PPS.list.size(); i++) {
+			if (PPS.list.get(i).nameI == kas) {
+				PPS.list.get(i).busena = ProcessBase.BLOCKED;
+				
+				if ((isorinis == "HDD") || (isorinis == "Kanalu irenginys") || (isorinis == "Vartotojo atmintis")) {
+					switch(isorinis) {
+					case "HDD" :
+						RSS.list.get(0).list.add(new ProcessNeedsResource(PPS.list.get(i), kiek));
+						return;
+					case "Kanalu irenginys" :
+						RSS.list.get(1).list.add(new ProcessNeedsResource(PPS.list.get(i), kiek));
+						return;
+					case "Vartotojo atmintis" :
+						RSS.list.get(2).list.add(new ProcessNeedsResource(PPS.list.get(i), kiek));
+						return;
+					}
+				}
+				else {
+					for (int j = 0; j < VRSS.list.size(); j++) {
+						if (VRSS.list.get(j).vardas == isorinis) {
+							VRSS.list.get(j).processList.add(new ProcessNeedsResource(PPS.list.get(i), kiek));
+							return;
+						}
+					}
+				}
+			}
 		}
 		
 	}

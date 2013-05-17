@@ -5,12 +5,13 @@ import java.util.List;
 
 public abstract class ProcessBase {
 	//Procesø bûsenos
-	protected final String READYS = "READYS";
-	protected final String READY = "READY";
-	protected final String RUN = "RUN";
-	protected final String BLOCKS = "BLOCKS";
-	protected final String BLOCKED = "BLOCKED";
+	public static final String READYS = "READYS";
+	public static final String READY = "READY";
+	public static final String RUN = "RUN";
+	public static final String BLOCKS = "BLOCKS";
+	public static final String BLOCKED = "BLOCKED";
 	
+	public int vieta = 0;
 	public int nameI; //proceso vidinis vardas
 	public String nameO; //iðorinis vardas
 	public Object[] cpu = new Object[12]; //visi procesoriaus registrai
@@ -32,4 +33,5 @@ public abstract class ProcessBase {
 	public String toString() {
 		return String.format("nameI=%s \n nameO=%s \n busena=%s \n father=%s \n prioritetas=%s", nameI, nameO, busena, father, prioritetas);
 	}
+	
 }

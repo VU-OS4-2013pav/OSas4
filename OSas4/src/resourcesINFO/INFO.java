@@ -1,5 +1,7 @@
 package resourcesINFO;
 
-public class INFO {
+import java.util.List;
 
+public class INFO {
+	public Object o;
 }

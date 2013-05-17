@@ -4,14 +4,12 @@ import resources.ProcessNeedsResource;
 import resources.ResourceDescriptor;
 import resources.VRSS;
 import resourcesINFO.INFO;
-import resourcesINFO.INFOboolean;
 import resourcesINFO.INFOhdd;
-import resourcesINFO.INFOint;
 import resourcesINFO.INFOuserMemory;
+import resourcesINFO.INFOv;
 
 
 public class BeginEnd extends ProcessBase {
-	int vieta = 0;
 	@Override
 	public void execute() {	
 		switch (vieta) {
@@ -25,7 +23,7 @@ public class BeginEnd extends ProcessBase {
 			
 		//Sukuriami daugkartinio panaudojimo resursai
 			ResourceDescriptor.sukurtiResursa("HDD", false, this.nameI, new INFOhdd());
-			ResourceDescriptor.sukurtiResursa("Kanalu irenginys", false, this.nameI, new INFOboolean(true));
+			ResourceDescriptor.sukurtiResursa("Kanalu irenginys", false, this.nameI, new INFOv());
 			ResourceDescriptor.sukurtiResursa("Vartotojo atmintis", false, this.nameI, new INFOuserMemory());
 			
 		//Sukuriami sisteminiai procesai
