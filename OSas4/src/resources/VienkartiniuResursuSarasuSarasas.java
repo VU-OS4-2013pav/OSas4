@@ -59,7 +59,7 @@ public class VienkartiniuResursuSarasuSarasas {
 	
 	public static void print(int i) {
 		for (int j=0; j<list.get(i).resourceList.size(); j++) {
-			System.out.println(list.get(i).resourceList.get(j).nameO);
+			System.out.println(list.get(i).resourceList.get(j).nameO+"||| id: "+list.get(i).resourceList.get(j).nameI);
 		}
 	}
 }
