@@ -4,7 +4,7 @@ import resources.ProcessNeedsResource;
 import resources.ResourceDescriptor;
 import resources.VienkartiniuResursuSarasuSarasas;
 import resourcesINFO.INFO;
-import resourcesINFO.INFOintBoolean;
+import resourcesINFO.INFOint;
 
 
 public class BeginEnd extends ProcessBase {
@@ -12,7 +12,7 @@ public class BeginEnd extends ProcessBase {
 	public void execute() {
 		VienkartiniuResursuSarasuSarasas.initialiseVRSS();
 		
-		INFO in = new INFOintBoolean();
+		INFO in = new INFOint(0);
 		
 	//Sukuriami daugkartinio panaudojimo resursai
 		ResourceDescriptor.sukurtiResursa("HDD", false, 1, in);
