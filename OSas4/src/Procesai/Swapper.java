@@ -1,7 +1,7 @@
 package Procesai;
 
 
-public class Snapper extends ProcessBase {
+public class Swapper extends ProcessBase {
 	@Override
 	public void execute() {
 		// TODO Auto-generated method stub

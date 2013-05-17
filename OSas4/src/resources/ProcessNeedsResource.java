@@ -3,6 +3,11 @@ package resources;
 import Procesai.ProcessBase;
 
 public class ProcessNeedsResource {
-	ProcessBase process;
-	int HowMuchResourceItNeeds;
+	public ProcessBase process;
+	public int howMuchResourceItNeeds;
+	
+	public ProcessNeedsResource(ProcessBase process, int howMuch) {
+		this.process = process;
+		this.howMuchResourceItNeeds = howMuch;
+	}
 }

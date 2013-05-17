@@ -1,3 +1,4 @@
+import Procesai.BeginEnd;
 import resources.ResourceDescriptor;
 import resources.ResursuSarasuSarasas;
 import resources.VienkartiniuResursuSarasuSarasas;
@@ -8,7 +9,7 @@ import resourcesINFO.INFOintBoolean;
 public class Main {
 
 	public static void main(String[] args) {
-		VienkartiniuResursuSarasuSarasas.initialiseVRSS();
+		/*VienkartiniuResursuSarasuSarasas.initialiseVRSS();
 		
 		INFO in = new INFOintBoolean();
 		ResourceDescriptor.sukurtiResursa("VM nori ivedimoafwjlbawjlf", false, 1, in);
@@ -25,9 +26,9 @@ public class Main {
 			VienkartiniuResursuSarasuSarasas.print(i);
 		}
 		
-		System.out.println("");
+		System.out.println("");*/
 
-		
+		(new BeginEnd()).execute();
 
 	}
 
