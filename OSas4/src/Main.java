@@ -2,7 +2,7 @@ import resources.ResourceDescriptor;
 import resources.ResursuSarasuSarasas;
 import resources.VienkartiniuResursuSarasuSarasas;
 import resourcesINFO.INFO;
-import resourcesINFO.INFOintBoolean;
+import resourcesINFO.INFOboolean;
 
 
 public class Main {
@@ -10,7 +10,7 @@ public class Main {
 	public static void main(String[] args) {
 		VienkartiniuResursuSarasuSarasas.initialiseVRSS();
 		
-		INFO in = new INFOintBoolean();
+		INFO in = new INFOboolean(new Boolean(true));
 		ResourceDescriptor.sukurtiResursa("VM nori ivedimoafwjlbawjlf", false, 1, in);
 		ResourceDescriptor.sukurtiResursa("InputStream pabaiga", true, 1, in);
 		ResourceDescriptor.sukurtiResursa("InputStream pabaigaasljfbasdlja", false, 2, in);
