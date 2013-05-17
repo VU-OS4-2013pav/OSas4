@@ -29,23 +29,23 @@ public class ResourceDescriptor {
 		
 		if (usable == false) {	
 			boolean freeSpot = false;
-			for(i=0; i<ResursuSarasuSarasas.list.size(); i++) {
-				if (ResursuSarasuSarasas.list.get(i).resourceDescriptor == null) {
-					ResursuSarasuSarasas.list.get(i).resourceDescriptor = new ResourceDescriptor(name, usable, father, inf, resourceID);
+			for(i=0; i<RSS.list.size(); i++) {
+				if (RSS.list.get(i).resourceDescriptor == null) {
+					RSS.list.get(i).resourceDescriptor = new ResourceDescriptor(name, usable, father, inf, resourceID);
 					freeSpot = true;
 					break;
 				}
 			}
-			if (ResursuSarasuSarasas.list.isEmpty() || !freeSpot) {
-				ResursuSarasuSarasas.list.add(new ResursuSarasas());
-				ResursuSarasuSarasas.list.get(ResursuSarasuSarasas.list.size()-1)
+			if (RSS.list.isEmpty() || !freeSpot) {
+				RSS.list.add(new RS());
+				RSS.list.get(RSS.list.size()-1)
 						.resourceDescriptor = new ResourceDescriptor(name, usable, father, inf, resourceID);
 			}
 		}
 		else {
-			for(i=0; i<VienkartiniuResursuSarasuSarasas.list.size(); i++) {
-				if (VienkartiniuResursuSarasuSarasas.list.get(i).vardas == name) {
-					VienkartiniuResursuSarasuSarasas.list.get(i).resourceList.add(new ResourceDescriptor(name, usable, father, inf, resourceID));
+			for(i=0; i<VRSS.list.size(); i++) {
+				if (VRSS.list.get(i).vardas == name) {
+					VRSS.list.get(i).resourceList.add(new ResourceDescriptor(name, usable, father, inf, resourceID));
 					break;
 				}
 			}

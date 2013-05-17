@@ -1,5 +1,5 @@
 package resourcesINFO;
 
-public abstract class INFO {
+public class INFO {
 
 }

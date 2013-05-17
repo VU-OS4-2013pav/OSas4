@@ -1,7 +1,7 @@
 import Procesai.BeginEnd;
 import resources.ResourceDescriptor;
-import resources.ResursuSarasuSarasas;
-import resources.VienkartiniuResursuSarasuSarasas;
+import resources.RSS;
+import resources.VRSS;
 import resourcesINFO.INFO;
 import resourcesINFO.INFOboolean;
 
