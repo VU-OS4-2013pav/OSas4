@@ -25,6 +25,15 @@ public abstract class ProcessBase {
 	public class Res {
 		String nameO; //iðorinis vardas
 		int nameI; //vidinis vardas
+		
+		public Res(String name, int namei) {
+			this.nameI = namei;
+			this.nameO = name;
+		}
+	}
+	
+	public void addRes(String name, int nameI) {
+		resursai.add(new Res(name, nameI));
 	}
 	
 	public String toString() {

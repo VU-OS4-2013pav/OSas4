@@ -30,6 +30,12 @@ public class Main {
 
 		(new BeginEnd()).execute();
 		Planuotojas.planuok();
+		Planuotojas.planuok();
+		Planuotojas.planuok();
+		Planuotojas.planuok();
+		Planuotojas.planuok();
+		Planuotojas.planuok();
+		
 		//Primityvai.sukurtiResursa(Statiniai.VRstring.MOS_darbo_pabaiga, true, 0, null);
 		
 	}

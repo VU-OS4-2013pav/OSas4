@@ -18,6 +18,8 @@ public class Loader extends ProcessBase {
 	public void execute() {
 		switch(this.vieta) {
 		case 0:
+			Primityvai.prasytiResurso(VRstring.Loader_pradzia, nameI, 1);
+			vieta++;
 			break;
 		case 1:
 			// ar egzistuoja toks resursas

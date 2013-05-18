@@ -13,8 +13,8 @@ public class IInterrupt extends ProcessBase {
 	public void execute() {
 		switch(vieta) {
 		case 0:
-			Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, Statiniai.Pint.IINTERRUPT, 1);
-			vieta = 1;
+			Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, nameI, 1);
+			vieta++;
 			break;
 		case 1:
 			if (!VRSS.list.get(Statiniai.VRint.VM_nori_ivedimo).resourceList.isEmpty()) {

@@ -1,10 +1,17 @@
 package Procesai;
 
+import Procesai.Statiniai.VRstring;
+
 
 public class Swapper extends ProcessBase {
 	@Override
 	public void execute() {
-		// TODO Auto-generated method stub
+		switch(vieta) {
+		case 0:
+			Primityvai.prasytiResurso(VRstring.Swapper_pradzia, nameI, 1);
+			vieta++;
+			break;
+		}
 		
 	}
 }
