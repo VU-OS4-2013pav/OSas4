@@ -15,13 +15,11 @@ import resources.ResourceDescriptor;
 import resources.VRSS;
 import resourcesINFO.HDDObject;
 import resourcesINFO.INFO;
-import resourcesINFO.INFOuserMemory;
-import resourcesINFO.ProgramosInfoHDD;
 
 public class Primityvai {
 	public static int processId = 0;
 	
-	public static int sukurtiProcesa(String name, int father, int priority) {
+	public static void sukurtiProcesa(String name, int father, int priority) {
 		ProcessBase proc;
 		processId++;
 		
@@ -71,8 +69,6 @@ public class Primityvai {
 		PPS.list.add(proc);
 		PL.addProcess(proc);
 		PL.getProcess(proc.father).sunus.add(proc.nameI);
-		
-		return proc.nameI; // grazina vidini varda
 		
 	}
 

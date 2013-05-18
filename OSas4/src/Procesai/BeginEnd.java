@@ -34,35 +34,19 @@ public class BeginEnd extends ProcessBase {
 			Primityvai.sukurtiResursa(Statiniai.DRstring.Vartotojo_atmintis, false, this.nameI, new INFOuserMemory());
 			
 		//Sukuriami sisteminiai procesai
-			//TODO iskelti resursu prasyma i execute metodus case 0
-			int proc;
 			
-			proc = Primityvai.sukurtiProcesa(Pstring.IInterrupt, this.nameI, 8);
-			
-			proc = Primityvai.sukurtiProcesa(Pstring.SyntaxCheck, this.nameI, 8);
-			
-			proc = Primityvai.sukurtiProcesa(Pstring.Loader, this.nameI, 8);
-			
-			proc = Primityvai.sukurtiProcesa(Pstring.Destroyer, this.nameI, 8);
-			
-			proc = Primityvai.sukurtiProcesa(Pstring.Interrupt, this.nameI, 8);
-			
-			proc = Primityvai.sukurtiProcesa(Pstring.Swapper, this.nameI, 8);
-			
-			proc = Primityvai.sukurtiProcesa(Pstring.Writer, this.nameI, 8);
-			
-			proc = Primityvai.sukurtiProcesa(Pstring.MainGovernor, this.nameI, 9);
+			Primityvai.sukurtiProcesa(Pstring.IInterrupt, this.nameI, 8);
+			Primityvai.sukurtiProcesa(Pstring.SyntaxCheck, this.nameI, 8);
+			Primityvai.sukurtiProcesa(Pstring.Loader, this.nameI, 8);
+			Primityvai.sukurtiProcesa(Pstring.Destroyer, this.nameI, 8);
+			Primityvai.sukurtiProcesa(Pstring.Interrupt, this.nameI, 8);
+			Primityvai.sukurtiProcesa(Pstring.Swapper, this.nameI, 8);
+			Primityvai.sukurtiProcesa(Pstring.Writer, this.nameI, 8);
+			Primityvai.sukurtiProcesa(Pstring.MainGovernor, this.nameI, 9);
 
 		//Blokuojasi ir laukia resurso <MOS darbo pabaiga>					
 			vieta++;		
 			Primityvai.prasytiResurso(VRstring.MOS_darbo_pabaiga, 0, 1);
-/*			System.out.println("\n\n");
-			for (int i = 0; i < VRSS.list.size(); i++) {
-				System.out.println("      "+VRSS.list.get(i).vardas);
-				if (!VRSS.list.get(i).processList.isEmpty())
-					System.out.println(VRSS.list.get(i).processList.get(0).process);
-			}
-			System.out.println("\n\n");*/
 			
 			break;
 		case 1:
