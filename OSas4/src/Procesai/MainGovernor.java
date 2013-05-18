@@ -1,5 +1,7 @@
 package Procesai;
 
+import Procesai.Statiniai.VRstring;
+
 import resources.ResourceDescriptor;
 import resources.VRSS;
 import resourcesINFO.INFOv;
@@ -8,9 +10,16 @@ import Procesai.Statiniai.VRint;
 import Procesai.Statiniai.VRstring;
 
 
+
 public class MainGovernor extends ProcessBase {
 	@Override
 	public void execute() {
+		switch(vieta) {
+		case 0:
+			Primityvai.prasytiResurso(VRstring.Info_apie_nauja_VM, nameI, 1);
+			vieta++;
+			break;
+		case 1:
 		int res = -1;
 		
 		// surandame main governor pazadinimas resursa proceso sarase
@@ -52,5 +61,7 @@ public class MainGovernor extends ProcessBase {
 			System.out.println("Main Governor klaida. MainGovernor_pazadinimas resursas neegzistuoja.");
 
 		Primityvai.prasytiResurso(VRstring.MainGovernor_pazadinimas, this.nameI, 1);
+		break;
+		}
 	}
 }

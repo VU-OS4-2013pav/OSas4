@@ -17,7 +17,7 @@ public abstract class ProcessBase {
 	public List<Res> sukurtiResursai = new ArrayList<Res>();
 	public String busena = ProcessState.RUN; //bûsena
 	public int father; //proceso tëvas
-	public List<Integer> sunus = new ArrayList<Integer>(); //sukurtu procesu vidiniai vardai
+	public List<Integer> sunus = new ArrayList<Integer>();
 	public int prioritetas; 
 	
 	public abstract void execute();
@@ -31,7 +31,10 @@ public abstract class ProcessBase {
 			this.nameO = name;
 		}
 		
-
+	}
+	
+	public void addRes(String name, int nameI) {
+		resursai.add(new Res(name, nameI));
 	}
 	
 	public String toString() {

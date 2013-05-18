@@ -1,3 +1,4 @@
+
 package Procesai;
 
 import Procesai.Statiniai.ProcessState;
@@ -39,25 +40,18 @@ public class BeginEnd extends ProcessBase {
 			proc = Primityvai.sukurtiProcesa(Pstring.IInterrupt, this.nameI, 8);
 			
 			proc = Primityvai.sukurtiProcesa(Pstring.SyntaxCheck, this.nameI, 8);
-			Primityvai.prasytiResurso(VRstring.Sintakses_tikrinimas, proc, 1);
 			
 			proc = Primityvai.sukurtiProcesa(Pstring.Loader, this.nameI, 8);
-			Primityvai.prasytiResurso(VRstring.Loader_pradzia, proc, 1);
 			
 			proc = Primityvai.sukurtiProcesa(Pstring.Destroyer, this.nameI, 8);
-			Primityvai.prasytiResurso(VRstring.Destroyer_XDD_pradzia, proc, 1);
 			
 			proc = Primityvai.sukurtiProcesa(Pstring.Interrupt, this.nameI, 8);
-			Primityvai.prasytiResurso(VRstring.Pertraukimo_ivykis, proc, 1);
 			
 			proc = Primityvai.sukurtiProcesa(Pstring.Swapper, this.nameI, 8);
-			Primityvai.prasytiResurso(VRstring.Swapper_pradzia, proc, 1);
 			
 			proc = Primityvai.sukurtiProcesa(Pstring.Writer, this.nameI, 8);
-			Primityvai.prasytiResurso(VRstring.Writer_pradzia, proc, 1);
 			
 			proc = Primityvai.sukurtiProcesa(Pstring.MainGovernor, this.nameI, 9);
-			Primityvai.prasytiResurso(VRstring.Info_apie_nauja_VM, proc, 1);
 
 		//Blokuojasi ir laukia resurso <MOS darbo pabaiga>					
 			vieta++;		
