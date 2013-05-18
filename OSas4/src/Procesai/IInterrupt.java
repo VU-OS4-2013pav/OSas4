@@ -27,7 +27,7 @@ public class IInterrupt extends ProcessBase {
 			break;
 		case 2:
 			//Kopijuoja kas ávesta
-			Primityvai.atlaisvintiResursa(Statiniai.DRstring.Kanalu_irenginys, nameO);
+			Primityvai.atlaisvintiResursa(Statiniai.DRstring.Kanalu_irenginys, nameI);
 			INFO inf = new INFO();
 			inf.o = false;
 			Primityvai.sukurtiResursa(Statiniai.VRstring.Pranesimas_apie_pertraukima, true, nameI, inf);
