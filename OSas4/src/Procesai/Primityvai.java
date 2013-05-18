@@ -52,14 +52,17 @@ public class Primityvai {
 			break;
 			
 		}
-		PPS.list.add(proc);
-		PL.addProcess(proc);
-		
+	
 		proc.father = father;
 		proc.nameI = processId;
 		proc.nameO = name;
 		proc.prioritetas = priority;
 
+//		System.out.println("Proceso isorinis vardas: "+proc.nameO);
+		
+		PPS.list.add(proc);
+		PL.addProcess(proc);
+		
 		return proc.nameI; // grazina vidini varda
 		
 	}
