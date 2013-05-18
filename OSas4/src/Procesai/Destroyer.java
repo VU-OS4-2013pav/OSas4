@@ -1,17 +1,15 @@
 package Procesai;
 
-import resources.ProcessNeedsResource;
 import resources.RSS;
 import resources.VRSS;
 import resourcesINFO.HDDObject;
 import resourcesINFO.INFO;
-import resourcesINFO.INFOv;
 import Procesai.Statiniai.DRstring;
-import Procesai.Statiniai.ProcessState;
 import Procesai.Statiniai.VRint;
 
 
 public class Destroyer extends ProcessBase {
+	
 	@Override
 	public void execute() {
 		switch (vieta) {
@@ -31,8 +29,7 @@ public class Destroyer extends ProcessBase {
 			HDDObject hdd = ((HDDObject)(RSS.list.get(0).resourceDescriptor.info.o));
 			boolean yra = false;
 			for (int i = 0; i < hdd.programs.size(); i++) {
-				if (hdd.programs.get(i).name //LAbai maþas ifas
-						== VRSS.list.get(VRint.Destroyer_XDD_pradzia).resourceList.get(0).nameO) {
+				if (hdd.programs.get(i).name == VRSS.list.get(VRint.Destroyer_XDD_pradzia).resourceList.get(0).nameO) {
 					
 					// taip saka - sutvarkomas deskriptorius, systemoutas
 					Primityvai.atlaisvintiResursa(DRstring.HDD, VRSS.list.get(VRint.Destroyer_XDD_pradzia).resourceList.get(0).nameO);
@@ -51,8 +48,8 @@ public class Destroyer extends ProcessBase {
 			}
 			
 			//atlaisvina kanalu irengini
-			
-			
+			Primityvai.atlaisvintiResursa(DRstring.Kanalu_irenginys, this.nameI);
+					
 			// sukuria destroyer pabaiga
 			vieta = 1;
 			Primityvai.sukurtiResursa(Statiniai.VRstring.Destroyer_XDD_pabaiga, true, this.nameI, new INFO());
