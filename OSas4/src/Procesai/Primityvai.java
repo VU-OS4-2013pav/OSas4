@@ -3,6 +3,7 @@ package Procesai;
 import java.util.ArrayList;
 import java.util.List;
 
+import Procesai.ProcessBase.Res;
 import Procesai.Statiniai.DRint;
 import Procesai.Statiniai.DRstring;
 import Procesai.Statiniai.ProcessState;
@@ -111,30 +112,33 @@ public class Primityvai {
 		System.out.println(PL.processList.get(father).name + " kuria " + name);
 		int i;
 		ResourceDescriptor.resourceID++;
+		ResourceDescriptor res = new ResourceDescriptor(name, usable, father, inf, ResourceDescriptor.resourceID);
 		
 		if (usable == false) {	
 			boolean freeSpot = false;
 			for(i=0; i<RSS.list.size(); i++) {
 				if (RSS.list.get(i).resourceDescriptor == null) {
-					RSS.list.get(i).resourceDescriptor = new ResourceDescriptor(name, usable, father, inf, ResourceDescriptor.resourceID);
+					RSS.list.get(i).resourceDescriptor = res;
 					freeSpot = true;
 					break;
 				}
 			}
 			if (RSS.list.isEmpty() || !freeSpot) {
 				RSS.list.add(new RS());
-				RSS.list.get(RSS.list.size()-1)
-						.resourceDescriptor = new ResourceDescriptor(name, usable, father, inf, ResourceDescriptor.resourceID);
+				RSS.list.get(RSS.list.size()-1).resourceDescriptor = res;
 			}
 		}
 		else {
 			for(i=0; i<VRSS.list.size(); i++) {
 				if (VRSS.list.get(i).vardas == name) {
-					VRSS.list.get(i).resourceList.add(new ResourceDescriptor(name, usable, father, inf, ResourceDescriptor.resourceID));
+					VRSS.list.get(i).resourceList.add(res);
 					break;
 				}
 			}
-		}
+		}	
+		// ideda i tevo-proceso sukurtu resursu sarasa
+		PL.getProcess(father).addResToPL(res.nameO, res.nameI);
+		
 	}
 	
 	public static void atlaisvintiResursa(String name, Object procORname) { //proceso id (int), arba programos vardas (String)
@@ -191,6 +195,161 @@ public class Primityvai {
 			
 			break;
 		}
+		
+		
+	}
+	
+	public static void naikintiProcesa(int name, ProcessBase father) {
+		int i, j;
+		ProcessBase proc = null;
+		boolean[] yra = new boolean[4];
+		
+		for (i = 0; i < 4; i++)
+			yra[i] = false;
+		
+		// surandam procesa
+		for (i = 0; i < PPS.list.size(); i++) //metam is PPS
+			if (PPS.list.get(i).nameI == name) {
+				proc = PPS.list.get(i);
+				yra[0] = true;
+			}
+	
+		for (i = 0; i < PL.processList.size(); i++) //metam is PL
+			for (j = 0; j < PL.processList.get(i).processList.size(); j++)
+				if (PL.processList.get(i).processList.get(j).nameI == name) {
+					proc = PL.processList.get(i).processList.get(j);
+					yra[1] = true;
+				}
+
+		for (i = 0; i < RSS.list.size(); i++)  //metam is RSS
+			for (j = 0; j < RSS.list.get(i).list.size(); j++)
+				if (RSS.list.get(i).list.get(j).process.nameI == name) {
+					proc = RSS.list.get(i).list.get(j).process;
+					yra[2] = true;
+				}
+		
+		for (i = 0; i < VRSS.list.size(); i++) //metam is VRSS
+			for (j = 0; j < VRSS.list.get(i).processList.size(); j++)
+				if (VRSS.list.get(i).processList.get(j).process.nameI == name) {
+					proc = VRSS.list.get(i).processList.get(j).process;
+					yra[3] = true;
+				}
+
+		// jeigu toki procesa rado||nerado
+		if (proc != null) {
+			// sunaikinami proceso sukurti procesai (vaikai)
+			for (i = 0; i < proc.sunus.size(); i++) {
+				naikintiProcesa(proc.sunus.get(i), proc);
+			}
+			
+			// sunaikinami proceso sukurti resursai (tik vienkartiniai)
+			for (i = 0; i < proc.sukurtiResursai.size(); i++) {
+				Primityvai.naikintiResursa(proc.sukurtiResursai.get(i).nameI);
+			}
+			
+			// ismetamas is tevo vaiku saraso
+			for (i = 0; i < father.sunus.size(); i++) {
+				if (father.sunus.get(i) == proc.nameI) {
+					father.sunus.remove(i);
+				}
+			}			
+			
+			// naikinami/atlaisvinami visi proceso turimi resursai (VRSS + RSS)
+			for (i = 0; i < proc.resursai.size(); i++) {
+				if (proc.resursai.get(i).nameO == DRstring.HDD 
+						|| proc.resursai.get(i).nameO == DRstring.Kanalu_irenginys 
+						|| proc.resursai.get(i).nameO == DRstring.Vartotojo_atmintis) {
+					atlaisvintiResursa(proc.resursai.get(i).nameO, proc);
+				}
+				else {
+					Primityvai.naikintiResursa(proc.sukurtiResursai.get(i).nameI);
+				}		
+			}
+			
+			// procesas ismetamas is visu procesu sarasu
+			if (yra[0])
+				for (i = 0; i < PPS.list.size(); i++)  //metam is PPS
+					if (PPS.list.get(i).nameI == name) 
+						PPS.list.remove(i);
+			if (yra[1])
+				for (i = 0; i < PL.processList.size(); i++) //metam is PL
+					for (j = 0; j < PL.processList.get(i).processList.size(); j++)
+						if (PL.processList.get(i).processList.get(j).nameI == name)
+							PL.processList.get(i).processList.remove(j);
+			
+			if (yra[2])
+				for (i = 0; i < RSS.list.size(); i++) //metam is RSS
+					for (j = 0; j < RSS.list.get(i).list.size(); j++)
+						if (RSS.list.get(i).list.get(j).process.nameI == name)
+							RSS.list.get(i).list.remove(j);
+		
+			if (yra[3])
+				for (i = 0; i < VRSS.list.size(); i++) //metam is VRSS
+					for (j = 0; j < VRSS.list.get(i).processList.size(); j++)
+						if (VRSS.list.get(i).processList.get(j).process.nameI == name)
+							VRSS.list.get(i).processList.remove(j);
+			
+			// naikinamas deskriptorius, bet cia java... visi pointeriai jau nugnaibyti
+		}
+		else {
+			System.out.println("Sunaikinti proceso nepavyko. Procesas su vidiniu vardu ''"+name+"'' neegzistuoja.");
+		}
+		
+		
+	}
+	
+	public static void naikintiResursa(int name) {
+		ResourceDescriptor res = null;
+		int i, j;
+		boolean rss = false;
+		
+		// randam ta resursa RSS || VRSS sarasuose
+		if (name < 4) { // RSS
+			res = RSS.list.get(name-1).resourceDescriptor;
+			rss = true;			
+		}
+		else { // VRSS
+			for (i = 0; i < VRSS.list.size(); i++) {
+				for (j = 0; j < VRSS.list.get(i).resourceList.size(); j++) {
+					if (VRSS.list.get(i).resourceList.get(j).nameI == name) {
+						res = VRSS.list.get(i).resourceList.get(j);
+					}		
+				}
+			}
+			
+		}
+		
+		if (res != null) {
+			// deskriptorius ismetamas is tevo sukurtu resursu saraso
+			for (i = 0; i < PL.getProcess(res.nameFather).sukurtiResursai.size(); i++) {
+				if (PL.getProcess(res.nameFather).sukurtiResursai.get(i).nameI == name) {
+					PL.getProcess(res.nameFather).sukurtiResursai.remove(i);
+				}
+			}	
+			//naikinamas resurso elementu sarasas. bet cia java.
+			
+			// ismetamas is resursu sarasu VRSS ir RSS
+			if (rss) {
+				RSS.list.get(name-1).resourceDescriptor = null;
+			}
+			else {
+				for (i = 0; i < VRSS.list.size(); i++) {
+					for (j = 0; j < VRSS.list.get(i).resourceList.size(); j++) {
+						if (VRSS.list.get(i).resourceList.get(j).nameI == name) {
+							VRSS.list.get(i).resourceList.remove(j);
+						}		
+					}
+				}
+			}
+			
+			// naikinamas deskriptorius. bet cia java.
+			
+		}
+		else {
+			System.out.println("NaikintiResursa. Something went horribly wrong here...");
+		}
+
+		
 		
 		
 	}

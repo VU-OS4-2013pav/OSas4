@@ -23,8 +23,15 @@ public abstract class ProcessBase {
 	public abstract void execute();
 	
 	public class Res {
-		String nameO; //iðorinis vardas
-		int nameI; //vidinis vardas
+		String nameO; // iðorinis vardas
+		int nameI; // vidinis vardas
+
+		public Res(String name, int namei) {
+			this.nameI = namei;
+			this.nameO = name;
+		}
+		
+
 		
 		public Res(String name, int namei) {
 			this.nameI = namei;
@@ -38,6 +45,10 @@ public abstract class ProcessBase {
 	
 	public String toString() {
 		return String.format("nameI=%s \n nameO=%s \n busena=%s \n father=%s \n prioritetas=%s", nameI, nameO, busena, father, prioritetas);
+	}
+	
+	public void addResToPL(String name, int nameI) {
+		sukurtiResursai.add(new Res(name, nameI));
 	}
 	
 	
