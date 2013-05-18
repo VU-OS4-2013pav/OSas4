@@ -2,6 +2,7 @@ package Procesai;
 
 import resources.VRSS;
 import resourcesINFO.INFO;
+import resourcesINFO.INFOv;
 import Procesai.Statiniai.DRstring;
 import Procesai.Statiniai.VRstring;
 
@@ -28,8 +29,8 @@ public class IInterrupt extends ProcessBase {
 		case 2:
 			//Kopijuoja kas ávesta
 			Primityvai.atlaisvintiResursa(Statiniai.DRstring.Kanalu_irenginys, nameI);
-			INFO inf = new INFO();
-			inf.o = false;
+			INFOv inf = new INFOv();
+			((Object[])inf.o)[0] = false;
 			Primityvai.sukurtiResursa(Statiniai.VRstring.Pranesimas_apie_pertraukima, true, nameI, inf);
 			Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, Statiniai.Pint.IINTERRUPT, 1);
 			vieta = 1;
