@@ -6,25 +6,7 @@ import java.util.List;
 public class VRSS {
 	public static List<VRS> list = new ArrayList<VRS>();
 	
-	public static final int MOS_darbo_pabaiga = 0;
-	public static final int Klaviaturos_pertraukimas = 1;
-	public static final int Sintakses_tikrinimas = 2;
-	public static final int Sintakse_patikrinta = 3;
-	public static final int VM_nori_ivedimo = 4;
-	public static final int Pranesimas_apie_pertraukima = 5;
-	public static final int InputStream_pabaiga = 6;
-	public static final int Loader_pabaiga = 7;
-	public static final int Destroyer_XDD_pabaiga = 8;
-	public static final int Destroyer_XDD_pradzia = 9;
-	public static final int Loader_pradzia = 10;
-	public static final int Info_apie_nauja_VM = 11;
-	public static final int MainGovernor_pazadinimas = 12;
-	public static final int Pertraukimo_ivykis = 13;
-	public static final int Writer_pradzia = 14;
-	public static final int Swapper_pradzia = 15;
-	
-	
-	public static void initialiseVRSS() {
+	public static void initialise() {
 		VRSS.list.add(new VRS());
 		VRSS.list.get(0).vardas = "MOS darbo pabaiga";
 		

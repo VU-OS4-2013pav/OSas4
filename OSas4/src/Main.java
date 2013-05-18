@@ -1,8 +1,4 @@
 import Procesai.BeginEnd;
-import Procesai.Loader;
-import resources.ResourceDescriptor;
-import resources.RSS;
-import resources.VRSS;
 
 
 public class Main {
@@ -27,7 +23,7 @@ public class Main {
 		
 		System.out.println("");*/
 
-		(new Loader()).execute();
+		(new BeginEnd()).execute();
 
 	}
 

@@ -1,9 +1,9 @@
 package Procesai;
 
-import resources.ProcessNeedsResource;
-import resources.ResourceDescriptor;
+import Procesai.Statiniai.ProcessState;
+import Procesai.Statiniai.Pstring;
+import Procesai.Statiniai.VRstring;
 import resources.VRSS;
-import resourcesINFO.INFO;
 import resourcesINFO.INFOhdd;
 import resourcesINFO.INFOuserMemory;
 import resourcesINFO.INFOv;
@@ -12,97 +12,64 @@ import resourcesINFO.INFOv;
 public class BeginEnd extends ProcessBase {
 	@Override
 	public void execute() {	
+		VRSS.initialise();
+		PL.initialise();
+		
 		switch (vieta) {
 		case 0:
-			this.busena = RUN;
-			this.nameI = 1;
+			this.busena = ProcessState.RUN;
+			this.nameI = 0;
 			this.nameO = "BeginEnd";
 			this.prioritetas = 10;
-			
-			VRSS.initialiseVRSS();
+			PPS.list.add(this);
 			
 		//Sukuriami daugkartinio panaudojimo resursai
-			ResourceDescriptor.sukurtiResursa("HDD", false, this.nameI, new INFOhdd());
-			ResourceDescriptor.sukurtiResursa("Kanalu irenginys", false, this.nameI, new INFOv());
-			ResourceDescriptor.sukurtiResursa("Vartotojo atmintis", false, this.nameI, new INFOuserMemory());
+			Primityvai.sukurtiResursa(Statiniai.DRstring.HDD, false, this.nameI, new INFOhdd());
+			Primityvai.sukurtiResursa(Statiniai.DRstring.Kanalu_irenginys, false, this.nameI, new INFOv());
+			Primityvai.sukurtiResursa(Statiniai.DRstring.Vartotojo_atmintis, false, this.nameI, new INFOuserMemory());
 			
 		//Sukuriami sisteminiai procesai
-			IInterrupt iinterrupt = new IInterrupt();
-			VRSS.list.get(VRSS.Klaviaturos_pertraukimas).processList.add(new ProcessNeedsResource(iinterrupt, 1));
-			iinterrupt.busena = BLOCKED;
-			iinterrupt.father = 1;
-			iinterrupt.nameI = 2;
-			iinterrupt.nameO = "IInterrupt";
-			iinterrupt.prioritetas = 8;
+			//TODO iskelti resursu prasyma i execute metodus case 0
+			int proc;
 			
-			SyntaxCheck syntaxCheck = new SyntaxCheck();
-			VRSS.list.get(VRSS.Sintakses_tikrinimas).processList.add(new ProcessNeedsResource(syntaxCheck, 1));
-			syntaxCheck.busena = BLOCKED;
-			syntaxCheck.father = 1;
-			syntaxCheck.nameI = 3;
-			syntaxCheck.nameO = "Syntax check";
-			syntaxCheck.prioritetas = 8;
+			proc = Primityvai.sukurtiProcesa(Pstring.IInterrupt, this.nameI, 8);
+			Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, proc, 1);
 			
-			Loader loader = new Loader();
-			VRSS.list.get(VRSS.Loader_pradzia).processList.add(new ProcessNeedsResource(loader, 1));
-			loader.busena = BLOCKED;
-			loader.father = 1;
-			loader.nameI = 4;
-			loader.nameO = "Loader";
-			loader.prioritetas = 8;
+			proc = Primityvai.sukurtiProcesa(Pstring.SyntaxCheck, this.nameI, 8);
+			Primityvai.prasytiResurso(VRstring.Sintakses_tikrinimas, proc, 1);
 			
-			Destroyer destroyer = new Destroyer();
-			VRSS.list.get(VRSS.Destroyer_XDD_pradzia).processList.add(new ProcessNeedsResource(destroyer, 1));
-			destroyer.busena = BLOCKED;
-			destroyer.father = 1;
-			destroyer.nameI = 5;
-			destroyer.nameO = "Destroyer";
-			destroyer.prioritetas = 8;
+			proc = Primityvai.sukurtiProcesa(Pstring.Loader, this.nameI, 8);
+			Primityvai.prasytiResurso(VRstring.Loader_pradzia, proc, 1);
 			
-			Interrupt interrupt = new Interrupt();
-			VRSS.list.get(VRSS.Pertraukimo_ivykis).processList.add(new ProcessNeedsResource(interrupt, 1));
-			interrupt.busena = BLOCKED;
-			interrupt.father = 1;
-			interrupt.nameI = 6;
-			interrupt.nameO = "Interrupt";
-			interrupt.prioritetas = 8;
+			proc = Primityvai.sukurtiProcesa(Pstring.Destroyer, this.nameI, 8);
+			Primityvai.prasytiResurso(VRstring.Destroyer_XDD_pradzia, proc, 1);
 			
-			Swapper swapper = new Swapper();
-			VRSS.list.get(VRSS.Swapper_pradzia).processList.add(new ProcessNeedsResource(swapper, 1));
-			swapper.busena = BLOCKED;
-			swapper.father = 1;
-			swapper.nameI = 7;
-			swapper.nameO = "Swapper";
-			swapper.prioritetas = 8;
+			proc = Primityvai.sukurtiProcesa(Pstring.Interrupt, this.nameI, 8);
+			Primityvai.prasytiResurso(VRstring.Pertraukimo_ivykis, proc, 1);
 			
-			Writer writer = new Writer();
-			VRSS.list.get(VRSS.Writer_pradzia).processList.add(new ProcessNeedsResource(writer, 1));
-			writer.busena = BLOCKED;
-			writer.father = 1;
-			writer.nameI = 8;
-			writer.nameO = "Writer";
-			writer.prioritetas = 8;	
+			proc = Primityvai.sukurtiProcesa(Pstring.Swapper, this.nameI, 8);
+			Primityvai.prasytiResurso(VRstring.Swapper_pradzia, proc, 1);
 			
-			MainGovernor mainGovernor = new MainGovernor();
-			VRSS.list.get(VRSS.Info_apie_nauja_VM).processList.add(new ProcessNeedsResource(mainGovernor, 1));
-			mainGovernor.busena = BLOCKED;
-			mainGovernor.father = 1;
-			mainGovernor.nameI = 9;
-			mainGovernor.nameO = "Main governor";
-			mainGovernor.prioritetas = 9;
+			proc = Primityvai.sukurtiProcesa(Pstring.Writer, this.nameI, 8);
+			Primityvai.prasytiResurso(VRstring.Writer_pradzia, proc, 1);
 			
-			/*for (int i = 0; i < VRSS.list.size(); i++)
+			proc = Primityvai.sukurtiProcesa(Pstring.MainGovernor, this.nameI, 9);
+			Primityvai.prasytiResurso(VRstring.Info_apie_nauja_VM, proc, 1);
+
+		//Blokuojasi ir laukia resurso <MOS darbo pabaiga>					
+			vieta++;		
+			Primityvai.prasytiResurso(VRstring.MOS_darbo_pabaiga, 0, 1);
+			
+			/*for (int i = 0; i < VRSS.list.size(); i++) {
+				System.out.println("      "+VRSS.list.get(i).vardas);
 				if (!VRSS.list.get(i).processList.isEmpty())
-					System.out.println(VRSS.list.get(i).processList.get(0).process);*/
-			
-		//Blokuojasi ir laukia resurso <MOS darbo pabaiga>	
-			this.busena = BLOCKED;
-			VRSS.list.get(VRSS.MOS_darbo_pabaiga).processList.add(new ProcessNeedsResource(this, 0));
-			vieta++;
+					System.out.println(VRSS.list.get(i).processList.get(0).process);
+			}*/
 			
 			break;
 		case 1:
 			//Èia kaip ir viskas baigiasi sulaukus resurso... Naikinama viskas
+			System.out.println("OS'as baige darba.");
 			break;
 		}
 		
