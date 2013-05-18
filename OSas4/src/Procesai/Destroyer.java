@@ -6,6 +6,7 @@ import resources.VRSS;
 import resourcesINFO.HDDObject;
 import resourcesINFO.INFO;
 import resourcesINFO.INFOv;
+import Procesai.Statiniai.DRstring;
 import Procesai.Statiniai.ProcessState;
 import Procesai.Statiniai.VRint;
 
@@ -27,13 +28,15 @@ public class Destroyer extends ProcessBase {
 			break;
 		case 2:
 			// gavo kanalu irengini. ar egzistuoja nurodyta programa atmintyje?
-	
+			HDDObject hdd = ((HDDObject)(RSS.list.get(0).resourceDescriptor.info.o));
 			boolean yra = false;
-			for (int i = 0; i < ((HDDObject)(RSS.list.get(0).resourceDescriptor.info.o)).programs.size(); i++) {
-				if (((HDDObject)(RSS.list.get(0).resourceDescriptor.info.o)).programs.get(i).name //LAbai maþas ifas
+			for (int i = 0; i < hdd.programs.size(); i++) {
+				if (hdd.programs.get(i).name //LAbai maþas ifas
 						== VRSS.list.get(VRint.Destroyer_XDD_pradzia).resourceList.get(0).nameO) {
 					
 					// taip saka - sutvarkomas deskriptorius, systemoutas
+					Primityvai.atlaisvintiResursa(DRstring.HDD, VRSS.list.get(VRint.Destroyer_XDD_pradzia).resourceList.get(0).nameO);
+					System.out.println("Programa is HDD istrinta.");
 										
 					yra = true;
 					break;
@@ -42,6 +45,7 @@ public class Destroyer extends ProcessBase {
 			
 			if (!yra) {
 				//ne ðaka klaidos pranesimas
+				System.out.println("Progrma is HDD neistrinta. Pavadinimas: "+VRSS.list.get(VRint.Destroyer_XDD_pradzia).resourceList.get(0).nameO);
 				
 				
 			}
