@@ -13,11 +13,10 @@ import resourcesINFO.INFOv;
 public class BeginEnd extends ProcessBase {
 	@Override
 	public void execute() {	
-		VRSS.initialise();
-		PL.initialise();
-		
 		switch (vieta) {
 		case 0:
+			VRSS.initialise();
+			PL.initialise();
 			System.out.println("Sistemos pradzia");
 			this.busena = ProcessState.RUN;
 			this.nameI = 0;

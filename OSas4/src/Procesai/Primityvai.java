@@ -20,7 +20,7 @@ public class Primityvai {
 	public static int processId = 0;
 	
 	public static void sukurtiProcesa(String name, int father, int priority) {
-		ProcessBase proc;
+		ProcessBase proc = null;
 		processId++;
 		
 		switch (name) {
@@ -54,10 +54,13 @@ public class Primityvai {
 		case Pstring.JobGovernor:
 			proc = new JobGovernor();
 			break;
-		default:// ProcessBase.VirtualMachine:
+		case Pstring.VirtualMachine:
 			proc = new VirtualMachine();
 			break;
-			
+		default: {
+			System.out.println("Primityvas sukurti procesa. Something went horribly wrong.");
+			return;
+		}
 		}
 		
 		proc.busena = Statiniai.ProcessState.READY;
