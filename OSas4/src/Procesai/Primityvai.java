@@ -1,5 +1,10 @@
 package Procesai;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import Procesai.Statiniai.DRint;
+import Procesai.Statiniai.DRstring;
 import Procesai.Statiniai.ProcessState;
 import Procesai.Statiniai.Pstring;
 import resources.ProcessNeedsResource;
@@ -7,7 +12,10 @@ import resources.RS;
 import resources.RSS;
 import resources.ResourceDescriptor;
 import resources.VRSS;
+import resourcesINFO.HDDObject;
 import resourcesINFO.INFO;
+import resourcesINFO.INFOuserMemory;
+import resourcesINFO.ProgramosInfoHDD;
 
 public class Primityvai {
 	public static int processId = 0;
@@ -57,8 +65,6 @@ public class Primityvai {
 		proc.nameI = processId;
 		proc.nameO = name;
 		proc.prioritetas = priority;
-
-//		System.out.println("Proceso isorinis vardas: "+proc.nameO);
 		
 		PPS.list.add(proc);
 		PL.addProcess(proc);
@@ -127,6 +133,62 @@ public class Primityvai {
 	
 			
 		}
+		
+	}
+	
+	public static void atlaisvintiResursa(String name, Object procORname) { //proceso id (int), arba programos vardas (String)
+		ProcessBase proc = PPS.getProcess((int)procORname);
+		switch (name) {
+		case DRstring.HDD:
+			HDDObject o = ((HDDObject)RSS.list.get(DRint.HDD).resourceDescriptor.info.o);
+			
+			int program = -1;
+
+			for (int i = 0; i < o.programs.size(); i++) { //began per visas programas ir ieskom nurodytos parametruose
+				if (o.programs.get(i).name == (String)procORname) { // jeigu ta programa
+					program = i;
+				}
+			}
+			
+			if (program > -1) { // jei programa buvo rasta
+				// pazymim visus programos turimus blokus hdd kaip laisvus
+				for (int k = 0; k < o.programs.get(program).memHDD; k++) { //iteruojam per programos turimus blokus
+					for (int j = 0; j < HDDObject.HDD_SIZE; j++) { //iteruojam per hdd
+						
+						if (o.hdd.get(j).intValue() == o.programs.get(program).nr) {
+							o.hdd.set(j, 0);
+							break;
+						}
+					}
+				}
+				
+				//ismetam informacija apie programa is programu saraso
+				o.programs.remove(program);
+			}
+			else 
+				System.out.println("Programa diske nerasta: "+(String)procORname);
+					
+			break;
+		case DRstring.Kanalu_irenginys:
+			((Boolean[])RSS.list.get(DRint.Kanalu_irenginys).resourceDescriptor.info.o)[0] = true;	
+			
+			for (int i = 0; i < proc.resursai.size(); i++) {
+				if (proc.resursai.get(i).nameO == ((String) DRstring.Kanalu_irenginys)) {
+					proc.resursai.remove(i);
+				}
+			}
+			break;
+		case DRstring.Vartotojo_atmintis:
+			int j;
+			for (int i = 0; i < proc.oa.length; i++) {
+				j = proc.oa[i];
+				((ArrayList<Boolean>)RSS.list.get(DRint.Vartotojo_atmintis).resourceDescriptor.info.o).set(j, false);
+			}
+			proc.oa = null;
+			
+			break;
+		}
+		
 		
 	}
 

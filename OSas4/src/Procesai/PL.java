@@ -27,6 +27,7 @@ public class PL {
 		for (int i = 0; i < processList.size(); i++) {
 			if (p.nameO == processList.get(i).name) {
 				processList.get(i).processList.add(p);
+				return;
 			}
 		}
 	}

@@ -12,8 +12,8 @@ public abstract class ProcessBase {
 	public int nameI; //proceso vidinis vardas
 	public String nameO; //iðorinis vardas
 	public Object[] cpu = new Object[12]; //visi procesoriaus registrai //TODO cpu processbase VM
-	public char[] oa = new char[4];  //TODO oa processbase VM
-	public List<Res> resursai = new ArrayList<Res>();
+	public int[] oa;  //TODO oa processbase VM
+	public List<Res> resursai = new ArrayList<Res>(); //turimu resursu sarasas
 	public List<Res> sukurtiResursai = new ArrayList<Res>();
 	public String busena = ProcessState.RUN; //bûsena
 	public int father; //proceso tëvas
