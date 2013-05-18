@@ -35,7 +35,6 @@ public class BeginEnd extends ProcessBase {
 			int proc;
 			
 			proc = Primityvai.sukurtiProcesa(Pstring.IInterrupt, this.nameI, 8);
-			Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, proc, 1);
 			
 			proc = Primityvai.sukurtiProcesa(Pstring.SyntaxCheck, this.nameI, 8);
 			Primityvai.prasytiResurso(VRstring.Sintakses_tikrinimas, proc, 1);

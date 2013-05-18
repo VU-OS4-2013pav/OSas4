@@ -14,6 +14,7 @@ public class ResourceDescriptor {
 	public int nameFather;
 	public List<ProcessNeedsResource> lps = new ArrayList<ProcessNeedsResource>();
 	// TODO (?) paskirstytojo laukas
+	public boolean laisvas = true;
 	public INFO info;
 	
 	public ResourceDescriptor(String name, boolean usable, int father, INFO inf, int id) {
