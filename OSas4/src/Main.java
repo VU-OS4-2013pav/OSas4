@@ -29,18 +29,9 @@ public class Main {
 		System.out.println("");*/
 
 		(new BeginEnd()).execute();
+		Planuotojas.planuok();
 		//Primityvai.sukurtiResursa(Statiniai.VRstring.MOS_darbo_pabaiga, true, 0, null);
-		Primityvai.sukurtiResursa(Statiniai.VRstring.Klaviaturos_pertraukimas, true, 0, null);
-		Paskirstytojas.skirstyk();
-		Planuotojas.planuok();
-		Primityvai.sukurtiResursa(Statiniai.VRstring.VM_nori_ivedimo, true, 0, null);
-		Paskirstytojas.skirstyk();
-		Planuotojas.planuok();
-		Primityvai.sukurtiResursa(Statiniai.DRstring.Kanalu_irenginys, false, 0, null);
-		Paskirstytojas.skirstyk();
-		Planuotojas.planuok();
-		Paskirstytojas.skirstyk();
-		Planuotojas.planuok();
+		
 	}
 
 }
