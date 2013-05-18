@@ -27,7 +27,9 @@ public class BeginEnd extends ProcessBase {
 			
 		//Sukuriami daugkartinio panaudojimo resursai
 			Primityvai.sukurtiResursa(Statiniai.DRstring.HDD, false, this.nameI, new INFOhdd());
-			Primityvai.sukurtiResursa(Statiniai.DRstring.Kanalu_irenginys, false, this.nameI, new INFOv());
+			INFOv in = new INFOv();
+			((Object[])in.o)[0] = true;
+			Primityvai.sukurtiResursa(Statiniai.DRstring.Kanalu_irenginys, false, this.nameI, in);
 			Primityvai.sukurtiResursa(Statiniai.DRstring.Vartotojo_atmintis, false, this.nameI, new INFOuserMemory());
 			
 		//Sukuriami sisteminiai procesai

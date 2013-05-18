@@ -138,7 +138,7 @@ public class Primityvai {
 	}
 	
 	public static void atlaisvintiResursa(String name, Object procORname) { //proceso id (int), arba programos vardas (String)
-		ProcessBase proc = PPS.getProcess((int)procORname);
+		
 		switch (name) {
 		case DRstring.HDD:
 			HDDObject o = ((HDDObject)RSS.list.get(DRint.HDD).resourceDescriptor.info.o);
@@ -171,7 +171,8 @@ public class Primityvai {
 					
 			break;
 		case DRstring.Kanalu_irenginys:
-			((Boolean[])RSS.list.get(DRint.Kanalu_irenginys).resourceDescriptor.info.o)[0] = true;	
+			ProcessBase proc = PPS.getProcess((int)procORname);
+			((Object[])RSS.list.get(DRint.Kanalu_irenginys).resourceDescriptor.info.o)[0] = true;	
 			
 			for (int i = 0; i < proc.resursai.size(); i++) {
 				if (proc.resursai.get(i).nameO == ((String) DRstring.Kanalu_irenginys)) {
@@ -180,12 +181,13 @@ public class Primityvai {
 			}
 			break;
 		case DRstring.Vartotojo_atmintis:
+			ProcessBase process = PPS.getProcess((int)procORname);
 			int j;
-			for (int i = 0; i < proc.oa.length; i++) {
-				j = proc.oa[i];
+			for (int i = 0; i < process.oa.length; i++) {
+				j = process.oa[i];
 				((ArrayList<Boolean>)RSS.list.get(DRint.Vartotojo_atmintis).resourceDescriptor.info.o).set(j, false);
 			}
-			proc.oa = null;
+			process.oa = null;
 			
 			break;
 		}

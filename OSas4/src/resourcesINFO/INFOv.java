@@ -1,9 +1,12 @@
 package resourcesINFO;
 
-public class INFOv extends INFO {
-	Object[] o = new Object[5];
+public class INFOv extends INFO {	
+	public INFOv() {
+		super();
+		o = new Object[5];
+	}
 	
 	public Object[] getO() {
-		return o;
+		return (Object[])this.o;
 	}
 }
