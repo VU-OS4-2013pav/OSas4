@@ -27,10 +27,12 @@ public class IInterrupt extends ProcessBase {
 			break;
 		case 2:
 			//Kopijuoja kas ávesta
-			//Atlaisvina kanalø árenginá
+			Primityvai.atlaisvintiResursa(Statiniai.DRstring.Kanalu_irenginys, nameO);
 			INFO inf = new INFO();
 			inf.o = false;
 			Primityvai.sukurtiResursa(Statiniai.VRstring.Pranesimas_apie_pertraukima, true, nameI, inf);
+			Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, Statiniai.Pint.IINTERRUPT, 1);
+			vieta = 1;
 			break;
 		}
 //		cpu[i] = "BLOCKED";

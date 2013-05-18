@@ -105,7 +105,6 @@ public class Primityvai {
 				}
 			}
 		}
-		Planuotojas.planuok();
 	}
 
 	public static void sukurtiResursa(String name, boolean usable, int father, INFO inf) {
@@ -136,8 +135,6 @@ public class Primityvai {
 				}
 			}
 		}
-		Paskirstytojas.skirstyk();
-		Planuotojas.planuok();
 	}
 	
 	public static void atlaisvintiResursa(String name, Object procORname) { //proceso id (int), arba programos vardas (String)
