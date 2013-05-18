@@ -143,16 +143,6 @@ public class Primityvai {
 		// ideda i tevo-proceso sukurtu resursu sarasa
 		PL.getProcess(father).addResToPL(res.nameO, res.nameI);
 		
-		// proceso busenu keitimas
-		// BLOCKS -> READYS
-		if (PL.getProcess(father).busena == ProcessState.BLOCKS) {
-			PL.getProcess(father).busena = ProcessState.READYS;
-		}
-		// BLOCKED -> READY
-		else if (PL.getProcess(father).busena == ProcessState.BLOCKED) {
-			PL.getProcess(father).busena = ProcessState.READY;
-		}
-		
 	}
 	
 	public static void atlaisvintiResursa(String name, Object procORname) { //proceso id (int), arba programos vardas (String)
