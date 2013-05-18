@@ -52,7 +52,8 @@ public class Primityvai {
 			break;
 			
 		}
-	
+		
+		proc.busena = Statiniai.ProcessState.READY;
 		proc.father = father;
 		proc.nameI = processId;
 		proc.nameO = name;
@@ -96,10 +97,11 @@ public class Primityvai {
 				}
 			}
 		}
-		
+		Planuotojas.planuok();
 	}
 
 	public static void sukurtiResursa(String name, boolean usable, int father, INFO inf) {
+		System.out.println(PL.processList.get(father).name + " kuria " + name);
 		int i;
 		ResourceDescriptor.resourceID++;
 		
@@ -125,10 +127,9 @@ public class Primityvai {
 					break;
 				}
 			}
-	
-			
 		}
-		
+		Paskirstytojas.skirstyk();
+		Planuotojas.planuok();
 	}
 
 }

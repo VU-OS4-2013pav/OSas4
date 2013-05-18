@@ -1,4 +1,7 @@
 import Procesai.BeginEnd;
+import Procesai.PPS;
+import Procesai.Paskirstytojas;
+import Procesai.Planuotojas;
 import Procesai.Primityvai;
 import Procesai.Statiniai;
 
@@ -26,10 +29,12 @@ public class Main {
 		System.out.println("");*/
 
 		(new BeginEnd()).execute();
-		Primityvai.sukurtiResursa(Statiniai.VRstring.MOS_darbo_pabaiga, true, 0, null);
+		//Primityvai.sukurtiResursa(Statiniai.VRstring.MOS_darbo_pabaiga, true, 0, null);
+		Primityvai.sukurtiResursa(Statiniai.VRstring.Klaviaturos_pertraukimas, true, 0, null);
+		Primityvai.sukurtiResursa(Statiniai.VRstring.VM_nori_ivedimo, true, 0, null);
+		Primityvai.sukurtiResursa(Statiniai.DRstring.Kanalu_irenginys, false, 0, null);
 		Paskirstytojas.skirstyk();
 		Planuotojas.planuok();
-
 	}
 
 }
