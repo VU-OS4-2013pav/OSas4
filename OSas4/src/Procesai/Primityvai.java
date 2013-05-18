@@ -74,6 +74,7 @@ public class Primityvai {
 	}
 
 	public static void prasytiResurso(String isorinis, int kas, int kiek) {
+		System.out.println(PL.processList.get(kas).name + " paprase " + isorinis);
 		for (int i = 0; i < PPS.list.size(); i++) {
 			if (PPS.list.get(i).nameI == kas) {
 				PPS.list.get(i).busena = ProcessState.BLOCKED;

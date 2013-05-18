@@ -1,4 +1,6 @@
 import Procesai.BeginEnd;
+import Procesai.Primityvai;
+import Procesai.Statiniai;
 
 
 public class Main {
@@ -24,6 +26,9 @@ public class Main {
 		System.out.println("");*/
 
 		(new BeginEnd()).execute();
+		Primityvai.sukurtiResursa(Statiniai.VRstring.MOS_darbo_pabaiga, true, 0, null);
+		Paskirstytojas.skirstyk();
+		Planuotojas.planuok();
 
 	}
 
