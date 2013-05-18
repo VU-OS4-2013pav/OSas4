@@ -19,7 +19,7 @@ public class MainGovernor extends ProcessBase {
 			Primityvai.prasytiResurso(VRstring.Info_apie_nauja_VM, nameI, 1);
 			vieta++;
 			break;
-		}
+		case 1:
 		int res = -1;
 		
 		// surandame main governor pazadinimas resursa proceso sarase
@@ -61,5 +61,7 @@ public class MainGovernor extends ProcessBase {
 			System.out.println("Main Governor klaida. MainGovernor_pazadinimas resursas neegzistuoja.");
 
 		Primityvai.prasytiResurso(VRstring.MainGovernor_pazadinimas, this.nameI, 1);
+		break;
+		}
 	}
 }

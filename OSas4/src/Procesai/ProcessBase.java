@@ -31,12 +31,6 @@ public abstract class ProcessBase {
 			this.nameO = name;
 		}
 		
-
-		
-		public Res(String name, int namei) {
-			this.nameI = namei;
-			this.nameO = name;
-		}
 	}
 	
 	public void addRes(String name, int nameI) {
