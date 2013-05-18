@@ -23,6 +23,7 @@ public class BeginEnd extends ProcessBase {
 			this.nameO = "BeginEnd";
 			this.prioritetas = 10;
 			PPS.list.add(this);
+			PL.addProcess(this);
 			
 		//Sukuriami daugkartinio panaudojimo resursai
 			Primityvai.sukurtiResursa(Statiniai.DRstring.HDD, false, this.nameI, new INFOhdd());
@@ -60,12 +61,13 @@ public class BeginEnd extends ProcessBase {
 		//Blokuojasi ir laukia resurso <MOS darbo pabaiga>					
 			vieta++;		
 			Primityvai.prasytiResurso(VRstring.MOS_darbo_pabaiga, 0, 1);
-			
-			/*for (int i = 0; i < VRSS.list.size(); i++) {
+/*			System.out.println("\n\n");
+			for (int i = 0; i < VRSS.list.size(); i++) {
 				System.out.println("      "+VRSS.list.get(i).vardas);
 				if (!VRSS.list.get(i).processList.isEmpty())
 					System.out.println(VRSS.list.get(i).processList.get(0).process);
-			}*/
+			}
+			System.out.println("\n\n");*/
 			
 			break;
 		case 1:
