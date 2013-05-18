@@ -70,6 +70,7 @@ public class Primityvai {
 		
 		PPS.list.add(proc);
 		PL.addProcess(proc);
+		PL.getProcess(proc.father).sunus.add(proc.nameI);
 		
 		return proc.nameI; // grazina vidini varda
 		
@@ -77,7 +78,6 @@ public class Primityvai {
 
 	public static void prasytiResurso(String isorinis, int kas, int kiek) {
 		System.out.println(PL.getProcess(kas).nameO + " paprase " + isorinis);
-	//	System.out.println(kas);
 		
 		for (int i = 0; i < PPS.list.size(); i++) {
 			if (PPS.list.get(i).nameI == kas) {
@@ -97,14 +97,19 @@ public class Primityvai {
 					}
 				}
 				else {
-					for (int j = 0; j < VRSS.list.size(); j++) {
+					for (int j = 0; j < VRSS.list.size(); j++) 
 						if (VRSS.list.get(j).vardas == isorinis) {
 							VRSS.list.get(j).processList.add(new ProcessNeedsResource(PPS.list.get(i), kiek));
 							return;
 						}
-					}
 				}
 			}
+		}
+		
+		// proceso busenos keitimas
+		// BLOCKS -> READYS
+		if (PL.getProcess(kas).busena == ProcessState.RUN) {
+			PL.getProcess(kas).busena = ProcessState.BLOCKED;
 		}
 	}
 
@@ -138,6 +143,16 @@ public class Primityvai {
 		}	
 		// ideda i tevo-proceso sukurtu resursu sarasa
 		PL.getProcess(father).addResToPL(res.nameO, res.nameI);
+		
+		// proceso busenu keitimas
+		// BLOCKS -> READYS
+		if (PL.getProcess(father).busena == ProcessState.BLOCKS) {
+			PL.getProcess(father).busena = ProcessState.READYS;
+		}
+		// BLOCKED -> READY
+		else if (PL.getProcess(father).busena == ProcessState.BLOCKED) {
+			PL.getProcess(father).busena = ProcessState.READY;
+		}
 		
 	}
 	
@@ -316,7 +331,6 @@ public class Primityvai {
 					}		
 				}
 			}
-			
 		}
 		
 		if (res != null) {
@@ -342,16 +356,47 @@ public class Primityvai {
 				}
 			}
 			
-			// naikinamas deskriptorius. bet cia java.
-			
+			// naikinamas deskriptorius. bet cia java.	
 		}
 		else {
 			System.out.println("NaikintiResursa. Something went horribly wrong here...");
 		}
-
 		
+	}
+	
+	public static void stabdytiProcesa(int name) {
+		ProcessBase proc = PL.getProcess(name);
 		
+		// BLOCKED -> BLOCKS
+		if (proc.busena == Statiniai.ProcessState.BLOCKED) { 
+			proc.busena = ProcessState.BLOCKS;
+		}
+		// READY -> READYS
+		else if (proc.busena == Statiniai.ProcessState.READY) {
+			proc.busena = ProcessState.READYS;
+		}
+		// RUN -> READYS
+		else if (proc.busena == Statiniai.ProcessState.RUN) {
+			proc.busena = ProcessState.READYS;
+		}	
+	}
+	
+	public static void aktyvuotiProcesa(int name) {
+		ProcessBase proc = PL.getProcess(name);
 		
+		// READYS -> READY
+		if (proc.busena == Statiniai.ProcessState.READYS) { 
+			proc.busena = ProcessState.READY;
+		}
+		// BLOCKS -> BLOCKED
+		else if (proc.busena == Statiniai.ProcessState.BLOCKS) { 
+			proc.busena = ProcessState.BLOCKED;
+		}
+		
+	}
+	
+	public static void keistiPrioriteta(int name, int priority) {
+		PL.getProcess(name).prioritetas = priority;
 	}
 
 }
