@@ -142,7 +142,7 @@ public class Primityvai {
 	}
 
 	public static void sukurtiResursa(String name, boolean usable, int father, INFO inf) {
-		System.out.println(PL.processList.get(father).name + " kuria " + name + ". father int: "+father);
+		System.out.println(PL.getProcess(father).nameO+ " kuria " + name);
 		
 		int i;
 		ResourceDescriptor.resourceID++;

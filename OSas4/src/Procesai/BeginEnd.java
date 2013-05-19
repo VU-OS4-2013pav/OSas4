@@ -55,11 +55,11 @@ public class BeginEnd extends ProcessBase {
 			break;
 		case 1:
 			//Èia kaip ir viskas baigiasi sulaukus resurso... Naikinama viskas
-			for (int i=1; i < PL.processList.size(); i++) {
+			/*for (int i=1; i < PL.processList.size(); i++) {
 				for (int j=0; j < PL.processList.get(i).processList.size(); j++) {
 					System.out.println(PL.processList.get(i).name+"  "+i);
 				}
-			}
+			}*/
 			Primityvai.naikintiProcesa(this.nameI, this);
 			System.out.println("OS'as baige darba.");
 			break;

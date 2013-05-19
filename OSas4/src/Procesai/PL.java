@@ -37,11 +37,13 @@ public class PL {
 	}
 	
 	public static ProcessBase getProcess(int innerName) {
-	//	System.out.println("InnerName: "+innerName);
+		//System.out.println("InnerName: "+innerName);
 		for (int i = 0; i < processList.size(); i++) {
 			//System.out.println("processList("+i+").name= "+processList.get(i).name);
 			for (int j = 0; j < processList.get(i).processList.size(); j++) {
+				//System.out.println("id=="+processList.get(i).processList.get(j).nameI);
 				if (processList.get(i).processList.get(j).nameI == innerName) {
+					//System.out.println("id=="+processList.get(i).processList.get(j).nameI);
 					return processList.get(i).processList.get(j);
 				}
 			}

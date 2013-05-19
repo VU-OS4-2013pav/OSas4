@@ -13,13 +13,12 @@ public class Input extends ProcessBase {
 
 	@Override
 	public void execute() {
-		System.out.println("Input pradzia. "+this.nameI+"  "+this.nameO);
+		System.out.println("Input pradzia. ");
 		if (RM.regOS == 1) {
 			System.out.println("Aptiktas klaviaturos pertraukimas.");
 			INFOv inf = new INFOv();
 			RM.regOS = 0;
-			//Primityvai.sukurtiResursa(VRstring.Klaviaturos_pertraukimas, true, this.nameI, inf);
-			Primityvai.sukurtiResursa(VRstring.MOS_darbo_pabaiga, true, 0, null);
+			Primityvai.sukurtiResursa(VRstring.Klaviaturos_pertraukimas, true, this.nameI, inf);
 		}
 		
 	}
