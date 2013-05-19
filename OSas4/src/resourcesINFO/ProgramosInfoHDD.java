@@ -13,4 +13,9 @@ public class ProgramosInfoHDD {
 		this.oa = oa;
 	}
 
+	public ProgramosInfoHDD(int nr, int memHDD) {
+		this.nr = nr;
+		this.memHDD = memHDD;
+	}
+	
 }
