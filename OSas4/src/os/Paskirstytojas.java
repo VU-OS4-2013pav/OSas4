@@ -61,6 +61,7 @@ public class Paskirstytojas {
 			
 			//Jei HDD resursas
 			if (RSS.list.get(i).resourceDescriptor.nameO == Statiniai.DRstring.HDD) {
+				System.out.println("Skirstau hdd");
 				boolean aptarnavau = true;
 				while(aptarnavau) {
 					aptarnavau = false;
@@ -81,6 +82,8 @@ public class Paskirstytojas {
 							int kiek, nr;
 							kiek = RSS.list.get(i).list.get(kelintas).howMuchResourceItNeeds;
 							nr = ((HDDObject)((INFOhdd)RSS.list.get(i).resourceDescriptor.info).o).programs.size() + 1;
+							RSS.list.get(i).list.get(kelintas).process.programaHDD = nr;
+							
 							((HDDObject)((INFOhdd)RSS.list.get(i).resourceDescriptor.info).o).programs.add(new ProgramosInfoHDD(nr, kiek));
 							for (int j = 0; j < ((HDDObject)((INFOhdd)RSS.list.get(i).resourceDescriptor.info).o).hdd.size(); j++) {
 								if (((HDDObject)((INFOhdd)RSS.list.get(i).resourceDescriptor.info).o).hdd.get(j) == 0) {

@@ -20,6 +20,7 @@ public abstract class ProcessBase {
 	public int father; //proceso tëvas
 	public List<Integer> sunus = new ArrayList<Integer>();
 	public int prioritetas; 
+	public int programaHDD;
 	
 	public abstract void execute();
 	
