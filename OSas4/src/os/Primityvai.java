@@ -15,6 +15,8 @@ import resourcesINFO.HDDObject;
 import resourcesINFO.INFO;
 import Procesai.Destroyer;
 import Procesai.IInterrupt;
+import Procesai.Idle;
+import Procesai.Input;
 import Procesai.InputStream;
 import Procesai.Interrupt;
 import Procesai.JobGovernor;
@@ -32,9 +34,10 @@ public class Primityvai {
 	public static int processId = 0;
 	
 	public static void sukurtiProcesa(String name, int father, int priority) {
-		System.out.println(PL.getProcess(father).nameO+" kuria procesa "+name);
+		
 		ProcessBase proc = null;
 		processId++;
+		System.out.println(PL.getProcess(father).nameO+" kuria procesa "+name+"  "+processId);
 		
 		switch (name) {
 		case Pstring.IInterrupt:
@@ -69,6 +72,12 @@ public class Primityvai {
 			break;
 		case Pstring.VirtualMachine:
 			proc = new VirtualMachine();
+			break;
+		case Pstring.Input:
+			proc = new Input();
+			break;
+		case Pstring.Idle:
+			proc = new Idle();
 			break;
 		default: {
 			System.out.println("Primityvas sukurti procesa. Something went horribly wrong.");
@@ -133,7 +142,7 @@ public class Primityvai {
 	}
 
 	public static void sukurtiResursa(String name, boolean usable, int father, INFO inf) {
-		System.out.println(PL.processList.get(father).name + " kuria " + name);
+		System.out.println(PL.processList.get(father).name + " kuria " + name + ". father int: "+father);
 		
 		int i;
 		ResourceDescriptor.resourceID++;

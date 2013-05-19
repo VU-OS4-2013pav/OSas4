@@ -1,9 +1,16 @@
 package gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import os.Statiniai;
+
+import rm.RM;
 
 public class InputForm extends JFrame {
 	JButton readLineButton;
@@ -13,6 +20,12 @@ public class InputForm extends JFrame {
 	public InputForm() {
 		super("Input Form");
 		readLineButton = new JButton("OK");
+		readLineButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				RM.regOS = 1;
+			}
+		});
 		readField = new JTextField(20);
 		formPanel = new JPanel();
 		formPanel.add(readField);
@@ -22,4 +35,8 @@ public class InputForm extends JFrame {
 		pack();
 		setVisible(true);
 	}
+	
+
+	
+
 }

@@ -1,15 +1,18 @@
 package rm;
 
 public class RM {
-	static final int AA = 2-1, BB = 3-1, CC = 4-1,
+	public static final int AA = 2-1, BB = 3-1, CC = 4-1,
 			PC = 1-1, SP = 6-1, PTR = 5-1, SR = 7-1, 
-			DI = 10-1, SI = 8-1, PI = 9-1, TI = 11-1;	
+			DI = 10-1, SI = 8-1, PI = 9-1, TI = 11-1, 
+			OS = 12-1;	
 	static byte MODE;	
 	static Object[] registers;
+	public static int regOS = 0;
 	static boolean supervisor;
 		
 	public static void createRM() {
 		registers = new Object[11];
+		
 		
 		for (int i = 0; i < 6; i++) {
 			registers[i] = new char[4];
@@ -23,6 +26,7 @@ public class RM {
 			registers[i] = new char[1];
 			((char[])registers[i])[0] = 0x0;
 		}
+
 		stringToRegister(SP, "00FF"); 
 		stringToRegister(PC, "0100");
 		
@@ -764,7 +768,7 @@ public class RM {
 				((char[])registers[registerNumber])[3]);
 	}
 	
-	static void stringToRegister(int registerNumber, String string) {
+	public static void stringToRegister(int registerNumber, String string) {
 		for (int i = 0; i < ((char[])registers[registerNumber]).length; i++)
 			if (i + string.length() >= ((char[])registers[registerNumber]).length)
 				((char[])registers[registerNumber])[i] = (char) Character.digit(string.charAt(i + string.length() - 4), 16);
@@ -776,7 +780,7 @@ public class RM {
 				((char[])registers[registerNumber])[0]);
 	}
 	
-	static void stringToRegister1B(int registerNumber, String string) {
+	public static void stringToRegister1B(int registerNumber, String string) {
 		((char[])registers[registerNumber])[0] = (char) Character.digit(string.charAt(0), 16);
 	}
 	

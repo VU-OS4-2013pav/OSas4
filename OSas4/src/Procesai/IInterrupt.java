@@ -20,7 +20,7 @@ public class IInterrupt extends ProcessBase {
 			break;
 		case 1:
 			if (!VRSS.list.get(Statiniai.VRint.VM_nori_ivedimo).resourceList.isEmpty()) {
-				Primityvai.prasytiResurso(DRstring.Kanalu_irenginys, Statiniai.Pint.IINTERRUPT, 1);
+				Primityvai.prasytiResurso(DRstring.Kanalu_irenginys, this.nameI, 1);
 				vieta = 2;
 			}
 			else {
@@ -34,7 +34,7 @@ public class IInterrupt extends ProcessBase {
 			INFOv inf = new INFOv();
 			((Object[])inf.o)[0] = false;
 			Primityvai.sukurtiResursa(Statiniai.VRstring.Pranesimas_apie_pertraukima, true, nameI, inf);
-			Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, Statiniai.Pint.IINTERRUPT, 1);
+			Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, this.nameI, 1);
 			vieta = 1;
 			break;
 		}

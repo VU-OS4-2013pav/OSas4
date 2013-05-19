@@ -22,6 +22,8 @@ public class PL {
 		processList.add(new ProcessListElement(Statiniai.Pstring.MainGovernor));
 		processList.add(new ProcessListElement(Statiniai.Pstring.JobGovernor));
 		processList.add(new ProcessListElement(Statiniai.Pstring.VirtualMachine));
+		processList.add(new ProcessListElement(Statiniai.Pstring.Input));
+		processList.add(new ProcessListElement(Statiniai.Pstring.Idle));
 		
 	}
 	

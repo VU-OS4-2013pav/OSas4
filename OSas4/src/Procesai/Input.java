@@ -1,0 +1,27 @@
+package Procesai;
+
+import os.Primityvai;
+import os.Statiniai.ProcessState;
+import os.Statiniai.VRstring;
+import resourcesINFO.INFOv;
+import rm.RM;
+
+public class Input extends ProcessBase {
+	 public Input() {
+		 super();
+	 }
+
+	@Override
+	public void execute() {
+		System.out.println("Input pradzia. "+this.nameI+"  "+this.nameO);
+		if (RM.regOS == 1) {
+			System.out.println("Aptiktas klaviaturos pertraukimas.");
+			INFOv inf = new INFOv();
+			RM.regOS = 0;
+			//Primityvai.sukurtiResursa(VRstring.Klaviaturos_pertraukimas, true, this.nameI, inf);
+			Primityvai.sukurtiResursa(VRstring.MOS_darbo_pabaiga, true, 0, null);
+		}
+		
+	}
+
+}

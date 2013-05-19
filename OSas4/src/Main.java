@@ -9,9 +9,9 @@ public class Main {
 	public static void main(String[] args) {
 
 		new InputForm();
-		/*(new BeginEnd()).execute();
+		(new BeginEnd()).execute();
 
-		Primityvai.sukurtiResursa(Statiniai.VRstring.MOS_darbo_pabaiga, true, 0, null);*/
+		//Primityvai.sukurtiResursa(Statiniai.VRstring.MOS_darbo_pabaiga, true, 0, null);
 		
 	}
 

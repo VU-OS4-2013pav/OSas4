@@ -61,7 +61,6 @@ public class Paskirstytojas {
 			
 			//Jei HDD resursas
 			if (RSS.list.get(i).resourceDescriptor.nameO == Statiniai.DRstring.HDD) {
-				System.out.println("Skirstau hdd");
 				boolean aptarnavau = true;
 				while(aptarnavau) {
 					aptarnavau = false;

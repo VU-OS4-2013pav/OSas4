@@ -44,6 +44,9 @@ public class BeginEnd extends ProcessBase {
 			Primityvai.sukurtiProcesa(Pstring.Swapper, this.nameI, 8);
 			Primityvai.sukurtiProcesa(Pstring.Writer, this.nameI, 8);
 			Primityvai.sukurtiProcesa(Pstring.MainGovernor, this.nameI, 9);
+			Primityvai.sukurtiProcesa(Pstring.Input, this.nameI, 0);
+			Primityvai.sukurtiProcesa(Pstring.Idle, this.nameI, 1);
+			
 
 		//Blokuojasi ir laukia resurso <MOS darbo pabaiga>					
 			vieta++;		
@@ -52,11 +55,11 @@ public class BeginEnd extends ProcessBase {
 			break;
 		case 1:
 			//Èia kaip ir viskas baigiasi sulaukus resurso... Naikinama viskas
-			/*for (int i=1; i < PL.processList.size(); i++) {
+			for (int i=1; i < PL.processList.size(); i++) {
 				for (int j=0; j < PL.processList.get(i).processList.size(); j++) {
-					Primityvai.naikintiProcesa(PL.processList.get(i).processList.get(j).nameI, PL.processList.get(i).processList.get(j));
+					System.out.println(PL.processList.get(i).name+"  "+i);
 				}
-			}*/
+			}
 			Primityvai.naikintiProcesa(this.nameI, this);
 			System.out.println("OS'as baige darba.");
 			break;

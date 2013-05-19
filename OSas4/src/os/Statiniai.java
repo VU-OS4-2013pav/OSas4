@@ -1,6 +1,7 @@
 package os;
 
 public class Statiniai {
+	
 	public static class VRstring {
 
 		// Vienkartiniu resursu isoriniai vardai
@@ -77,12 +78,14 @@ public class Statiniai {
 		public static final String MainGovernor = "Main governor";
 		public static final String JobGovernor = "Job governor";
 		public static final String VirtualMachine =  "Virtual machine";
+		public static final String Input =  "Input";
+		public static final String Idle =  "Idle";
 		
 	}
 	
 	public static class Pint {
 		// Procesu tvarka PL sarase
-		public static final int BEGIN_END = 0;
+	/*	public static final int BEGIN_END = 0;
 		public static final int IINTERRUPT = 1;
 		public static final int INPUT_STREAM = 2;
 		public static final int SYNTAX_CHECK = 3;
@@ -91,9 +94,11 @@ public class Statiniai {
 		public static final int INTERRUPT = 6;
 		public static final int SWAPPER = 7;
 		public static final int WRITER = 8;
-		public static final int MAIN_GOVERNOR = 9;
+	//	public static final int MAIN_GOVERNOR = 9;
 		public static final int JOB_GOVERNOR = 10;
 		public static final int VIRTUAL_MACHINE = 11;
+		public static final int INPUT = 12;
+		public static final int IDLE = 13;*/
 		
 	}
 	
