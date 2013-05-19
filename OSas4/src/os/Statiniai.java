@@ -1,4 +1,4 @@
-package Procesai;
+package os;
 
 public class Statiniai {
 	public static class VRstring {

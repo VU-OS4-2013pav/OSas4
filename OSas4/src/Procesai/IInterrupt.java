@@ -1,10 +1,12 @@
 package Procesai;
 
+import os.Primityvai;
+import os.Statiniai;
+import os.Statiniai.DRstring;
+import os.Statiniai.VRstring;
 import resources.VRSS;
 import resourcesINFO.INFO;
 import resourcesINFO.INFOv;
-import Procesai.Statiniai.DRstring;
-import Procesai.Statiniai.VRstring;
 
 
 public class IInterrupt extends ProcessBase {

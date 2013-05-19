@@ -1,11 +1,13 @@
 package Procesai;
 
+import os.Primityvai;
+import os.Statiniai;
+import os.Statiniai.DRstring;
+import os.Statiniai.VRint;
 import resources.RSS;
 import resources.VRSS;
 import resourcesINFO.HDDObject;
 import resourcesINFO.INFO;
-import Procesai.Statiniai.DRstring;
-import Procesai.Statiniai.VRint;
 
 
 public class Destroyer extends ProcessBase {

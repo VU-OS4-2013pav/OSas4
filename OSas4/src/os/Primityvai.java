@@ -1,13 +1,28 @@
-package Procesai;
+package os;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import os.Statiniai.DRint;
+import os.Statiniai.DRstring;
+import os.Statiniai.ProcessState;
+import os.Statiniai.Pstring;
+
+import Procesai.Destroyer;
+import Procesai.IInterrupt;
+import Procesai.InputStream;
+import Procesai.Interrupt;
+import Procesai.JobGovernor;
+import Procesai.Loader;
+import Procesai.MainGovernor;
+import Procesai.PL;
+import Procesai.PPS;
+import Procesai.ProcessBase;
+import Procesai.Swapper;
+import Procesai.SyntaxCheck;
+import Procesai.VirtualMachine;
+import Procesai.Writer;
 import Procesai.ProcessBase.Res;
-import Procesai.Statiniai.DRint;
-import Procesai.Statiniai.DRstring;
-import Procesai.Statiniai.ProcessState;
-import Procesai.Statiniai.Pstring;
 import resources.ProcessNeedsResource;
 import resources.RS;
 import resources.RSS;

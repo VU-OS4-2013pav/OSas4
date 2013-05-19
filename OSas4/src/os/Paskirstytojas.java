@@ -1,4 +1,6 @@
-package Procesai;
+package os;
+import os.Statiniai.ProcessState;
+import Procesai.PPS;
 import resources.RSS;
 import resources.VRSS;
 

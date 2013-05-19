@@ -1,6 +1,7 @@
 package Procesai;
 
-import Procesai.Statiniai.VRstring;
+import os.Primityvai;
+import os.Statiniai.VRstring;
 
 
 public class SyntaxCheck extends ProcessBase {

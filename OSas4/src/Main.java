@@ -1,9 +1,9 @@
+import os.Paskirstytojas;
+import os.Planuotojas;
+import os.Primityvai;
+import os.Statiniai;
 import Procesai.BeginEnd;
 import Procesai.PPS;
-import Procesai.Paskirstytojas;
-import Procesai.Planuotojas;
-import Procesai.Primityvai;
-import Procesai.Statiniai;
 
 
 public class Main {

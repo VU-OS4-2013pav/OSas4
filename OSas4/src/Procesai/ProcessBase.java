@@ -3,7 +3,8 @@ package Procesai;
 import java.util.ArrayList;
 import java.util.List;
 
-import Procesai.Statiniai.ProcessState;
+import os.Statiniai.ProcessState;
+
 
 public abstract class ProcessBase {
 	// Proceso deskriptorius
@@ -23,8 +24,8 @@ public abstract class ProcessBase {
 	public abstract void execute();
 	
 	public class Res {
-		String nameO; // iðorinis vardas
-		int nameI; // vidinis vardas
+		public String nameO; // iðorinis vardas
+		public int nameI; // vidinis vardas
 
 		public Res(String name, int namei) {
 			this.nameI = namei;

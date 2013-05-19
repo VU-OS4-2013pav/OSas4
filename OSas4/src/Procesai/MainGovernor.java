@@ -1,13 +1,14 @@
 package Procesai;
 
-import Procesai.Statiniai.VRstring;
+import os.Primityvai;
+import os.Statiniai;
+import os.Statiniai.DRstring;
+import os.Statiniai.VRint;
+import os.Statiniai.VRstring;
 
 import resources.ResourceDescriptor;
 import resources.VRSS;
 import resourcesINFO.INFOv;
-import Procesai.Statiniai.DRstring;
-import Procesai.Statiniai.VRint;
-import Procesai.Statiniai.VRstring;
 
 
 

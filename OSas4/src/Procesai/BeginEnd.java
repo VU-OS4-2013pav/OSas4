@@ -1,9 +1,11 @@
 
 package Procesai;
 
-import Procesai.Statiniai.ProcessState;
-import Procesai.Statiniai.Pstring;
-import Procesai.Statiniai.VRstring;
+import os.Primityvai;
+import os.Statiniai;
+import os.Statiniai.ProcessState;
+import os.Statiniai.Pstring;
+import os.Statiniai.VRstring;
 import resources.VRSS;
 import resourcesINFO.INFOhdd;
 import resourcesINFO.INFOuserMemory;

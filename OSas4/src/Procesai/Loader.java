@@ -1,10 +1,11 @@
 package Procesai;
 
-import Procesai.Statiniai.DRint;
-import Procesai.Statiniai.DRstring;
-import Procesai.Statiniai.ProcessState;
-import Procesai.Statiniai.VRint;
-import Procesai.Statiniai.VRstring;
+import os.Primityvai;
+import os.Statiniai.DRint;
+import os.Statiniai.DRstring;
+import os.Statiniai.ProcessState;
+import os.Statiniai.VRint;
+import os.Statiniai.VRstring;
 import resources.ProcessNeedsResource;
 import resources.RSS;
 import resources.VRSS;
