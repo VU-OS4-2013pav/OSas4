@@ -2,6 +2,7 @@ import os.Paskirstytojas;
 import os.Planuotojas;
 import os.Primityvai;
 import os.Statiniai;
+import rm.ChannelDevice;
 import Procesai.BeginEnd;
 import Procesai.PPS;
 
@@ -28,12 +29,19 @@ public class Main {
 		
 		System.out.println("");*/
 
+
 		(new BeginEnd()).execute();
 		Planuotojas.planuok();
 		Planuotojas.planuok();
 		Planuotojas.planuok();
 		Planuotojas.planuok();
 		Planuotojas.planuok();
+		Planuotojas.planuok();
+		Planuotojas.planuok();
+		Planuotojas.planuok();
+		Planuotojas.planuok();
+
+		Primityvai.sukurtiResursa(Statiniai.VRstring.MOS_darbo_pabaiga, true, 0, null);
 		Planuotojas.planuok();
 		
 		//Primityvai.sukurtiResursa(Statiniai.VRstring.MOS_darbo_pabaiga, true, 0, null);

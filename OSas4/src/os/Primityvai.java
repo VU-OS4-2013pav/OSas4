@@ -35,6 +35,7 @@ public class Primityvai {
 	public static int processId = 0;
 	
 	public static void sukurtiProcesa(String name, int father, int priority) {
+		System.out.println(PL.getProcess(father).nameO+" kuria procesa "+name);
 		ProcessBase proc = null;
 		processId++;
 		
@@ -93,38 +94,45 @@ public class Primityvai {
 	public static void prasytiResurso(String isorinis, int kas, int kiek) {
 		System.out.println(PL.getProcess(kas).nameO + " paprase " + isorinis);
 		
+		int procesasInPPS = -1;
+		
 		for (int i = 0; i < PPS.list.size(); i++) {
 			if (PPS.list.get(i).nameI == kas) {
+				procesasInPPS = i;
 				PPS.list.get(i).busena = ProcessState.BLOCKED;
 				
 				if ((isorinis == "HDD") || (isorinis == "Kanalu irenginys") || (isorinis == "Vartotojo atmintis")) {
 					switch(isorinis) {
 					case "HDD" :
 						RSS.list.get(0).list.add(new ProcessNeedsResource(PPS.list.get(i), kiek));
-						return;
+						break;
 					case "Kanalu irenginys" :
 						RSS.list.get(1).list.add(new ProcessNeedsResource(PPS.list.get(i), kiek));
-						return;
+						break;
 					case "Vartotojo atmintis" :
 						RSS.list.get(2).list.add(new ProcessNeedsResource(PPS.list.get(i), kiek));
-						return;
+						break;
 					}
 				}
 				else {
 					for (int j = 0; j < VRSS.list.size(); j++) 
 						if (VRSS.list.get(j).vardas == isorinis) {
 							VRSS.list.get(j).processList.add(new ProcessNeedsResource(PPS.list.get(i), kiek));
-							return;
+							break;
 						}
 				}
 			}
 		}
+		
+		if (procesasInPPS > -1)
+			PPS.list.remove(procesasInPPS);
 		
 		// proceso busenos keitimas
 		// BLOCKS -> READYS
 		if (PL.getProcess(kas).busena == ProcessState.RUN) {
 			PL.getProcess(kas).busena = ProcessState.BLOCKED;
 		}
+		Paskirstytojas.skirstyk();
 	}
 
 	public static void sukurtiResursa(String name, boolean usable, int father, INFO inf) {
@@ -157,6 +165,7 @@ public class Primityvai {
 		}	
 		// ideda i tevo-proceso sukurtu resursu sarasa
 		PL.getProcess(father).addResToPL(res.nameO, res.nameI);
+		Paskirstytojas.skirstyk();
 		
 	}
 	
@@ -215,7 +224,7 @@ public class Primityvai {
 			break;
 		}
 		
-		
+		Paskirstytojas.skirstyk();
 	}
 	
 	public static void naikintiProcesa(int name, ProcessBase father) {
@@ -365,7 +374,7 @@ public class Primityvai {
 		else {
 			System.out.println("NaikintiResursa. Something went horribly wrong here...");
 		}
-		
+		Paskirstytojas.skirstyk();
 	}
 	
 	public static void stabdytiProcesa(int name) {
