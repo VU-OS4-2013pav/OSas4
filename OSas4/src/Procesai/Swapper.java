@@ -9,8 +9,8 @@ public class Swapper extends ProcessBase {
 	public void execute() {
 		switch(vieta) {
 		case 0:
-			Primityvai.prasytiResurso(VRstring.Swapper_pradzia, nameI, 1);
 			vieta++;
+			Primityvai.prasytiResurso(VRstring.Swapper_pradzia, nameI, 1);
 			break;
 		}
 		

@@ -17,8 +17,8 @@ public class MainGovernor extends ProcessBase {
 	public void execute() {
 		switch(vieta) {
 		case 0:
-			Primityvai.prasytiResurso(VRstring.MainGovernor_pazadinimas, nameI, 1);
 			vieta++;
+			Primityvai.prasytiResurso(VRstring.MainGovernor_pazadinimas, nameI, 1);
 			break;
 		case 1:
 		int res = -1;

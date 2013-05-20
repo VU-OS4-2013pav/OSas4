@@ -25,15 +25,17 @@ public class InputForm extends JFrame {
 		readLineButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				RM.regOS = 1;
-				//Statiniai.input.add(readField.getText());
-				Statiniai.inputNr++;
-				
-				Memory.addWord(Statiniai.vietaMem, readField.getText().substring(0, 4));
-				Statiniai.vietaMem++;
-				Memory.addWord(Statiniai.vietaMem, readField.getText().substring(4, 8));
-				Statiniai.vietaMem++;
+				if (readField.getText().length() % 4 == 0) { // jeigu ivesta pilna komandu seka po 4 simbolius komandoje
+					RM.regOS = 1; // vadinas ivedimas gali buti tvarkingas. statom interrupta ir kisam i memory
+					for (int i = 0; i < readField.getText().length() / 4; i++) {
+						Memory.addWord(Statiniai.vietaMem, readField.getText().substring(i, i+4));
+						Statiniai.vietaMem++;
+					}
+				}
 				readField.setText("");
+				System.out.println("readmem: "+Statiniai.readMem);
+				for (int i = 0x0A00; i < Statiniai.vietaMem; i++)
+					System.out.println("i: "+i+". "+String.valueOf(Memory.get()[i].getWord()));
 			}
 		});
 		readField = new JTextField(20);

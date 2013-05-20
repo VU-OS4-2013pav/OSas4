@@ -9,8 +9,8 @@ public class SyntaxCheck extends ProcessBase {
 	public void execute() {
 		switch(vieta) {
 		case 0:
-			Primityvai.prasytiResurso(VRstring.Sintakses_tikrinimas, nameI, 1);
 			vieta++;
+			Primityvai.prasytiResurso(VRstring.Sintakses_tikrinimas, nameI, 1);
 			break;
 		}
 		

@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Statiniai {
-	public static List<String> input = new ArrayList<String>();
-	public static int inputNr = 0;
+	//public static List<String> input = new ArrayList<String>();
+	//public static int inputNr = 0;
 	public static int vietaMem = 0x0A00;
+	public static int readMem = 0x0A00;
 	
 	public static class VRstring {
 

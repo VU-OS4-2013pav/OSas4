@@ -45,14 +45,12 @@ public class Destroyer extends ProcessBase {
 			if (!yra) {
 				//ne ðaka klaidos pranesimas
 				System.out.println("Progrma is HDD neistrinta. Pavadinimas: "+VRSS.list.get(VRint.Destroyer_XDD_pradzia).resourceList.get(0).nameO);
-				
-				
 			}
 			
 			//atlaisvina kanalu irengini
 			Primityvai.atlaisvintiResursa(DRstring.Kanalu_irenginys, this.nameI);
 					
-			// sukuria destroyer pabaiga
+			// sukuria destroyer pabaiga ir grizta i pradzia
 			vieta = 1;
 			Primityvai.sukurtiResursa(Statiniai.VRstring.Destroyer_XDD_pabaiga, true, this.nameI, new INFO());
 			
