@@ -35,9 +35,14 @@ public class Writer extends ProcessBase {
 			//o[3] OO
 			//Pasigriebiam resursà
 			ResourceDescriptor resource;
+			int id = -1;
+			for (int i = 0; i < resursai.size(); i++)
+				if (resursai.get(i).nameO == Statiniai.VRstring.MainGovernor_pazadinimas)
+					id = resursai.get(i).nameI;
+					
 			for (int i = 0; i < VRSS.list.get(Statiniai.VRint.MainGovernor_pazadinimas).resourceList.size(); i++) {
 				ResourceDescriptor tempResource = VRSS.list.get(Statiniai.VRint.MainGovernor_pazadinimas).resourceList.get(i);
-				if (!tempResource.laisvas && tempResource.process == this) {
+				if (!tempResource.laisvas && (tempResource.nameI == id)) {
 					resource = tempResource;
 					break;
 				}

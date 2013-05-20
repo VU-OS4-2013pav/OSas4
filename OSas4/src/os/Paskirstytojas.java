@@ -49,9 +49,6 @@ public class Paskirstytojas {
 						//Paþymim resursà uþimtu
 						VRSS.list.get(i).resourceList.get(kelintasLaisvas).laisvas = false;
 						
-						//Pridedam resursui procesà, kuris já dabar turi
-						VRSS.list.get(i).resourceList.get(kelintasLaisvas).process = VRSS.list.get(i).processList.get(kelintas).process;
-						
 						//Iðtrinam procesà ið laukianèiø sàraðo
 						VRSS.list.get(i).processList.remove(kelintas);
 						

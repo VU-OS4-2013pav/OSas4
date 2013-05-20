@@ -17,7 +17,6 @@ public class ResourceDescriptor {
 	public List<ProcessNeedsResource> lps = new ArrayList<ProcessNeedsResource>();
 	// TODO (?) paskirstytojo laukas
 	public boolean laisvas = true;
-	public ProcessBase process; // jei resursas nëra laisvas, saugomas já turintis procesas
 	public INFO info;
 	
 	public ResourceDescriptor(String name, boolean usable, int father, INFO inf, int id) {

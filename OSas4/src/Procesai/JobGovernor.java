@@ -17,9 +17,14 @@ public class JobGovernor extends ProcessBase {
 			Primityvai.prasytiResurso(VRstring.MainGovernor_pazadinimas, nameI, 1);
 			break;
 		case 1:
+			int id = -1;
+			for (int i = 0; i < resursai.size(); i++)
+				if (resursai.get(i).nameO == Statiniai.VRstring.MainGovernor_pazadinimas)
+					id = resursai.get(i).nameI;
+			
 			for (int i = 0; i < VRSS.list.get(Statiniai.VRint.MainGovernor_pazadinimas).resourceList.size(); i++) {
 				ResourceDescriptor resource = VRSS.list.get(Statiniai.VRint.MainGovernor_pazadinimas).resourceList.get(i);
-				if (!resource.laisvas && resource.process == this) {
+				if (!resource.laisvas && resource.nameI == id) {
 					if (!(Boolean)((Object[])resource.info.o)[0]) {//jei reikia sunaikinti
 						int kuriNaikinam = (int)((Object[])resource.info.o)[1];
 						Primityvai.naikintiProcesa(kuriNaikinam, this);
