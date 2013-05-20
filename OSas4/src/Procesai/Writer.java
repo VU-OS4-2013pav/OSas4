@@ -1,9 +1,15 @@
 package Procesai;
 
 import os.Primityvai;
+import os.Statiniai;
 import os.Statiniai.DRstring;
 import os.Statiniai.VRstring;
 import resources.RSS;
+import resources.ResourceDescriptor;
+import resources.VRSS;
+import resourcesINFO.INFO;
+import resourcesINFO.INFOv;
+import rm.ChannelDevice;
 
 
 public class Writer extends ProcessBase {
@@ -21,8 +27,34 @@ public class Writer extends ProcessBase {
 			Primityvai.prasytiResurso(DRstring.Kanalu_irenginys, nameI, 1);
 			break;
 		case 2:
-			System.out.println("Kanalø árenginá turiu!!!");
+			//Iðveda ið atminties á ekranà
+			//INFO laukas turëtø bûti: (beabejonës galima ir pakeisti)
+			//o[0] IA
+			//o[1] OA
+			//o[2] IO
+			//o[3] OO
+			//Pasigriebiam resursà
+			ResourceDescriptor resource;
+			for (int i = 0; i < VRSS.list.get(Statiniai.VRint.MainGovernor_pazadinimas).resourceList.size(); i++) {
+				ResourceDescriptor tempResource = VRSS.list.get(Statiniai.VRint.MainGovernor_pazadinimas).resourceList.get(i);
+				if (!tempResource.laisvas && tempResource.process == this) {
+					resource = tempResource;
+					break;
+				}
+			ChannelDevice.setValueOfChannel(0, (int)((Object[])tempResource.info.o)[0]);
+			ChannelDevice.setValueOfChannel(1, (int)((Object[])tempResource.info.o)[1]);
+			ChannelDevice.setValueOfChannel(2, (int)((Object[])tempResource.info.o)[2]);
+			ChannelDevice.setValueOfChannel(3, (int)((Object[])tempResource.info.o)[3]);
+			//Po ðito stebuklo turëtø bûti iðvedimas
+			ChannelDevice.runDevice();
+			Primityvai.atlaisvintiResursa(Statiniai.DRstring.Kanalu_irenginys, nameI);
+			INFO in = new INFO();
+			((Object[])in.o)[0] = false; //VM darbo baigti nereikia
+			Primityvai.sukurtiResursa(Statiniai.VRstring.Pranesimas_apie_pertraukima, true, nameI, in);
+			vieta = 1;
+			Primityvai.prasytiResurso(VRstring.Writer_pradzia, nameI, 1);
 			break;
+		}
 		}
 	}
 }
