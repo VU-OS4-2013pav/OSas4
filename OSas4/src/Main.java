@@ -1,3 +1,4 @@
+
 import gui.InputForm;
 import os.Primityvai;
 import os.Statiniai;
@@ -18,7 +19,7 @@ public class Main {
 		RM.createRM();
 		
 		new InputForm();
-		new GUI();
+		
 		(new BeginEnd()).execute();
 		
 		

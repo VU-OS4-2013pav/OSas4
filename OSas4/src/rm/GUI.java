@@ -1,5 +1,6 @@
 package rm;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -29,10 +30,10 @@ public class GUI extends JFrame implements ActionListener {
 	
 	JButton showHDDTable = new JButton("Show HDD table");
 	JFrame hddFrame;
-	private int showFrom = 0;
-	private int showTo = Memory.MEMORY_SIZE-1;
-	private int showFromHDD = 0;
-	private int showToHDD = HDD.HDD_SIZE-1;
+	private static int showFrom = 0;
+	private static int showTo = Memory.MEMORY_SIZE-1;
+	private static int showFromHDD = 0;
+	private static int showToHDD = HDD.HDD_SIZE-1;
 	TableRowSorter<TableModel> sorter;
 	TableRowSorter<TableModel> HDDsorter;
 	JPanel hddMemoryPanel = new JPanel(); //
@@ -68,26 +69,26 @@ public class GUI extends JFrame implements ActionListener {
 	JLabel PI = new JLabel("PI");
 	JLabel SR = new JLabel("SR");
 	JLabel MODE = new JLabel("MODE");
-	JTextField[] fieldsRM = new JTextField[12];
+	static JTextField[] fieldsRM = new JTextField[12];
 	
 	JPanel panelMD = new JPanel();
 	JLabel IA = new JLabel("IA");
 	JLabel IO = new JLabel("IO");
 	JLabel OA = new JLabel("OA");
 	JLabel OO = new JLabel("OO");
-	JTextField[] fieldsMD = new JTextField[4];
+	static JTextField[] fieldsMD = new JTextField[4];
 	
 	JPanel panelButtons = new JPanel();
-	JButton nextCommand = new JButton("Next");
+//	JButton nextCommand = new JButton("Next");
 	
 	JScrollPane scrollPane;
-	JTable memoryTable;
+	static JTable memoryTable;
 	
 	JScrollPane HDDscrollPane;
-	JTable HDDmemoryTable;
+	static JTable HDDmemoryTable;
 	
-	JScrollPane scrollConsole;
-	static JTextArea console = new JTextArea();
+//	JScrollPane scrollConsole;
+//	static JTextArea console = new JTextArea();
 	
 	public GUI() {
 		showHDDTable.addActionListener(this);
@@ -102,6 +103,7 @@ public class GUI extends JFrame implements ActionListener {
 			fieldsRM[i].setText(RM.registerToString1B(i));
 			fieldsRM[i].setEditable(false);
 		}
+		
 		
 		fieldsRM[11] = new JTextField(3);
 		fieldsRM[11].setText(String.format("%d", RM.MODE));
@@ -171,33 +173,34 @@ public class GUI extends JFrame implements ActionListener {
         panelMD.add(createPanel(OO, fieldsMD[3]));      
         framePanel.add(panelMD);
         
-        panelButtons.add(nextCommand);
+//        panelButtons.add(nextCommand);
         panelButtons.add(showHDDTable);
         framePanel.add(panelButtons);
         
-        scrollConsole = new JScrollPane(console);
-        console.setWrapStyleWord(true);
-        console.setLineWrap(true);
-        framePanel.add(scrollConsole);      
+//        scrollConsole = new JScrollPane(console);
+//        console.setWrapStyleWord(true);
+//        console.setLineWrap(true);
+//        framePanel.add(scrollConsole);      
 
-        nextCommand.addActionListener(this);
+//        nextCommand.addActionListener(this);
         add(framePanel);
+        
+        framePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+    //    framePanel.setMaximumSize(new Dimension(700, 700));
+        
         
       	panelRM.setMaximumSize(new Dimension(WIDTH, 100));
       	panelMD.setMaximumSize(new Dimension(WIDTH, 50));
       	panelButtons.setMaximumSize(new Dimension(WIDTH, 50));
-      	scrollConsole.setSize(WIDTH, 200);
+//      	scrollConsole.setSize(WIDTH, 200);
       	
-      	this.setMinimumSize(new Dimension(WIDTH, HEIGHT-200));
-      	setSize(WIDTH, HEIGHT);
-      	this.setMaximumSize(new Dimension(WIDTH, HEIGHT));
+      	this.setBounds(0, 0, WIDTH, HEIGHT-250);
+      	this.setMinimumSize(new Dimension(WIDTH, HEIGHT-250));
+      	this.setMaximumSize(new Dimension(WIDTH+50, HEIGHT));
         
-        pack();
-        
-        setResizable(true);
-        setLocation(200, 100);
-        setVisible(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(false);
+        setVisible(false);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 	
 	private JPanel radioButtonsPanel(JRadioButton button1, JRadioButton button2) {
@@ -229,7 +232,7 @@ public class GUI extends JFrame implements ActionListener {
 		return panel;
 	}
 	
-	public void refresh() {
+	public static void refresh() {
 		for (int i = 0; i < 6; i++) {
 			fieldsRM[i].setText(RM.registerToString(i));
 		}
@@ -271,8 +274,7 @@ public class GUI extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("Next")) {
 			RM.runPC();
-			this.refresh();
-			
+			this.refresh();		
 		}
 		
 		else if(e.getActionCommand().equals("Show")) {
@@ -380,12 +382,20 @@ public class GUI extends JFrame implements ActionListener {
 		HDDmemoryTable.setEnabled(false);
 	}
 	
-	public static void printChar(char c) {
+	/*public static void printChar(char c) {
 		console.append(Character.toString(c));
 	}
 	
 	public static void printStream(String s) {
 		console.append(s+"\n");
+	}*/
+	
+	public void showHide() {
+		if (isVisible()) {
+			setVisible(false);
+		}
+		else
+			setVisible(true);
 	}
 	
 }
