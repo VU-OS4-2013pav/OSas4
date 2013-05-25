@@ -176,7 +176,7 @@ public class Primityvai {
 		
 	}
 	
-	public static void atlaisvintiResursa(String name, Object procORname) { //proceso id (int), arba programos vardas (String)
+	public static void atlaisvintiResursa(String name, Object procORname) { //proceso id (int), arba programos vardas (int)
 		System.out.println("Atlaisvinamas resursas vardu: "+name);
 		
 		switch (name) {
@@ -186,7 +186,7 @@ public class Primityvai {
 			int program = -1;
 
 			for (int i = 0; i < o.programs.size(); i++) { //began per visas programas ir ieskom nurodytos parametruose
-				if (o.programs.get(i).name == (String)procORname) { // jeigu ta programa
+				if (o.programs.get(i).nr == (int)procORname) { // jeigu ta programa
 					program = i;
 				}
 			}
@@ -207,7 +207,7 @@ public class Primityvai {
 				o.programs.remove(program);
 			}
 			else 
-				System.out.println("Programa diske nerasta: "+(String)procORname);
+				System.out.println("Programa diske nerasta: "+(int)procORname);
 					
 			break;
 		case DRstring.Kanalu_irenginys:
@@ -288,13 +288,19 @@ public class Primityvai {
 			}
 
 			// naikinami/atlaisvinami visi proceso turimi resursai (VRSS + RSS)
+			
+			
 			for (i = proc.resursai.size()-1; i >= 0; i--) {
 				if (proc.resursai.get(i).nameI < 4) {
-					atlaisvintiResursa(proc.resursai.get(i).nameO, proc);
+					 if (proc.resursai.get(i).nameO != DRstring.HDD) {
+						 System.out.println("nelygu HDD!!!! "+proc.resursai.get(i).nameO);
+						 atlaisvintiResursa(proc.resursai.get(i).nameO, proc.nameI);
+					 }
 				} else {
 					Primityvai.naikintiResursa(proc.resursai.get(i).nameI);
 				}
 			}
+			System.out.println("neatlaisvinti resursaui: "+proc.resursai.size());
 			
 			if (name == 0) { // jei begin end sunaikinami daugkartiniai
 				for (i = proc.sukurtiResursai.size()-1; i >= 0; i--) {

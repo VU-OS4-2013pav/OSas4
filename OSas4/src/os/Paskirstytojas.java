@@ -65,14 +65,15 @@ public class Paskirstytojas {
 			
 			//Jei HDD resursas
 			if (RSS.list.get(i).resourceDescriptor.nameO == Statiniai.DRstring.HDD) {
+				System.out.println("Skirstau HDD");
 				boolean aptarnavau = true;
 				while(aptarnavau) {
 					aptarnavau = false;
 					//Jei laukianèiø procesø sàraðas netuðèias
 					if (!RSS.list.get(i).list.isEmpty()) {	
-						
 						int maxPrioritetas = 0, kelintas = -1; //rastas didþiausias prioritetas ir kelintas procesas sàraðe
 						for (int j = 0; j < RSS.list.get(i).list.size(); j++) {
+							System.out.println(RSS.list.get(i).list.get(j).howMuchResourceItNeeds + " <= " + ((HDDObject)((INFOhdd)RSS.list.get(i).resourceDescriptor.info).o).laisvuBlokuSk);
 							if (RSS.list.get(i).list.get(j).howMuchResourceItNeeds <= ((HDDObject)((INFOhdd)RSS.list.get(i).resourceDescriptor.info).o).laisvuBlokuSk) {
 								if (RSS.list.get(i).list.get(j).process.prioritetas > maxPrioritetas) {
 									maxPrioritetas = RSS.list.get(i).list.get(j).process.prioritetas;
@@ -82,6 +83,7 @@ public class Paskirstytojas {
 						}
 						if (kelintas > -1) {
 							//Á HDD ádedama nauja programa
+							System.out.println("VAvavava");
 							int kiek, nr;
 							kiek = RSS.list.get(i).list.get(kelintas).howMuchResourceItNeeds;
 							nr = ((HDDObject)((INFOhdd)RSS.list.get(i).resourceDescriptor.info).o).programs.size() + 1;

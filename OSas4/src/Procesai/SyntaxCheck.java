@@ -21,7 +21,7 @@ public class SyntaxCheck extends ProcessBase {
 			Primityvai.naikintiResursa(resursai.get(0).nameI);
 			System.out.println("O að tikrinu sintaksæ!");
 			INFO inf = new INFO();
-			inf.o= false;
+			inf.o= true;
 			vieta++;
 			Primityvai.sukurtiResursa(Statiniai.VRstring.Sintakse_patikrinta, true, nameI, inf);
 			break;

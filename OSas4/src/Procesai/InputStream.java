@@ -71,28 +71,27 @@ public class InputStream extends ProcessBase {
 				Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, nameI, 1);
 			}
 			else {
-				vieta = 4;
+				vieta = 5;
 				Primityvai.sukurtiResursa(Statiniai.VRstring.Sintakses_tikrinimas, true, nameI, null);
-				Primityvai.prasytiResurso(VRstring.Sintakse_patikrinta, nameI, 1);
 				break;
 			}
 			
 			break;
-	/*	case 3:
+		/*case 4:
 			vieta++;
-			Primityvai.sukurtiResursa(Statiniai.VRstring.Sintakses_tikrinimas, true, nameI, null);
+			Primityvai.prasytiResurso(VRstring.Sintakse_patikrinta, nameI, 1);
 			break;*/
-		case 4: 
+		case 5: 
 			//Blokuojasi ir laukia sintaksë patikrinta resurso
-			vieta = 5;
+			vieta = 6;
 			Primityvai.prasytiResurso(VRstring.Sintakse_patikrinta, nameI, 1);
 			break;
-		case 5:
+		case 6:
 			//Blokuojasi ir laukia kanalø árenginys
 			vieta++;
 			Primityvai.prasytiResurso(DRstring.Kanalu_irenginys, nameI, 1);
 			break;
-		case 6:
+		case 7:
 			//Tikrinama ar buvo klaidu ar nebuvo
 			ResourceDescriptor sintaksesResursas = null;
 			for (int i = 0; i < resursai.size(); i++)
@@ -109,23 +108,22 @@ public class InputStream extends ProcessBase {
 			if ((boolean)sintaksesResursas.info.o) {
 				//Jei visa sintaksë teisinga
 				System.out.println("Sintaksë teisinga!");
-				/*Primityvai.prasytiResurso(Statiniai.DRstring.HDD, nameI, 1);
-				vieta++;*/
+				vieta++;
+				Primityvai.prasytiResurso(Statiniai.DRstring.HDD, nameI, 1);
 			} else {
 				//Jei sintaksë neteisinga
 				System.out.println("Uþduotyje buvo klaidø!");
-				vieta = 8;
+				vieta = 9;
 				Primityvai.atlaisvintiResursa(Statiniai.DRstring.Kanalu_irenginys, nameI);
 				
 			}
 			break;
-		case 7:
+		case 8:
 			//Kopijuoja uþduotá á HDD
-			int blokas;
 			HDDObject hdd = null;
 			for (int i = 0; i < resursai.size(); i++)
 				if (resursai.get(i).nameO == Statiniai.DRstring.HDD) {
-					hdd = ((HDDObject)((INFOhdd)RSS.list.get(i).resourceDescriptor.info).o);
+					hdd = ((HDDObject)(RSS.list.get(Statiniai.DRint.HDD).resourceDescriptor.info).o);
 					break;
 				}
 			//gaunam kuriam bloke programa
@@ -143,13 +141,15 @@ public class InputStream extends ProcessBase {
 			ChannelDevice.c = nuskaitytiZodziai; 
 			ChannelDevice.runDevice();
 			
-			Primityvai.atlaisvintiResursa(Statiniai.DRstring.Kanalu_irenginys, this);
-			Primityvai.sukurtiResursa(Statiniai.VRstring.InputStream_pabaiga, true, father, null);
-			break;
-		case 8:
 			vieta = 9;
+			Primityvai.atlaisvintiResursa(Statiniai.DRstring.Kanalu_irenginys, nameI);
+			
+			break;
+		case 9:
+			vieta = 10;
 			Primityvai.sukurtiResursa(Statiniai.VRstring.InputStream_pabaiga, true, father, null);
 			break;
+		
 		}
 		
 	}
