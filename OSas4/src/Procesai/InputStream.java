@@ -16,43 +16,61 @@ import rm.Memory;
 
 public class InputStream extends ProcessBase {
 	int nuskaitytiZodziai = 0;
+	boolean nuskaitymasBaigtas = false;
 	@Override
 	public void execute() {
 		switch(vieta) {
 		case 0:
 			//Blokuojasi ir laukia kanalø árenginys
-			vieta++;
+			vieta = 2;
 			Primityvai.prasytiResurso(DRstring.Kanalu_irenginys, nameI, 1);
 			break;
-		case 1:
-			//Blokuojasi ir laukia klaviatûros pertraukimas
+		/*case 1:
 			vieta++;
-			Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, nameI, 1);
-			break;
-		case 2:
-			//Padidina nuskaitytø þodþiø skaièiø
-			nuskaitytiZodziai++;
-			//Tikrinam ar nuskaityta komanda nëra #END
-			if (String.valueOf(Memory.get()[Statiniai.readMem].getWord()).equals("#END")) {
-				//Atlaisvinamas kanalø árenginys
-				vieta++;
-				Primityvai.atlaisvintiResursa(Statiniai.DRstring.Kanalu_irenginys, nameI);
-			} else {
-				//Blokuojasi ir laukia klaviatûros pertraukimo
-				Statiniai.readMem++;
+			if (Statiniai.readMem == Statiniai.vietaMem) {
+				//Blokuojasi ir laukia klaviatûros pertraukimas
 				Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, nameI, 1);
+			}
+			break;*/
+		case 2:
+			if (Statiniai.readMem < Statiniai.vietaMem) {
+				for (int i = Statiniai.readMem; i < Statiniai.vietaMem; i++) {
+					//Padidina nuskaitytø þodþiø skaièiø
+					nuskaitytiZodziai++;
+					//Tikrinam ar nuskaityta komanda nëra #END
+					if (String.valueOf(Memory.get()[Statiniai.readMem].getWord()).equals("#END")) {
+						Statiniai.readMem++;
+						//Atlaisvinamas kanalø árenginys
+						vieta++;
+						nuskaitymasBaigtas = true;
+						Primityvai.atlaisvintiResursa(Statiniai.DRstring.Kanalu_irenginys, nameI);
+					} else {	
+						Statiniai.readMem++;
+					}
+				}
+			}
+			
+			if (!nuskaitymasBaigtas) {
+				vieta = 2;
+				Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, nameI, 1);
+			}
+			else {
+				vieta = 5;
+				Primityvai.sukurtiResursa(Statiniai.VRstring.Sintakses_tikrinimas, true, nameI, null);
+				Primityvai.prasytiResurso(VRstring.Sintakse_patikrinta, nameI, 1);
+				break;
 			}
 			
 			break;
-		case 3:
+	/*	case 3:
 			vieta++;
 			Primityvai.sukurtiResursa(Statiniai.VRstring.Sintakses_tikrinimas, true, nameI, null);
-			break;
-		case 4: 
+			break;*/
+/*		case 4: 
 			//Blokuojasi ir laukia sintaksë patikrinta resurso
 			vieta++;
 			Primityvai.prasytiResurso(VRstring.Sintakse_patikrinta, nameI, 1);
-			break;
+			break;*/
 		case 5:
 			//Blokuojasi ir laukia kanalø árenginys
 			vieta++;
