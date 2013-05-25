@@ -49,7 +49,9 @@ public class InputStream extends ProcessBase {
 					}
 				}
 			}
-			
+			break;
+		case 3:
+			System.out.println("nuskaityti zodziai-----------------: "+nuskaitytiZodziai);
 			if (!nuskaitymasBaigtas) {
 				vieta = 2;
 				Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, nameI, 1);
