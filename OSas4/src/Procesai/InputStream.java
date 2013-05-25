@@ -143,7 +143,7 @@ public class InputStream extends ProcessBase {
 			
 			ChannelDevice.setValueOfChannel(ChannelDevice.IO, 1);
 			ChannelDevice.setValueOfChannel(ChannelDevice.OO, 2);
-			ChannelDevice.setValueOfChannel(ChannelDevice.IA, Statiniai.vietaMem);
+			ChannelDevice.setValueOfChannel(ChannelDevice.IA, nuoKur);
 			ChannelDevice.setValueOfChannel(ChannelDevice.OA, kurisBlokas*255);
 			ChannelDevice.c = nuskaitytiZodziai; 
 			ChannelDevice.runDevice();
