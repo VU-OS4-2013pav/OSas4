@@ -34,6 +34,7 @@ public class IInterrupt extends ProcessBase {
 				Primityvai.sukurtiProcesa(Statiniai.Pstring.InputStream, this.nameI, 8);
 				vieta = 3;
 				Primityvai.prasytiResurso(VRstring.InputStream_pabaiga, this.nameI, 1);
+
 			} 
 			// jeigu mos pabaiga
 			else if(String.valueOf(Memory.get()[Statiniai.readMem].getWord()).equals(".END")) {
