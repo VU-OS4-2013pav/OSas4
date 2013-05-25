@@ -1,11 +1,11 @@
 package os;
 
-import Procesai.PL;
 import Procesai.PPS;
 
 
 public class Planuotojas {
 	public static void planuok() {
+
 		System.out.println("Planuoju...");
 		int max = -1, kelintas = -1, runPrioritetas = -1, runKelintas = -1;
 		

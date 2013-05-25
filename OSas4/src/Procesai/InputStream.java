@@ -4,6 +4,14 @@ import os.Primityvai;
 import os.Statiniai;
 import os.Statiniai.DRstring;
 import os.Statiniai.VRstring;
+import resources.RSS;
+import resources.ResourceDescriptor;
+import resources.VRSS;
+import resourcesINFO.HDDObject;
+import resourcesINFO.INFOhdd;
+import rm.ChannelDevice;
+import rm.HDD;
+import rm.Memory;
 
 
 public class InputStream extends ProcessBase {
@@ -25,40 +33,82 @@ public class InputStream extends ProcessBase {
 			//Padidina nuskaitytø þodþiø skaièiø
 			nuskaitytiZodziai++;
 			//Tikrinam ar nuskaityta komanda nëra #END
-			//jei ne vieta = 1;
-			//jei taip vieta++;
+			if (String.valueOf(Memory.get()[Statiniai.readMem].getWord()).equals("#END")) {
+				//Atlaisvinamas kanalø árenginys
+				vieta++;
+				Primityvai.atlaisvintiResursa(Statiniai.DRstring.Kanalu_irenginys, nameI);
+			} else {
+				//Blokuojasi ir laukia klaviatûros pertraukimo
+				Statiniai.readMem++;
+				Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, nameI, 1);
+			}
+			
 			break;
 		case 3:
-			//Atlaisvinamas kanalø árenginys
-			Primityvai.atlaisvintiResursa(Statiniai.DRstring.Kanalu_irenginys, nameI);
-			//Sukuriamas sintaksës tikrinimas resursas
-			Primityvai.sukurtiResursa(Statiniai.VRstring.Sintakses_tikrinimas, true, nameI, null);
 			vieta++;
+			Primityvai.sukurtiResursa(Statiniai.VRstring.Sintakses_tikrinimas, true, nameI, null);
+			break;
+		case 4: 
 			//Blokuojasi ir laukia sintaksë patikrinta resurso
+			vieta++;
 			Primityvai.prasytiResurso(VRstring.Sintakse_patikrinta, nameI, 1);
 			break;
-		case 4:
+		case 5:
 			//Blokuojasi ir laukia kanalø árenginys
 			vieta++;
 			Primityvai.prasytiResurso(DRstring.Kanalu_irenginys, nameI, 1);
 			break;
-		case 5:
-			//Tikrinama ar buvo klaidu ar nebuvo
-			//jei buvo iðvedamas praneðimas su klaidom vieta = 7
-			//jei nebuvo Blokuojasi ir laukia HDD, vieta++
-			break;
 		case 6:
-			//Kopijuoja uþduotá á HDD
-			//vieta++
+			//Tikrinama ar buvo klaidu ar nebuvo
+			ResourceDescriptor sintaksesResursas = null;
+			for (int i = 0; i < resursai.size(); i++)
+				if (resursai.get(i).nameO == Statiniai.VRstring.Sintakse_patikrinta) {
+					for (int j = 0; j < VRSS.list.get(Statiniai.VRint.Sintakse_patikrinta).resourceList.size(); j++)
+						if (VRSS.list.get(Statiniai.VRint.Sintakse_patikrinta).resourceList.get(j).nameI == resursai.get(i).nameI) {
+							sintaksesResursas = VRSS.list.get(Statiniai.VRint.Sintakse_patikrinta).resourceList.get(j);
+							break;
+						}
+					break;
+				}
+			if (sintaksesResursas == null)
+				System.out.println("Input stream neturi sintaksës resurso.. Baisi klaida");
+			if ((boolean)sintaksesResursas.info.o) {
+				//Jei visa sintaksë teisinga
+				Primityvai.prasytiResurso(Statiniai.DRstring.HDD, nameI, 1);
+				vieta++;
+			} else {
+				//Jei sintaksë neteisinga
+				System.out.println("Uþduotyje buvo klaidø!");
+				Primityvai.atlaisvintiResursa(Statiniai.DRstring.Kanalu_irenginys, this);
+				Primityvai.sukurtiResursa(Statiniai.VRstring.InputStream_pabaiga, true, father, null);
+			}
 			break;
 		case 7:
-			vieta++;
-			//Atlaisvinamas kanalø árenginys
-			Primityvai.atlaisvintiResursa(Statiniai.DRstring.Kanalu_irenginys, nameI);
-			break;
-		case 8:
-			Primityvai.sukurtiResursa(Statiniai.VRstring.InputStream_pabaiga, true, nameI, null);
-			//Blokuojasi, laukia neegzistuoja
+			//Kopijuoja uþduotá á HDD
+			int blokas;
+			HDDObject hdd = null;
+			for (int i = 0; i < resursai.size(); i++)
+				if (resursai.get(i).nameO == Statiniai.DRstring.HDD) {
+					hdd = ((HDDObject)((INFOhdd)RSS.list.get(i).resourceDescriptor.info).o);
+					break;
+				}
+			//gaunam kuriam bloke programa
+			int kurisBlokas = 0;
+			for (int i = 0; i < hdd.HDD_SIZE; i++)
+				if (hdd.hdd.get(i) == programaHDD) {
+					kurisBlokas = i;
+					break;
+				}
+			
+			ChannelDevice.setValueOfChannel(ChannelDevice.IO, 1);
+			ChannelDevice.setValueOfChannel(ChannelDevice.OO, 2);
+			ChannelDevice.setValueOfChannel(ChannelDevice.IA, Statiniai.vietaMem);
+			ChannelDevice.setValueOfChannel(ChannelDevice.OA, kurisBlokas*255);
+			ChannelDevice.c = nuskaitytiZodziai; 
+			ChannelDevice.runDevice();
+			
+			Primityvai.atlaisvintiResursa(Statiniai.DRstring.Kanalu_irenginys, this);
+			Primityvai.sukurtiResursa(Statiniai.VRstring.InputStream_pabaiga, true, father, null);
 			break;
 		}
 		

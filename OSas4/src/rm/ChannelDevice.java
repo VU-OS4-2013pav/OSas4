@@ -2,7 +2,8 @@ package rm;
 import java.io.IOException;
 
 public class ChannelDevice {	
-	static final int IA = 0, OA = 1, IO = 2, OO = 3;	
+	public static final int IA = 0, OA = 1, IO = 2, OO = 3;
+	public static int c;
 	static Object[] channels;	
 	
 	public static void createDevice() {
@@ -51,7 +52,8 @@ public class ChannelDevice {
 			case 2 : { // ->isorine atmintis
 				int ia = Integer.parseInt(registerToString(IA), 16);
 				int oa = Integer.parseInt(registerToString(OA), 16);
-				int cc = Integer.parseInt(RM.registerToString(RM.CC), 16);
+				//int cc = Integer.parseInt(RM.registerToString(RM.CC), 16);
+				int cc = c;
 				if (cc > 0)
 					for (int i = 0; i < cc; i++) {
 						HDD.addWord(oa, (Memory.get()[ia]).toString());
