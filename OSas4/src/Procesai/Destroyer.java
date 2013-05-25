@@ -28,17 +28,34 @@ public class Destroyer extends ProcessBase {
 			break;
 		case 2:
 			// gavo kanalu irengini. ar egzistuoja nurodyta programa atmintyje?
+			
+			//gaunam pavadinimà, kà trinti
+			String pavadinimas = null;
+			int kuris = -1;
+			
+			for (int i = 0; i < VRSS.list.get(VRint.Destroyer_XDD_pradzia).resourceList.size(); i++) 
+				if (VRSS.list.get(VRint.Destroyer_XDD_pradzia).resourceList.get(i).nameI == resursai.get(0).nameI) {
+					pavadinimas = (String)((Object[])VRSS.list.get(VRint.Destroyer_XDD_pradzia).resourceList.get(i).info.o)[0];
+					kuris = i;
+					break; //Radom ko reikia, galim nebetæst paieðkos
+				}
+			
+			if (pavadinimas == null)
+				System.out.println("Destroyer pradþia neatsineðë pavadinimo!");
+			System.out.println("pavadinimas: " + pavadinimas);
 			HDDObject hdd = ((HDDObject)(RSS.list.get(0).resourceDescriptor.info.o));
+			
 			boolean yra = false;
 			for (int i = 0; i < hdd.programs.size(); i++) {
-				if (hdd.programs.get(i).name == VRSS.list.get(VRint.Destroyer_XDD_pradzia).resourceList.get(0).nameO) {
+				if (hdd.programs.get(i).name.equals(pavadinimas)) {
 					
 					// taip saka - sutvarkomas deskriptorius, systemoutas
-					Primityvai.atlaisvintiResursa(DRstring.HDD, VRSS.list.get(VRint.Destroyer_XDD_pradzia).resourceList.get(0).nameO);
-					System.out.println("Programa is HDD istrinta.");
+					vieta++;
+					Primityvai.atlaisvintiResursa(DRstring.HDD, hdd.programs.get(i).nr);
+					/*System.out.println("Programa is HDD istrinta.");
 										
 					yra = true;
-					break;
+					break;*/
 				}
 			}
 			
@@ -47,13 +64,23 @@ public class Destroyer extends ProcessBase {
 				System.out.println("Progrma is HDD neistrinta. Pavadinimas: "+VRSS.list.get(VRint.Destroyer_XDD_pradzia).resourceList.get(0).nameO);
 			}
 			
+			break;
+		case 3:
+			vieta++;
+			Primityvai.atlaisvintiResursa(Statiniai.VRstring.Destroyer_XDD_pradzia, nameI);
+			break;
+		case 4:
 			//atlaisvina kanalu irengini
+			vieta++;
 			Primityvai.atlaisvintiResursa(DRstring.Kanalu_irenginys, this.nameI);
-					
+			break;
+		case 5:
 			// sukuria destroyer pabaiga ir grizta i pradzia
-			vieta = 1;
+			vieta ++;
 			Primityvai.sukurtiResursa(Statiniai.VRstring.Destroyer_XDD_pabaiga, true, this.nameI, new INFO());
-			
+			break;
+		case 6:
+			vieta = 1;
 			// grizta i blokuota busena ir laukia paleidimo
 			Primityvai.prasytiResurso(Statiniai.VRstring.Destroyer_XDD_pradzia, this.nameI, 1);
 			break;
