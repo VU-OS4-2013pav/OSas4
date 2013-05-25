@@ -53,14 +53,14 @@ public class JobGovernor extends ProcessBase {
 			int last = -1;
 			oa2 = new int[oa.length];
 			// adreso virtualizacija - skirta PTR lentelei
-			oa2[0] = oa[0]*0x100+0x8000;
+			oa2[0] = oa[0]*0x100+0x8100;
 			
 			// imam sekanti bloka
 			int ptr = this.oa2[0]+1;
 			
 			for (int i = 1; i < oa2.length; i++) {
 				// adreso virtualizacija - isskirti blokai
-				oa2[i] = oa[i]*0x100+0x8000;
+				oa2[i] = oa[i]*0x100+0x8100;
 				// i char'a
 				for (int j = Integer.toHexString(this.oa2[i]).length()-1; j > 0; j--) {
 					last = j;
