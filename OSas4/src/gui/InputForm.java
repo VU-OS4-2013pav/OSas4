@@ -26,11 +26,11 @@ import rm.RM;
 
 public class InputForm extends JFrame {
 	JButton readLineButton, RMbutton;
-	JLabel readLabel, processLabel, resourcesLabel;
+	JLabel readLabel, processLabel, resourcesLabel, waitingLabel;
 	JTextField readField;
 	static JTextArea processField;
-	static JTextArea resourcesField;
-	JScrollPane scrollProcess, scrollResources;
+	static JTextArea resourcesField, waitingField;
+	JScrollPane scrollProcess, scrollResources, scrollWaiting;
 	JPanel formPanel;
 	
 	public static GUI gui;
@@ -43,7 +43,7 @@ public class InputForm extends JFrame {
 		processLabel = new JLabel("Procesai: ");
 		formPanel.add(processLabel);
 		
-		processField = new JTextArea(15, 52);
+		processField = new JTextArea(11, 52);
 		processField.setEditable(false);
 		scrollProcess = new JScrollPane(processField);
 		processField.setWrapStyleWord(true);
@@ -55,13 +55,26 @@ public class InputForm extends JFrame {
 		resourcesLabel = new JLabel("Resursai: ");
 		formPanel.add(resourcesLabel);
 		
-		resourcesField = new JTextArea(15, 52);
+		resourcesField = new JTextArea(11, 52);
 		resourcesField.setEditable(false);
 		scrollResources = new JScrollPane(resourcesField);
 		resourcesField.setWrapStyleWord(true);
 		resourcesField.setLineWrap(true);
 		
 		formPanel.add(scrollResources);
+		
+		// waiting for list
+		waitingLabel = new JLabel("Kas ko laukia:");
+		formPanel.add(waitingLabel);
+		
+		waitingField = new JTextArea(11, 52);
+		waitingField.setEditable(false);
+		scrollWaiting = new JScrollPane(waitingField);
+		waitingField.setWrapStyleWord(true);
+		waitingField.setLineWrap(true);
+		
+		formPanel.add(scrollWaiting);
+		
 		
 		// konsole
 		readLabel = new JLabel("Ivedimo konsole: ");
@@ -104,8 +117,8 @@ public class InputForm extends JFrame {
 		
 		
 		this.setMinimumSize(new Dimension(600, 600));
-      	this.setMaximumSize(new Dimension(700, 700));
-      	this.setBounds(716, 0, 650, 650);
+      	this.setMaximumSize(new Dimension(700, 760));
+      	this.setBounds(716, 0, 650, 700);
       	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
@@ -129,6 +142,22 @@ public class InputForm extends JFrame {
 		for (i = 0; i < VRSS.list.size(); i++) {
 			for (j = 0; j < VRSS.list.get(i).resourceList.size(); i++)
 				resourcesField.append(VRSS.list.get(i).resourceList.get(j).toString()+"\n");
+		}
+		
+		waitingField.setText("");
+		for (i = 0; i < RSS.list.size(); i++) {
+			if (!RSS.list.get(i).list.isEmpty()) {
+				waitingField.append("Resurso "+RSS.list.get(i).resourceDescriptor.nameO+" laukia:\n");
+				for (j = 0; j < RSS.list.get(i).list.size(); j++)
+					waitingField.append("  "+RSS.list.get(i).list.get(j).process.nameI+" "+RSS.list.get(i).list.get(j).process.nameO+"\n");
+			}
+		}
+		for (i = 0; i < VRSS.list.size(); i++) {
+			if (!VRSS.list.get(i).processList.isEmpty()) {
+				waitingField.append("Resurso "+VRSS.list.get(i).vardas+" laukia:\n");
+				for (j = 0; j < VRSS.list.get(i).processList.size(); j++)
+					waitingField.append("  "+VRSS.list.get(i).processList.get(j).process.nameI+" "+VRSS.list.get(i).processList.get(j).process.nameO+"\n");
+			}
 		}
 		
 		
