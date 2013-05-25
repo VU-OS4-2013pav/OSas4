@@ -16,6 +16,10 @@ public class Planuotojas {
 			if (PPS.list.get(i).busena == Statiniai.ProcessState.RUN) {
 				runPrioritetas = PPS.list.get(i).prioritetas;
 				runKelintas = i;
+				if (runPrioritetas > max) {
+					max = runPrioritetas;
+					kelintas = runKelintas;
+				}
 			}
 			
 			//Pasiþiûrim ar proceso prioritetas didesnis uþ iki ðiol rasto ir ar jo bûsena READY
@@ -28,14 +32,17 @@ public class Planuotojas {
 		if (kelintas > -1) { //ar buvo rastas procesas, kurá galima vykdyti
 			
 			//Pasiþiûrim ar RUN proceso duomenys sutampa su rasto proceso, kurá dabar reikia vykdyti duomenimis
-			if ((max == runPrioritetas) && (kelintas == runKelintas) && (max != -1))
+			if ((max == runPrioritetas) && (kelintas == runKelintas) && (max != -1)) {
 				PPS.list.get(kelintas).execute();
+			}
+				
 			else {
-				if (runKelintas > -1) //Jei buvo rastas RUN procesas
+				if (runKelintas > -1){ //Jei buvo rastas RUN procesas 
 					//RUN procesà þymim pasiruoðusiu
 					PPS.list.get(runKelintas).busena = Statiniai.ProcessState.READY;
-				
-				//Keièiam proceso bûsenà á RUN
+					System.out.println(PPS.list.get(runKelintas).nameO + " pakeièiau i ready");
+				}
+					//Keièiam proceso bûsenà á RUN
 				PPS.list.get(kelintas).busena = Statiniai.ProcessState.RUN;
 				
 				//Vykdom procesà

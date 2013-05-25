@@ -28,7 +28,7 @@ public class InputForm extends JFrame {
 				if (readField.getText().length() % 4 == 0) { // jeigu ivesta pilna komandu seka po 4 simbolius komandoje
 					RM.regOS = 1; // vadinas ivedimas gali buti tvarkingas. statom interrupta ir kisam i memory
 					for (int i = 0; i < readField.getText().length() / 4; i++) {
-						Memory.addWord(Statiniai.vietaMem, readField.getText().substring(i, i+4));
+						Memory.addWord(Statiniai.vietaMem, readField.getText().substring(i*4, i*4+4));
 						Statiniai.vietaMem++;
 					}
 				}
