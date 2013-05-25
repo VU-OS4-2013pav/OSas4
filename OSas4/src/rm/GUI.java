@@ -30,10 +30,10 @@ public class GUI extends JFrame implements ActionListener {
 	
 	JButton showHDDTable = new JButton("Show HDD table");
 	JFrame hddFrame;
-	private int showFrom = 0;
-	private int showTo = Memory.MEMORY_SIZE-1;
-	private int showFromHDD = 0;
-	private int showToHDD = HDD.HDD_SIZE-1;
+	private static int showFrom = 0;
+	private static int showTo = Memory.MEMORY_SIZE-1;
+	private static int showFromHDD = 0;
+	private static int showToHDD = HDD.HDD_SIZE-1;
 	TableRowSorter<TableModel> sorter;
 	TableRowSorter<TableModel> HDDsorter;
 	JPanel hddMemoryPanel = new JPanel(); //
@@ -69,23 +69,23 @@ public class GUI extends JFrame implements ActionListener {
 	JLabel PI = new JLabel("PI");
 	JLabel SR = new JLabel("SR");
 	JLabel MODE = new JLabel("MODE");
-	JTextField[] fieldsRM = new JTextField[12];
+	static JTextField[] fieldsRM = new JTextField[12];
 	
 	JPanel panelMD = new JPanel();
 	JLabel IA = new JLabel("IA");
 	JLabel IO = new JLabel("IO");
 	JLabel OA = new JLabel("OA");
 	JLabel OO = new JLabel("OO");
-	JTextField[] fieldsMD = new JTextField[4];
+	static JTextField[] fieldsMD = new JTextField[4];
 	
 	JPanel panelButtons = new JPanel();
 //	JButton nextCommand = new JButton("Next");
 	
 	JScrollPane scrollPane;
-	JTable memoryTable;
+	static JTable memoryTable;
 	
 	JScrollPane HDDscrollPane;
-	JTable HDDmemoryTable;
+	static JTable HDDmemoryTable;
 	
 //	JScrollPane scrollConsole;
 //	static JTextArea console = new JTextArea();
@@ -199,7 +199,7 @@ public class GUI extends JFrame implements ActionListener {
       	this.setMaximumSize(new Dimension(WIDTH+50, HEIGHT));
         
         setResizable(false);
-        setVisible(true);
+        setVisible(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 	
@@ -232,7 +232,7 @@ public class GUI extends JFrame implements ActionListener {
 		return panel;
 	}
 	
-	public void refresh() {
+	public static void refresh() {
 		for (int i = 0; i < 6; i++) {
 			fieldsRM[i].setText(RM.registerToString(i));
 		}
@@ -274,8 +274,7 @@ public class GUI extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("Next")) {
 			RM.runPC();
-			this.refresh();
-			
+			this.refresh();		
 		}
 		
 		else if(e.getActionCommand().equals("Show")) {

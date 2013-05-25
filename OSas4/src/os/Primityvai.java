@@ -1,5 +1,7 @@
 package os;
 
+import gui.InputForm;
+
 import java.util.ArrayList;
 
 import os.Statiniai.DRint;
@@ -34,6 +36,7 @@ public class Primityvai {
 	public static int processId = 0;
 	
 	public static void sukurtiProcesa(String name, int father, int priority) {
+		InputForm.refreshAll();
 		
 		ProcessBase proc = null;
 		processId++;
@@ -98,6 +101,7 @@ public class Primityvai {
 	}
 
 	public static void prasytiResurso(String isorinis, int kas, int kiek) {
+		InputForm.refreshAll();
 		System.out.println(PL.getProcess(kas).nameO + " paprase " + isorinis);
 		
 		int procesasInPPS = -1;
@@ -142,6 +146,7 @@ public class Primityvai {
 	}
 
 	public static void sukurtiResursa(String name, boolean usable, int father, INFO inf) {
+		InputForm.refreshAll();
 		System.out.println(PL.getProcess(father).nameO+ " kuria " + name);
 		
 		int i;
@@ -177,6 +182,7 @@ public class Primityvai {
 	}
 	
 	public static void atlaisvintiResursa(String name, Object procORname) { //proceso id (int), arba programos vardas (String)
+		InputForm.refreshAll();
 		System.out.println("Atlaisvinamas resursas vardu: "+name);
 		
 		switch (name) {
@@ -237,6 +243,7 @@ public class Primityvai {
 	}
 	
 	public static void naikintiProcesa(int name, ProcessBase father) {
+		InputForm.refreshAll();
 		System.out.println("Naikinamas procesas ''"+PL.getProcess(name).nameO+"''. Vidinis vardas: "+name);
 		
 		int i, j;
@@ -345,6 +352,7 @@ public class Primityvai {
 	}
 	
 	public static void naikintiResursa(int name) {
+		InputForm.refreshAll();
 		System.out.println("Naikinamas resursas vidiniu vardu "+name);
 		
 		ResourceDescriptor res = null;
@@ -413,6 +421,7 @@ public class Primityvai {
 	}
 	
 	public static void stabdytiProcesa(int name) {
+		InputForm.refreshAll();
 		ProcessBase proc = PL.getProcess(name);
 		
 		// BLOCKED -> BLOCKS
@@ -430,6 +439,7 @@ public class Primityvai {
 	}
 	
 	public static void aktyvuotiProcesa(int name) {
+		InputForm.refreshAll();
 		ProcessBase proc = PL.getProcess(name);
 		
 		// READYS -> READY
@@ -444,6 +454,7 @@ public class Primityvai {
 	}
 	
 	public static void keistiPrioriteta(int name, int priority) {
+		InputForm.refreshAll();
 		PL.getProcess(name).prioritetas = priority;
 	}
 
