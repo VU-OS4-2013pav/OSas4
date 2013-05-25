@@ -129,6 +129,7 @@ public class Paskirstytojas {
 						if (kelintas > -1) {
 							//Á proceso OA laukà sugrudami numeriai blokø, kuriuos gauna procesas
 							int kiek = RSS.list.get(i).list.get(kelintas).howMuchResourceItNeeds;
+							System.out.println("Kiek       !!!!!!!" + kiek);
 							int[] blokai = new int[kiek];
 							int k = 0;
 							for (int j = 0; j < ((ArrayList<Boolean>)((INFOuserMemory)RSS.list.get(i).resourceDescriptor.info).o).size(); j++) {
@@ -138,7 +139,7 @@ public class Paskirstytojas {
 									((ArrayList<Boolean>)((INFOuserMemory)RSS.list.get(i).resourceDescriptor.info).o).set(j, true);
 									((INFOuserMemory)RSS.list.get(i).resourceDescriptor.info).laisviBlokai--;
 								}
-								if (k+1 == kiek)
+								if (k == kiek)
 									break;
 							}
 							//RSS.list.get(i).list.get(kelintas).process.addRes(RSS.list.get(i).resourceDescriptor.nameO, RSS.list.get(i).resourceDescriptor.nameI);

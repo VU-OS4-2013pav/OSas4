@@ -120,7 +120,6 @@ public class JobGovernor extends ProcessBase {
 			 #!xy	Bloko numeris xy
 			 #*xy	Þodþio numeris xy
 			 */
-			
 			int iKur = oa2[1];
 			// nustatom is nuo kur pradedam mesti koda - +3 praleidzia #STR, bloku skaiciu ir programos varda
 			int isKur = hdm.get(0)*0x0100+3;
@@ -131,10 +130,11 @@ public class JobGovernor extends ProcessBase {
 					bl[0] = HDD.get()[isKur].getWord()[2];
 					bl[1] = HDD.get()[isKur].getWord()[3];
 					
-					if (HDD.get()[isKur].getWord()[1] != '!') { // bloko keitimas
+					if (HDD.get()[isKur].getWord()[1] == '!') { // bloko keitimas
+					
 						iKur = hdm.get(Integer.valueOf(String.valueOf(bl), 16));
 					}
-					else if (HDD.get()[isKur].getWord()[1] != '*') { // zodzio keitimas
+					else if (HDD.get()[isKur].getWord()[1] == '*') { // zodzio keitimas
 						iKur = (iKur / 0x100)*0x100 + Integer.valueOf(String.valueOf(bl), 16);
 					}
 				}
@@ -142,13 +142,10 @@ public class JobGovernor extends ProcessBase {
 				iKur++;
 				isKur++;
 			}
-			
+			vieta = 6;
 			Primityvai.atlaisvintiResursa(DRstring.Kanalu_irenginys, this.nameI);
 			
-			Primityvai.sukurtiProcesa(Statiniai.Pstring.VirtualMachine, this.nameI, 3);
 			
-			vieta++;
-			Primityvai.prasytiResurso(VRstring.Pranesimas_apie_pertraukima, nameI, 1);
 			break;
 		case 4:
 			int resNameI = -1;
@@ -194,6 +191,14 @@ public class JobGovernor extends ProcessBase {
 			break;
 		case 5:
 			Primityvai.prasytiResurso(VRstring.Neegzistuojantis, nameI, 1);
+			break;
+		case 6:
+			vieta++;
+			Primityvai.sukurtiProcesa(Statiniai.Pstring.VirtualMachine, this.nameI, 3);
+			break;
+		case 7:
+			vieta = 4;
+			Primityvai.prasytiResurso(VRstring.Pranesimas_apie_pertraukima, nameI, 1);
 			break;
 		}
 		

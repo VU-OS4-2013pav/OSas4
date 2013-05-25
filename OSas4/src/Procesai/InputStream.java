@@ -135,6 +135,11 @@ public class InputStream extends ProcessBase {
 			for (int i = 0; i < hdd.programs.size(); i++) 
 				if (hdd.programs.get(i).nr == programaHDD) {
 					hdd.programs.get(i).name = String.valueOf(Memory.get()[nuoKur + 2].getWord());
+					
+					char[] bl = new char[2];
+					bl[0] = Memory.get()[nuoKur + 1].getWord()[2];
+					bl[1] = Memory.get()[nuoKur + 1].getWord()[3];
+					hdd.programs.get(i).oa = Integer.parseInt(String.valueOf(bl), 16);
 				}
 			
 			//gaunam kuriam bloke programa

@@ -221,7 +221,7 @@ public class Primityvai {
 			((Object[])RSS.list.get(DRint.Kanalu_irenginys).resourceDescriptor.info.o)[0] = true;	
 			
 			for (int i = 0; i < proc.resursai.size(); i++) {
-				if (proc.resursai.get(i).nameO == ((String) DRstring.Kanalu_irenginys)) {
+				if (proc.resursai.get(i).nameO.equals(DRstring.Kanalu_irenginys)) {
 					proc.resursai.remove(i);
 				}
 			}

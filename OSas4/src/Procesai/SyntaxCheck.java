@@ -59,11 +59,13 @@ public class SyntaxCheck extends ProcessBase {
 				}else {
 				inf.o= false;
 				}
+			System.out.println("SYNTAX CHEKAS TURI::: "+resursai.size());
 			Primityvai.naikintiResursa(resursai.get(0).nameI);
 			vieta++;
 			Primityvai.sukurtiResursa(Statiniai.VRstring.Sintakse_patikrinta, true, nameI, inf);	
 		case 3:
 			vieta++;
+			System.out.println("SYNTAX CHEKAS TURI::: "+resursai.size());
 			Primityvai.atlaisvintiResursa(Statiniai.DRstring.Kanalu_irenginys, nameI);
 			break;
 		case 4:
