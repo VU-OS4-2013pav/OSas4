@@ -1,5 +1,6 @@
 package Procesai;
 
+import os.Planuotojas;
 import os.Primityvai;
 import os.Statiniai;
 import os.Statiniai.DRstring;
@@ -29,7 +30,13 @@ public class IInterrupt extends ProcessBase {
 			// TODO jeigu nauja uzduotis
 			else if(String.valueOf(Memory.get()[Statiniai.readMem].getWord()).equals(".NEW")) {
 				Statiniai.readMem++;
+				Primityvai.sukurtiProcesa(Statiniai.Pstring.InputStream, nameI, 8);
+				Primityvai.atlaisvintiResursa(Statiniai.VRstring.Klaviaturos_pertraukimas, this);
+				//Planuotojas.planuok();
 				
+				//Blokuojasi ir laukia klaviatûros pertraukimo
+				vieta = 1;
+				Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, nameI, 1);
 			} 
 			// jeigu mos pabaiga
 			else if(String.valueOf(Memory.get()[Statiniai.readMem].getWord()).equals(".END")) {
