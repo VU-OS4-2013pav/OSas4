@@ -9,10 +9,8 @@ import resources.ResourceDescriptor;
 import resources.VRSS;
 import resourcesINFO.HDDObject;
 import resourcesINFO.INFO;
-import resourcesINFO.INFOhdd;
 import resourcesINFO.INFOv;
 import rm.ChannelDevice;
-import rm.HDD;
 import rm.Memory;
 
 

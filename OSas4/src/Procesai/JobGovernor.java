@@ -35,17 +35,28 @@ public class JobGovernor extends ProcessBase {
 			
 			// issitraukiam info apie nauja vm info lauka ir programos varda
 			INFO inf = VRSS.list.get(VRint.Info_apie_nauja_VM).resourceList.get(0).info;
-			String programName = (String) ((Object[])inf.o)[0];
+			
+			String programName = (String) (((Object[])inf.o)[0]);
+
+			
 			kelintas = -1;
 			
 			for (int i = 0; i < hdd.programs.size(); i++) {
-				if (programName == hdd.programs.get(i).name) {
+				System.out.println(programName + " == " + hdd.programs.get(i).name);
+				if (programName.equals(hdd.programs.get(i).name)) {
+					System.out.println("AS JAAA RAAAADAAAAUUUUUUU!!!!");
 					kelintas = i;
 					break;
 				}
 			}
-			vieta++;
-			Primityvai.prasytiResurso(DRstring.Vartotojo_atmintis, nameI, hdd.programs.get(kelintas).oa+1);
+			if (kelintas >= 0) {
+				vieta++;
+				Primityvai.prasytiResurso(DRstring.Vartotojo_atmintis, nameI, hdd.programs.get(kelintas).oa+1);
+			}
+			else {
+				vieta = 0;
+				System.out.println("JG. Programa nerasta.");
+			}
 			break;
 		case 2:
 			// TVARKOMA PTR LENTELE

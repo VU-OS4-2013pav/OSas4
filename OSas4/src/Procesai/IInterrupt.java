@@ -49,10 +49,8 @@ public class IInterrupt extends ProcessBase {
 				INFOv inf = new INFOv();
 				((Object[])inf.o)[0] = String.valueOf(Memory.get()[Statiniai.readMem].getWord());
 				Statiniai.readMem++;
+				vieta = 5;
 				Primityvai.sukurtiResursa(Statiniai.VRstring.Loader_pradzia, true, this.nameI, inf);
-				vieta = 0;
-				Primityvai.prasytiResurso(VRstring.Loader_pabaiga, this.nameI, 1);
-
 			} 
 			// jeigu uzduoties istrinimas
 			else if(String.valueOf(Memory.get()[Statiniai.readMem].getWord()).equals(".DEL")) {
@@ -87,6 +85,10 @@ public class IInterrupt extends ProcessBase {
 		case 4:
 			vieta = 0;
 			Primityvai.prasytiResurso(VRstring.Destroyer_XDD_pabaiga, this.nameI, 1);
+			break;
+		case 5:
+			vieta = 0;
+			Primityvai.prasytiResurso(VRstring.Loader_pabaiga, this.nameI, 1);
 			break;
 		}
 

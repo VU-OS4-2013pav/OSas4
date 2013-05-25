@@ -41,6 +41,7 @@ public class MainGovernor extends ProcessBase {
 			}
 			
 			if (rd != null) {
+				
 				// tikrinam, ar JG reikia sukurti ar sunaikinti
 				if (((boolean)((Object[])rd.info.o)[0]) == true) {
 					// proceso kurimas
@@ -48,9 +49,14 @@ public class MainGovernor extends ProcessBase {
 					// info apie nauja vm kurimas
 					INFOv inf = new INFOv();
 					((Object[])inf.o)[0] = ((Object[])rd.info.o)[1];
+					vieta = 0;
+					Primityvai.naikintiResursa(rd.nameI);
 					Primityvai.sukurtiResursa(VRstring.Info_apie_nauja_VM, true, this.nameI, inf);
 				}
 				else {
+					vieta = 0;
+					Primityvai.naikintiResursa(rd.nameI);
+					
 					//naikinimas
 					Primityvai.naikintiProcesa(((int)((Object[])rd.info.o)[1]), this);
 				}
