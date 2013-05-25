@@ -22,10 +22,17 @@ public class InputStream extends ProcessBase {
 		switch(vieta) {
 		case 0:
 			//Blokuojasi ir laukia kanalø árenginys
-			vieta = 1;
+			vieta = 2;
 			Primityvai.prasytiResurso(DRstring.Kanalu_irenginys, nameI, 1);
 			break;
-		case 1:
+		/*case 1:
+			vieta++;
+			if (Statiniai.readMem == Statiniai.vietaMem) {
+				//Blokuojasi ir laukia klaviatûros pertraukimas
+				Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, nameI, 1);
+			}
+			break;*/
+		case 2:
 			if (Statiniai.readMem < Statiniai.vietaMem) {
 				for (int i = Statiniai.readMem; i < Statiniai.vietaMem; i++) {
 					//Padidina nuskaitytø þodþiø skaièiø
@@ -34,6 +41,7 @@ public class InputStream extends ProcessBase {
 					if (String.valueOf(Memory.get()[Statiniai.readMem].getWord()).equals("#END")) {
 						Statiniai.readMem++;
 						//Atlaisvinamas kanalø árenginys
+						vieta++;
 						nuskaitymasBaigtas = true;
 						Primityvai.atlaisvintiResursa(Statiniai.DRstring.Kanalu_irenginys, nameI);
 					} else {	
@@ -41,25 +49,36 @@ public class InputStream extends ProcessBase {
 					}
 				}
 			}
-			
+			break;
+		case 3:
+			System.out.println("nuskaityti zodziai-----------------: "+nuskaitytiZodziai);
 			if (!nuskaitymasBaigtas) {
-				vieta = 1;
+				vieta = 2;
 				Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, nameI, 1);
 			}
 			else {
-				vieta = 3;
+				vieta = 5;
 				Primityvai.sukurtiResursa(Statiniai.VRstring.Sintakses_tikrinimas, true, nameI, null);
 				Primityvai.prasytiResurso(VRstring.Sintakse_patikrinta, nameI, 1);
 				break;
 			}
 			
 			break;
-		case 3:
+	/*	case 3:
+			vieta++;
+			Primityvai.sukurtiResursa(Statiniai.VRstring.Sintakses_tikrinimas, true, nameI, null);
+			break;*/
+/*		case 4: 
+			//Blokuojasi ir laukia sintaksë patikrinta resurso
+			vieta++;
+			Primityvai.prasytiResurso(VRstring.Sintakse_patikrinta, nameI, 1);
+			break;*/
+		case 5:
 			//Blokuojasi ir laukia kanalø árenginys
 			vieta++;
 			Primityvai.prasytiResurso(DRstring.Kanalu_irenginys, nameI, 1);
 			break;
-		case 4:
+		case 6:
 			//Tikrinama ar buvo klaidu ar nebuvo
 			ResourceDescriptor sintaksesResursas = null;
 			for (int i = 0; i < resursai.size(); i++)
@@ -84,7 +103,7 @@ public class InputStream extends ProcessBase {
 				Primityvai.sukurtiResursa(Statiniai.VRstring.InputStream_pabaiga, true, father, null);
 			}
 			break;
-		case 5:
+		case 7:
 			//Kopijuoja uþduotá á HDD
 			int blokas;
 			HDDObject hdd = null;
