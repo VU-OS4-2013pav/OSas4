@@ -26,9 +26,12 @@ public class IInterrupt extends ProcessBase {
 				vieta = 2;
 				Primityvai.prasytiResurso(DRstring.Kanalu_irenginys, this.nameI, 1);
 			} 
-			// TODO jeigu nauja uzduotis
+			// jeigu nauja uzduotis
 			else if(String.valueOf(Memory.get()[Statiniai.readMem].getWord()).equals(".NEW")) {
 				Statiniai.readMem++;
+				Primityvai.sukurtiProcesa(Statiniai.Pstring.InputStream, this.nameI, 8);
+				vieta = 3;
+				Primityvai.prasytiResurso(VRstring.InputStream_pabaiga, this.nameI, 1);
 				
 			} 
 			// jeigu mos pabaiga
@@ -36,20 +39,35 @@ public class IInterrupt extends ProcessBase {
 				Statiniai.readMem++;
 				vieta = 0;
 				Primityvai.sukurtiResursa(Statiniai.VRstring.MOS_darbo_pabaiga, true, this.nameI, null);
+				
 			} 
-			// TODO jeigu uzduoties paleidimas
+			// jeigu uzduoties paleidimas
 			else if(String.valueOf(Memory.get()[Statiniai.readMem].getWord()).equals(".OPN")) {
 				Statiniai.readMem++;
+				INFOv inf = new INFOv();
+				((Object[])inf.o)[0] = String.valueOf(Memory.get()[Statiniai.readMem].getWord());
+				Statiniai.readMem++;
+				Primityvai.sukurtiResursa(Statiniai.VRstring.Loader_pradzia, true, this.nameI, inf);
+				vieta = 0;
+				Primityvai.prasytiResurso(VRstring.Loader_pabaiga, this.nameI, 1);
 
 			} 
-			// TODO jeigu uzduoties istrinimas
+			// jeigu uzduoties istrinimas
 			else if(String.valueOf(Memory.get()[Statiniai.readMem].getWord()).equals(".DEL")) {
+				Statiniai.readMem++;		
+				INFOv inf = new INFOv();
+				((Object[])inf.o)[0] = String.valueOf(Memory.get()[Statiniai.readMem].getWord());
 				Statiniai.readMem++;
+				Primityvai.sukurtiResursa(Statiniai.VRstring.Destroyer_XDD_pradzia, true, this.nameI, inf);
+				vieta = 0;
+				Primityvai.prasytiResurso(VRstring.Destroyer_XDD_pabaiga, this.nameI, 1);
 				
 			} 
 			// jeigu nesamone
 			else {
 				System.out.println("Neatpazinta sistemos komanda.");
+				vieta = 1;
+				Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, nameI, 1);
 			}
 			break;
 		case 2:
@@ -61,19 +79,12 @@ public class IInterrupt extends ProcessBase {
 			Primityvai.sukurtiResursa(Statiniai.VRstring.Pranesimas_apie_pertraukima, true, nameI, inf);
 			Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, this.nameI, 1);
 			break;
+		case 3:
+			Primityvai.naikintiProcesa(this.sunus.get(0), this);
+			vieta = 1;
+			Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, this.nameI, 1);
+			break;
 		}
-//		cpu[i] = "BLOCKED";
-//		
-//		if(VMNoriIvedimo) {
-//			
-//		} else if(naujaUþduotis) {
-//			
-//		} else if(MOSpabaiga) {
-//			
-//		} else if(uzduotiesPaleidimas) {
-//			
-//		} else if(uzduotiesIstrinimas) {
-//			
-//		}
+
 	}
 }
