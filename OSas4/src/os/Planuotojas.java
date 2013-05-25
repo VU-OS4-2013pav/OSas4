@@ -16,10 +16,10 @@ public class Planuotojas {
 			if (PPS.list.get(i).busena == Statiniai.ProcessState.RUN) {
 				runPrioritetas = PPS.list.get(i).prioritetas;
 				runKelintas = i;
-				if (runPrioritetas > max) {
+				/*if (runPrioritetas > max) {
 					max = runPrioritetas;
 					kelintas = runKelintas;
-				}
+				}*/
 			}
 			
 			//Pasiþiûrim ar proceso prioritetas didesnis uþ iki ðiol rasto ir ar jo bûsena READY
