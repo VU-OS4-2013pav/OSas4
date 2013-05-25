@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,17 +18,21 @@ import os.Statiniai;
 
 import resources.RSS;
 import resources.VRSS;
+import rm.GUI;
 import rm.Memory;
 import rm.RM;
 
 public class InputForm extends JFrame {
-	JButton readLineButton;
+	JButton readLineButton, RMbutton;
 	JLabel readLabel, processLabel, resourcesLabel;
 	JTextField readField;
 	static JTextArea processField;
 	static JTextArea resourcesField;
 	JScrollPane scrollProcess, scrollResources;
 	JPanel formPanel;
+	
+	GUI gui;
+	
 	
 	
 	public InputForm() {
@@ -83,11 +88,28 @@ public class InputForm extends JFrame {
 		
 		formPanel.add(readField);
 		formPanel.add(readLineButton);
+		RMbutton = new JButton("Rodyti RM ir Memory");
+		RMbutton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (e.getActionCommand().equals("Rodyti RM ir Memory")) {
+					gui.showHide();
+				}
+				
+			}
+		});
+		formPanel.add(RMbutton);
 		add(formPanel);
 		
+		
+		this.setMinimumSize(new Dimension(600, 600));
+      	this.setMaximumSize(new Dimension(700, 700));
+      	this.setBounds(716, 0, 650, 650);
+      	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		pack();
 		setVisible(true);
+		gui = new GUI();
 	}
 	
 	public static void refresh() {

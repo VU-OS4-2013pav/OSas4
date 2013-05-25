@@ -18,7 +18,7 @@ public class Main {
 		RM.createRM();
 		
 		new InputForm();
-		new GUI();
+		
 		(new BeginEnd()).execute();
 		
 		
