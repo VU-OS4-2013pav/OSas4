@@ -60,10 +60,8 @@ public class IInterrupt extends ProcessBase {
 				INFOv inf = new INFOv();
 				((Object[])inf.o)[0] = String.valueOf(Memory.get()[Statiniai.readMem].getWord());
 				Statiniai.readMem++;
+				vieta = 4;
 				Primityvai.sukurtiResursa(Statiniai.VRstring.Destroyer_XDD_pradzia, true, this.nameI, inf);
-				vieta = 0;
-				Primityvai.prasytiResurso(VRstring.Destroyer_XDD_pabaiga, this.nameI, 1);
-				
 			} 
 			// jeigu nesamone
 			else {
@@ -85,6 +83,10 @@ public class IInterrupt extends ProcessBase {
 			Primityvai.naikintiProcesa(this.sunus.get(0), this);
 			vieta = 1;
 			Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, this.nameI, 1);
+			break;
+		case 4:
+			vieta = 0;
+			Primityvai.prasytiResurso(VRstring.Destroyer_XDD_pabaiga, this.nameI, 1);
 			break;
 		}
 

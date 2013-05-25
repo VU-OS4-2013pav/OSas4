@@ -76,13 +76,8 @@ public class Destroyer extends ProcessBase {
 			break;
 		case 5:
 			// sukuria destroyer pabaiga ir grizta i pradzia
-			vieta ++;
+			vieta = 0;
 			Primityvai.sukurtiResursa(Statiniai.VRstring.Destroyer_XDD_pabaiga, true, this.nameI, new INFO());
-			break;
-		case 6:
-			vieta = 1;
-			// grizta i blokuota busena ir laukia paleidimo
-			Primityvai.prasytiResurso(Statiniai.VRstring.Destroyer_XDD_pradzia, this.nameI, 1);
 			break;
 		}
 		
