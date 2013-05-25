@@ -135,8 +135,8 @@ public class InputForm extends JFrame {
 	}
 	
 	public static void refreshAll() {
-		Scanner scan = new Scanner(System.in);
-		scan.nextLine();
+		/*Scanner scan = new Scanner(System.in);
+		scan.nextLine();*/
 		
 		InputForm.refresh();
 		GUI.refresh();

@@ -21,8 +21,6 @@ public class Main {
 		new InputForm();
 		
 		(new BeginEnd()).execute();
-		
-		
 	}
 
 }

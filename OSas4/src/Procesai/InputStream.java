@@ -8,19 +8,23 @@ import resources.RSS;
 import resources.ResourceDescriptor;
 import resources.VRSS;
 import resourcesINFO.HDDObject;
+import resourcesINFO.INFO;
 import resourcesINFO.INFOhdd;
+import resourcesINFO.INFOv;
 import rm.ChannelDevice;
 import rm.HDD;
 import rm.Memory;
 
 
 public class InputStream extends ProcessBase {
-	int nuskaitytiZodziai = 0;
+	int nuskaitytiZodziai, nuoKur;
 	boolean nuskaitymasBaigtas = false;
 	@Override
 	public void execute() {
 		switch(vieta) {
 		case 0:
+			nuskaitytiZodziai = 0;
+			nuoKur = Statiniai.readMem;
 			//Blokuojasi ir laukia kanalø árenginys
 			vieta = 2;
 			Primityvai.prasytiResurso(DRstring.Kanalu_irenginys, nameI, 1);
@@ -72,7 +76,10 @@ public class InputStream extends ProcessBase {
 			}
 			else {
 				vieta = 5;
-				Primityvai.sukurtiResursa(Statiniai.VRstring.Sintakses_tikrinimas, true, nameI, null);
+				INFO inf = new INFOv();
+				((Object[])inf.o)[0] = nuoKur;
+				((Object[])inf.o)[1] = nuskaitytiZodziai;
+				Primityvai.sukurtiResursa(Statiniai.VRstring.Sintakses_tikrinimas, true, nameI, inf);
 				break;
 			}
 			
