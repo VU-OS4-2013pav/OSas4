@@ -35,9 +35,9 @@ public class IInterrupt extends ProcessBase {
 				vieta = 3;
 				Primityvai.prasytiResurso(VRstring.InputStream_pabaiga, this.nameI, 1);
 				
-				//Blokuojasi ir laukia klaviatûros pertraukimo
+				/*//Blokuojasi ir laukia klaviatûros pertraukimo
 				vieta = 1;
-				Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, nameI, 1);
+				Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, nameI, 1);*/
 			} 
 			// jeigu mos pabaiga
 			else if(String.valueOf(Memory.get()[Statiniai.readMem].getWord()).equals(".END")) {

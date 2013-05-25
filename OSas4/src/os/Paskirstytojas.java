@@ -15,6 +15,7 @@ import resourcesINFO.ProgramosInfoHDD;
 
 public class Paskirstytojas {
 	public static void skirstyk() {
+		System.out.println("Skirstau..");
 		for (int i = 0; i < VRSS.list.size(); i++) {
 			int maxPrioritetas = 0, kelintas = -1; //rastas didþiausias prioritetas ir kelintas procesas sàraðe
 			

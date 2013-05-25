@@ -57,9 +57,8 @@ public class InputStream extends ProcessBase {
 				Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, nameI, 1);
 			}
 			else {
-				vieta = 5;
+				vieta = 4;
 				Primityvai.sukurtiResursa(Statiniai.VRstring.Sintakses_tikrinimas, true, nameI, null);
-				Primityvai.prasytiResurso(VRstring.Sintakse_patikrinta, nameI, 1);
 				break;
 			}
 			
@@ -68,11 +67,11 @@ public class InputStream extends ProcessBase {
 			vieta++;
 			Primityvai.sukurtiResursa(Statiniai.VRstring.Sintakses_tikrinimas, true, nameI, null);
 			break;*/
-/*		case 4: 
+		case 4: 
 			//Blokuojasi ir laukia sintaksë patikrinta resurso
-			vieta++;
+			vieta = 5;
 			Primityvai.prasytiResurso(VRstring.Sintakse_patikrinta, nameI, 1);
-			break;*/
+			break;
 		case 5:
 			//Blokuojasi ir laukia kanalø árenginys
 			vieta++;
@@ -94,13 +93,15 @@ public class InputStream extends ProcessBase {
 				System.out.println("Input stream neturi sintaksës resurso.. Baisi klaida");
 			if ((boolean)sintaksesResursas.info.o) {
 				//Jei visa sintaksë teisinga
-				Primityvai.prasytiResurso(Statiniai.DRstring.HDD, nameI, 1);
-				vieta++;
+				System.out.println("Sintaksë teisinga!");
+				/*Primityvai.prasytiResurso(Statiniai.DRstring.HDD, nameI, 1);
+				vieta++;*/
 			} else {
 				//Jei sintaksë neteisinga
 				System.out.println("Uþduotyje buvo klaidø!");
-				Primityvai.atlaisvintiResursa(Statiniai.DRstring.Kanalu_irenginys, this);
-				Primityvai.sukurtiResursa(Statiniai.VRstring.InputStream_pabaiga, true, father, null);
+				vieta = 8;
+				Primityvai.atlaisvintiResursa(Statiniai.DRstring.Kanalu_irenginys, nameI);
+				
 			}
 			break;
 		case 7:
@@ -128,6 +129,10 @@ public class InputStream extends ProcessBase {
 			ChannelDevice.runDevice();
 			
 			Primityvai.atlaisvintiResursa(Statiniai.DRstring.Kanalu_irenginys, this);
+			Primityvai.sukurtiResursa(Statiniai.VRstring.InputStream_pabaiga, true, father, null);
+			break;
+		case 8:
+			vieta = 9;
 			Primityvai.sukurtiResursa(Statiniai.VRstring.InputStream_pabaiga, true, father, null);
 			break;
 		}

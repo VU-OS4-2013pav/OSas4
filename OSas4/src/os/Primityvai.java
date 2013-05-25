@@ -219,6 +219,7 @@ public class Primityvai {
 					proc.resursai.remove(i);
 				}
 			}
+			RSS.list.get(DRint.Kanalu_irenginys).resourceDescriptor.laisvas = true;
 			break;
 		case DRstring.Vartotojo_atmintis:
 			ProcessBase process = PPS.getProcess((int)procORname);

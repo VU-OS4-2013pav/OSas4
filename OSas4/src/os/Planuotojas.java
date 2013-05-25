@@ -40,12 +40,13 @@ public class Planuotojas {
 				if (runKelintas > -1){ //Jei buvo rastas RUN procesas 
 					//RUN procesà þymim pasiruoðusiu
 					PPS.list.get(runKelintas).busena = Statiniai.ProcessState.READY;
-					System.out.println(PPS.list.get(runKelintas).nameO + " pakeièiau i ready");
+					
 				}
 					//Keièiam proceso bûsenà á RUN
 				PPS.list.get(kelintas).busena = Statiniai.ProcessState.RUN;
 				
 				//Vykdom procesà
+				System.out.println("Vykdau " + PPS.list.get(kelintas).nameO);
 				PPS.list.get(kelintas).execute();
 			}
 		}
