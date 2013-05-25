@@ -1,5 +1,6 @@
 package os;
 
+import gui.InputForm;
 import Procesai.PPS;
 
 
@@ -33,6 +34,7 @@ public class Planuotojas {
 			
 			//Pasiþiûrim ar RUN proceso duomenys sutampa su rasto proceso, kurá dabar reikia vykdyti duomenimis
 			if ((max == runPrioritetas) && (kelintas == runKelintas) && (max != -1)) {
+				InputForm.refresh();
 				PPS.list.get(kelintas).execute();
 			}
 				
@@ -46,6 +48,7 @@ public class Planuotojas {
 				PPS.list.get(kelintas).busena = Statiniai.ProcessState.RUN;
 				
 				//Vykdom procesà
+				InputForm.refresh();
 				PPS.list.get(kelintas).execute();
 			}
 		}

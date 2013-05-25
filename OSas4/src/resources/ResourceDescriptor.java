@@ -27,5 +27,10 @@ public class ResourceDescriptor {
 		info = inf;		
 	}
 	
+	public String toString() {
+		return String.format("nameI=%s nameO=%s usedOnce=%s father=%s free=%s", nameI, nameO, usedOnce, nameFather, laisvas);
+		//("nameI=%s nameO=%s busena=%s father=%s prioritetas=%s", nameI, nameO, busena, father, prioritetas);
+	}
+	
 
 }

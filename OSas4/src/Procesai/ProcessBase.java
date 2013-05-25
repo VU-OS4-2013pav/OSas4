@@ -40,7 +40,7 @@ public abstract class ProcessBase {
 	}
 	
 	public String toString() {
-		return String.format("nameI=%s \n nameO=%s \n busena=%s \n father=%s \n prioritetas=%s", nameI, nameO, busena, father, prioritetas);
+		return String.format("nameI=%s nameO=%s busena=%s father=%s prioritetas=%s", nameI, nameO, busena, father, prioritetas);
 	}
 	
 	public void addResToPL(String name, int nameI) {

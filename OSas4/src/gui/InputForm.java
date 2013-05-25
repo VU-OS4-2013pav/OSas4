@@ -5,22 +5,63 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
+import Procesai.PL;
 
 import os.Statiniai;
 
+import resources.RSS;
+import resources.VRSS;
 import rm.Memory;
 import rm.RM;
 
 public class InputForm extends JFrame {
 	JButton readLineButton;
+	JLabel readLabel, processLabel, resourcesLabel;
 	JTextField readField;
+	static JTextArea processField;
+	static JTextArea resourcesField;
+	JScrollPane scrollProcess, scrollResources;
 	JPanel formPanel;
 	
 	
 	public InputForm() {
 		super("Input Form");
+		formPanel = new JPanel();
+
+		// procesu langas
+		processLabel = new JLabel("Procesai: ");
+		formPanel.add(processLabel);
+		
+		processField = new JTextArea(15, 52);
+		processField.setEditable(false);
+		scrollProcess = new JScrollPane(processField);
+		processField.setWrapStyleWord(true);
+		processField.setLineWrap(true);
+		
+		formPanel.add(scrollProcess);
+		
+		// resursu
+		resourcesLabel = new JLabel("Resursai: ");
+		formPanel.add(resourcesLabel);
+		
+		resourcesField = new JTextArea(15, 52);
+		resourcesField.setEditable(false);
+		scrollResources = new JScrollPane(resourcesField);
+		resourcesField.setWrapStyleWord(true);
+		resourcesField.setLineWrap(true);
+		
+		formPanel.add(scrollResources);
+		
+		// konsole
+		readLabel = new JLabel("Ivedimo konsole: ");
+		formPanel.add(readLabel);
+		
 		readLineButton = new JButton("OK");
 		readLineButton.addActionListener(new ActionListener() {
 			@Override
@@ -39,13 +80,36 @@ public class InputForm extends JFrame {
 			}
 		});
 		readField = new JTextField(20);
-		formPanel = new JPanel();
+		
 		formPanel.add(readField);
 		formPanel.add(readLineButton);
 		add(formPanel);
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
 		setVisible(true);
+	}
+	
+	public static void refresh() {
+		int i, j;
+		
+		processField.setText("");
+		for (i = 0; i < PL.processList.size(); i++) {
+			for (j = 0; j < PL.processList.get(i).processList.size(); j++) {
+				processField.append(PL.processList.get(i).processList.get(j).toString()+"\n");
+			}
+		}
+		
+		resourcesField.setText("");
+		for (i = 0; i < RSS.list.size(); i++) {
+			resourcesField.append(RSS.list.get(i).resourceDescriptor.toString()+"\n");
+		}
+		for (i = 0; i < VRSS.list.size(); i++) {
+			for (j = 0; j < VRSS.list.get(i).resourceList.size(); i++)
+				resourcesField.append(VRSS.list.get(i).resourceList.get(j).toString()+"\n");
+		}
+		
+		
 	}
 	
 
