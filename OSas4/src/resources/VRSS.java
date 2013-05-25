@@ -55,6 +55,9 @@ public class VRSS {
 		VRSS.list.add(new VRS());
 		VRSS.list.get(15).vardas = "Swapper  pradzia";
 		
+		VRSS.list.add(new VRS());
+		VRSS.list.get(16).vardas = "Neegzistuojantis";
+		
 	}
 	
 	public static void print(int i) {

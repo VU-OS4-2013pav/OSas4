@@ -3,6 +3,8 @@ package os;
 import java.util.ArrayList;
 import java.util.List;
 
+import resources.VRSS;
+
 public class Statiniai {
 	//public static List<String> input = new ArrayList<String>();
 	//public static int inputNr = 0;
@@ -28,6 +30,7 @@ public class Statiniai {
 		public static final String Pertraukimo_ivykis = "Pertraukimo ivykis";
 		public static final String Writer_pradzia = "Writer pradzia";
 		public static final String Swapper_pradzia = "Swapper  pradzia";
+		public static final String Neegzistuojantis = "Neegzistuojantis";
 		
 	}
 	
