@@ -54,7 +54,8 @@ public class Loader extends ProcessBase {
 						((Object[])inf.o)[1] = pavadinimas;
 						
 						vieta = 3;
-						Primityvai.sukurtiResursa(Statiniai.VRstring.MainGovernor_pazadinimas, true, this.nameI, inf);					
+						Primityvai.sukurtiResursa(Statiniai.VRstring.MainGovernor_pazadinimas, true, this.nameI, inf);
+						return;
 					}
 				}
 				
@@ -74,20 +75,20 @@ public class Loader extends ProcessBase {
 			System.out.println("Nurodyta programa HDD neegzistuoja. Loader.");
 			vieta = 3;
 			Primityvai.atlaisvintiResursa(DRstring.Kanalu_irenginys, this.nameI);
-			break;
+			return;
 		case 3:
 			vieta = 4;
 			Primityvai.atlaisvintiResursa(Statiniai.VRstring.Loader_pradzia, nameI);
-			break;
+			return;
 		case 4:
 			vieta = 5;
 			Primityvai.sukurtiResursa(VRstring.Loader_pabaiga, true, this.nameI, new INFO());
-			break;
+			return;
 		case 5:
 			//sukuria loader pabaiga ir pereina á pradþià - laukia <loader pradzia>
 			vieta = 1;
 			Primityvai.prasytiResurso(VRstring.Loader_pradzia, this.nameI, 1);
-			break;
+			return;
 		
 		}
 		

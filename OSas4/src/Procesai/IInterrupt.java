@@ -26,6 +26,7 @@ public class IInterrupt extends ProcessBase {
 			if (!VRSS.list.get(Statiniai.VRint.VM_nori_ivedimo).resourceList.isEmpty()) {
 				vieta = 2;
 				Primityvai.prasytiResurso(DRstring.Kanalu_irenginys, this.nameI, 1);
+				return;
 			} 
 			// jeigu nauja uzduotis
 			else if(String.valueOf(Memory.get()[Statiniai.readMem].getWord()).equals(".NEW")) {
@@ -34,14 +35,14 @@ public class IInterrupt extends ProcessBase {
 				Primityvai.sukurtiProcesa(Statiniai.Pstring.InputStream, this.nameI, 8);
 				vieta = 3;
 				Primityvai.prasytiResurso(VRstring.InputStream_pabaiga, this.nameI, 1);
-
+				return;
 			} 
 			// jeigu mos pabaiga
 			else if(String.valueOf(Memory.get()[Statiniai.readMem].getWord()).equals(".END")) {
 				Statiniai.readMem++;
 				vieta = 0;
 				Primityvai.sukurtiResursa(Statiniai.VRstring.MOS_darbo_pabaiga, true, this.nameI, null);
-				
+				return;
 			} 
 			// jeigu uzduoties paleidimas
 			else if(String.valueOf(Memory.get()[Statiniai.readMem].getWord()).equals(".OPN")) {
@@ -51,6 +52,7 @@ public class IInterrupt extends ProcessBase {
 				Statiniai.readMem++;
 				vieta = 5;
 				Primityvai.sukurtiResursa(Statiniai.VRstring.Loader_pradzia, true, this.nameI, inf);
+				return;
 			} 
 			// jeigu uzduoties istrinimas
 			else if(String.valueOf(Memory.get()[Statiniai.readMem].getWord()).equals(".DEL")) {
@@ -60,36 +62,42 @@ public class IInterrupt extends ProcessBase {
 				Statiniai.readMem++;
 				vieta = 4;
 				Primityvai.sukurtiResursa(Statiniai.VRstring.Destroyer_XDD_pradzia, true, this.nameI, inf);
+				return;
 			} 
 			// jeigu nesamone
 			else {
 				System.out.println("Neatpazinta sistemos komanda.");
 				vieta = 1;
 				Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, nameI, 1);
+				return;
 			}
-			break;
+			
 		case 2:
 			//Kopijuoja kas ávesta
 			Primityvai.atlaisvintiResursa(Statiniai.DRstring.Kanalu_irenginys, nameI);
 			INFOv inf = new INFOv();
 			((Object[])inf.o)[0] = false;
-			vieta = 1;
+			vieta = 6;
 			Primityvai.sukurtiResursa(Statiniai.VRstring.Pranesimas_apie_pertraukima, true, nameI, inf);
-			Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, this.nameI, 1);
-			break;
+			
+			return;
 		case 3:
 			Primityvai.naikintiProcesa(this.sunus.get(0), this);
 			vieta = 1;
 			Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, this.nameI, 1);
-			break;
+			return;
 		case 4:
 			vieta = 0;
 			Primityvai.prasytiResurso(VRstring.Destroyer_XDD_pabaiga, this.nameI, 1);
-			break;
+			return;
 		case 5:
 			vieta = 0;
 			Primityvai.prasytiResurso(VRstring.Loader_pabaiga, this.nameI, 1);
-			break;
+			return;
+		case 6:
+			vieta = 1;
+			Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, this.nameI, 1);
+			return;
 		}
 
 	}

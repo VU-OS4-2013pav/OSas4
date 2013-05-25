@@ -118,34 +118,34 @@ public class RM {
 	public static void CHMD() { 
 		if (MODE == 0) {
 			// pop is supervizoriaus steko
-			PPxy(PC+1);
-			PPxy(SP+1);
+//			PPxy(PC+1);
+//			PPxy(SP+1);
 			
 			MODE = 1; 
 			// pop is vartotojo steko
-			PPxy(AA+1);
-			PPxy(BB+1);
-			PPxy(CC+1);
+//			PPxy(AA+1);
+//			PPxy(BB+1);
+//			PPxy(CC+1);
 				
 		}
 		else {
 			// push i vartotojo steka 
-			PSxy(CC+1);
-			PSxy(BB+1);
-			PSxy(AA+1);
+//			PSxy(CC+1);
+//			PSxy(BB+1);
+//			PSxy(AA+1);
 			MODE = 0;
 			
-			char[] sp = new char[4];
-			sp = registerToString(SP).toCharArray();
-			
-			stringToRegister(SP, "7FFF"); 
-			
-			// push i supervizoriaus steka
-			Memory.addWord(Integer.parseInt(registerToString(SP), 16), String.valueOf(sp));
-			int spValue = Integer.parseInt(registerToString(SP), 16) - 1;
-			stringToRegister(SP, Integer.toHexString(spValue)); 
-
-			PSxy(PC+1);
+//			char[] sp = new char[4];
+//			sp = registerToString(SP).toCharArray();
+//			
+//			stringToRegister(SP, "7FFF"); 
+//			
+//			// push i supervizoriaus steka
+//			Memory.addWord(Integer.parseInt(registerToString(SP), 16), String.valueOf(sp));
+//			int spValue = Integer.parseInt(registerToString(SP), 16) - 1;
+//			stringToRegister(SP, Integer.toHexString(spValue)); 
+//
+//			PSxy(PC+1);
 				
 		}
 	}
@@ -162,7 +162,9 @@ public class RM {
 			CHMD();
 		
 		//vykdo emuliatoriu
-		word = Memory.get()[Integer.parseInt(String.valueOf(virtualToReal(registerToString(PC).toCharArray())), 16)].getWord();	
+		
+		word = Memory.get()[Integer.parseInt(String.valueOf(virtualToReal(registerToString(PC).toCharArray())), 16)].getWord();
+		System.out.println("VM WORDAS:: "+String.valueOf(word)+" PC::: "+registerToString(PC));
 		guessTheCommand(word);	
 		
 		/*if (MODE == 1) {
@@ -656,7 +658,7 @@ public class RM {
 		}
 		
 		else if ( Integer.parseInt(registerToString1B(TI), 16) == 0) {
-			stringToRegister(TI, "F");
+			stringToRegister1B(TI, "F");
 			/*stringToRegister(CC, (Memory.get()[0x5]).toString());
 		    CALL();*/
 			return true;

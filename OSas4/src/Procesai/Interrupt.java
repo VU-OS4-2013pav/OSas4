@@ -12,6 +12,8 @@ public class Interrupt extends ProcessBase {
 			vieta++;
 			Primityvai.prasytiResurso(VRstring.Pertraukimo_ivykis, nameI, 1);
 			break;
+		case 1:
+			break;
 		}
 		
 	}

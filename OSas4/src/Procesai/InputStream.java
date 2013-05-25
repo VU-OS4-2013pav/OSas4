@@ -44,27 +44,31 @@ public class InputStream extends ProcessBase {
 					//Tikrinam ar nuskaityta komanda nëra #END
 					if (String.valueOf(Memory.get()[Statiniai.readMem].getWord()).equals("#END")) {
 						Statiniai.readMem++;
-						//Atlaisvinamas kanalø árenginys
+						//Atlaisvinamas kanalø árenginysmes
 						vieta++;
 						nuskaitymasBaigtas = true;
 						Primityvai.atlaisvintiResursa(Statiniai.DRstring.Kanalu_irenginys, nameI);
+						return;
 					} else {	
 						Statiniai.readMem++;
 					}
 				}
 			}
 			
-			if (!nuskaitymasBaigtas) {
+		/*	if (!nuskaitymasBaigtas) {
 				vieta = 2;
 				Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, nameI, 1);
 			}
 			else {
 				vieta = 4;
 				System.out.println("IS kuria sintakses tikrinima!!!");
-				Primityvai.sukurtiResursa(Statiniai.VRstring.Sintakses_tikrinimas, true, nameI, null);
+				INFO inf = new INFOv();
+				((Object[])inf.o)[0] = nuoKur;
+				((Object[])inf.o)[1] = nuskaitytiZodziai;
+				Primityvai.sukurtiResursa(Statiniai.VRstring.Sintakses_tikrinimas, true, nameI, inf);
 				break;
 			}
-			
+			*/
 			break;
 		case 3:
 			System.out.println("nuskaityti zodziai-----------------: "+nuskaitytiZodziai);

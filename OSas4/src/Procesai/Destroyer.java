@@ -52,6 +52,7 @@ public class Destroyer extends ProcessBase {
 					// taip saka - sutvarkomas deskriptorius, systemoutas
 					vieta++;
 					Primityvai.atlaisvintiResursa(DRstring.HDD, hdd.programs.get(i).nr);
+					return;
 					/*System.out.println("Programa is HDD istrinta.");
 										
 					yra = true;

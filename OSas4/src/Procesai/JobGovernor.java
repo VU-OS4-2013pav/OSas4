@@ -16,6 +16,7 @@ import resourcesINFO.INFO;
 import resourcesINFO.INFOv;
 import rm.HDD;
 import rm.Memory;
+import rm.RM;
 
 
 public class JobGovernor extends ProcessBase {
@@ -71,28 +72,31 @@ public class JobGovernor extends ProcessBase {
 			
 			for (int i = 1; i < oa2.length; i++) {
 				// adreso virtualizacija - isskirti blokai
+				
 				oa2[i] = oa[i]*0x100+0x8100;
+				System.out.println("JG:::: oa2[i]="+oa2[i]);
 				// i char'a
-				for (int j = Integer.toHexString(this.oa2[i]).length()-1; j > 0; j--) {
+				for (int j = Integer.toHexString(this.oa2[i]).length()-1; j >= 0; j--) {
 					last = j;
 					c[j] = (Integer.toHexString(this.oa2[i])).charAt(j);
 				}
 				if (last > 0) {
-					for (int j = last-1; j > 0; j--) {
+					for (int j = last-1; j >= 0; j--) {
 						c[j] = '0';
 					}
 				}
 				Memory.get()[ptr].setWord(c);
+				c = new char[4];
 				ptr++;
 			}
 			
 			// ptr sutvarkymas || oa[0]
-			for (int j = Integer.toHexString(ptr).length()-1; j > 0; j--) {
+			for (int j = Integer.toHexString(ptr).length()-1; j >= 0; j--) {
 				last = j;
 				c[j] = (Integer.toHexString(ptr).charAt(j));
 			}
 			if (last > 0) {
-				for (int j = last-1; j > 0; j--) {
+				for (int j = last-1; j >= 0; j--) {
 					c[j] = '0';
 				}
 			}
@@ -120,6 +124,8 @@ public class JobGovernor extends ProcessBase {
 			 #!xy	Bloko numeris xy
 			 #*xy	Þodþio numeris xy
 			 */
+			int kelintasDEM = 0;
+			int pc = -1;
 			int iKur = oa2[1];
 			// nustatom is nuo kur pradedam mesti koda - +3 praleidzia #STR, bloku skaiciu ir programos varda
 			int isKur = hdm.get(0)*0x0100+3;
@@ -129,19 +135,36 @@ public class JobGovernor extends ProcessBase {
 					char[] bl = new char[2];
 					bl[0] = HDD.get()[isKur].getWord()[2];
 					bl[1] = HDD.get()[isKur].getWord()[3];
+					kelintasDEM++;
+					
 					
 					if (HDD.get()[isKur].getWord()[1] == '!') { // bloko keitimas
-					
+						if (kelintasDEM == 1)
+							pc = Integer.valueOf(String.valueOf(bl), 16)*0x100;
 						iKur = hdm.get(Integer.valueOf(String.valueOf(bl), 16));
+						isKur++;
 					}
 					else if (HDD.get()[isKur].getWord()[1] == '*') { // zodzio keitimas
+						if (kelintasDEM == 1)
+							pc = 0x100+Integer.valueOf(String.valueOf(bl), 16);
+						else if (kelintasDEM == 2)
+							pc = pc+Integer.valueOf(String.valueOf(bl), 16);
 						iKur = (iKur / 0x100)*0x100 + Integer.valueOf(String.valueOf(bl), 16);
+						isKur++;
 					}
+					
+					System.out.println("iKUR JG!!!!!!!!!!!!!!!!!!!!!!!!!"+iKur);
 				}
 				Memory.get()[iKur].setWord(HDD.get()[isKur].getWord());
 				iKur++;
 				isKur++;
 			}
+			for (int i = 0; i < cpu.length; i++)
+				cpu[i] = 0;
+			this.cpu[RM.PTR] = oa2[0];
+			this.cpu[RM.PC] = pc;
+			System.out.println("=============================PC: "+this.cpu[RM.PC]+"   PTR: "+this.cpu[RM.PTR]);
+			
 			vieta = 6;
 			Primityvai.atlaisvintiResursa(DRstring.Kanalu_irenginys, this.nameI);
 			
@@ -198,6 +221,9 @@ public class JobGovernor extends ProcessBase {
 			break;
 		case 7:
 			vieta = 4;
+			
+			
+			
 			Primityvai.prasytiResurso(VRstring.Pranesimas_apie_pertraukima, nameI, 1);
 			break;
 		}

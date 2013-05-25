@@ -62,7 +62,8 @@ public class SyntaxCheck extends ProcessBase {
 			System.out.println("SYNTAX CHEKAS TURI::: "+resursai.size());
 			Primityvai.naikintiResursa(resursai.get(0).nameI);
 			vieta++;
-			Primityvai.sukurtiResursa(Statiniai.VRstring.Sintakse_patikrinta, true, nameI, inf);	
+			Primityvai.sukurtiResursa(Statiniai.VRstring.Sintakse_patikrinta, true, nameI, inf);
+			break;
 		case 3:
 			vieta++;
 			System.out.println("SYNTAX CHEKAS TURI::: "+resursai.size());
