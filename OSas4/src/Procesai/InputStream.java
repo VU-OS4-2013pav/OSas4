@@ -133,6 +133,12 @@ public class InputStream extends ProcessBase {
 					hdd = ((HDDObject)(RSS.list.get(Statiniai.DRint.HDD).resourceDescriptor.info).o);
 					break;
 				}
+			
+			for (int i = 0; i < hdd.programs.size(); i++) 
+				if (hdd.programs.get(i).nr == programaHDD) {
+					hdd.programs.get(i).name = String.valueOf(Memory.get()[nuoKur + 2].getWord());
+				}
+			
 			//gaunam kuriam bloke programa
 			int kurisBlokas = 0;
 			for (int i = 0; i < hdd.HDD_SIZE; i++)

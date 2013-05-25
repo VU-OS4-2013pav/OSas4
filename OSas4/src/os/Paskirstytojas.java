@@ -83,7 +83,6 @@ public class Paskirstytojas {
 						}
 						if (kelintas > -1) {
 							//Á HDD ádedama nauja programa
-							System.out.println("VAvavava");
 							int kiek, nr;
 							kiek = RSS.list.get(i).list.get(kelintas).howMuchResourceItNeeds;
 							nr = ((HDDObject)((INFOhdd)RSS.list.get(i).resourceDescriptor.info).o).programs.size() + 1;
