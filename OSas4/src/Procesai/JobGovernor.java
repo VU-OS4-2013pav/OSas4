@@ -43,9 +43,9 @@ public class JobGovernor extends ProcessBase {
 			kelintas = -1;
 			
 			for (int i = 0; i < hdd.programs.size(); i++) {
-				System.out.println(programName + " == " + hdd.programs.get(i).name);
+				//System.out.println(programName + " == " + hdd.programs.get(i).name);
 				if (programName.equals(hdd.programs.get(i).name)) {
-					System.out.println("AS JAAA RAAAADAAAAUUUUUUU!!!!");
+					//System.out.println("AS JAAA RAAAADAAAAUUUUUUU!!!!");
 					kelintas = i;
 					break;
 				}
@@ -79,7 +79,7 @@ public class JobGovernor extends ProcessBase {
 				// adreso virtualizacija - isskirti blokai
 				
 				oa2[i] = oa[i]*0x100+0x8000;
-				System.out.println("JG:::: oa2[i]="+oa2[i]);
+				//System.out.println("JG:::: oa2[i]="+oa2[i]);
 				// i char'a
 				for (int j = Integer.toHexString(this.oa2[i]).length()-1; j >= 0; j--) {
 					last = j;
@@ -161,7 +161,7 @@ public class JobGovernor extends ProcessBase {
 						isKur++;
 					}
 					
-					System.out.println("iKUR JG!!!!!!!!!!!!!!!!!!!!!!!!!"+iKur);
+					//System.out.println("iKUR JG!!!!!!!!!!!!!!!!!!!!!!!!!"+iKur);
 				}
 				Memory.get()[iKur].setWord(HDD.get()[isKur].getWord());
 				iKur++;
@@ -172,7 +172,7 @@ public class JobGovernor extends ProcessBase {
 			this.cpu[RM.SP] = 0x00FF;
 			this.cpu[RM.PTR] = oa2[oa2.length-1];
 			this.cpu[RM.PC] = pc;
-			System.out.println("=============================PC: "+this.cpu[RM.PC]+"   PTR: "+this.cpu[RM.PTR]);
+			//System.out.println("=============================PC: "+this.cpu[RM.PC]+"   PTR: "+this.cpu[RM.PTR]);
 			
 			vieta = 6;
 			Primityvai.atlaisvintiResursa(DRstring.Kanalu_irenginys, this.nameI);

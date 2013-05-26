@@ -40,7 +40,7 @@ public class Primityvai {
 		
 		ProcessBase proc = null;
 		processId++;
-		System.out.println(PL.getProcess(father).nameO+" kuria procesa "+name+"  "+processId);
+		System.out.println(PL.getProcess(father).nameO+" kuria procesa "+name);//+"  "+processId
 		
 		switch (name) {
 		case Pstring.IInterrupt:
@@ -300,14 +300,14 @@ public class Primityvai {
 			for (i = proc.resursai.size()-1; i >= 0; i--) {
 				if (proc.resursai.get(i).nameI < 4) {
 					 if (proc.resursai.get(i).nameO != DRstring.HDD) {
-						 System.out.println("nelygu HDD!!!! "+proc.resursai.get(i).nameO);
+						 //System.out.println("nelygu HDD!!!! "+proc.resursai.get(i).nameO);
 						 atlaisvintiResursa(proc.resursai.get(i).nameO, proc.nameI);
 					 }
 				} else {
 					Primityvai.naikintiResursa(proc.resursai.get(i).nameI);
 				}
 			}
-			System.out.println("neatlaisvinti resursaui: "+proc.resursai.size());
+			//System.out.println("neatlaisvinti resursaui: "+proc.resursai.size());
 			
 			if (name == 0) { // jei begin end sunaikinami daugkartiniai
 				for (i = proc.sukurtiResursai.size()-1; i >= 0; i--) {
@@ -359,7 +359,7 @@ public class Primityvai {
 	
 	public static void naikintiResursa(int name) {
 		InputForm.refreshAll();
-		System.out.println("Naikinamas resursas vidiniu vardu "+name);
+		//System.out.println("Naikinamas resursas vidiniu vardu "+name);
 		
 		ResourceDescriptor res = null;
 		int i, j;
@@ -417,7 +417,7 @@ public class Primityvai {
 					}
 				}
 			}
-			System.out.println("Naikinamas resursas: "+res.nameO+"  "+res.nameI);
+			System.out.println("Naikinamas resursas: "+res.nameO+" . Vidinis vardas: "+res.nameI);
 			// naikinamas deskriptorius. bet cia java.	
 		}
 		else {

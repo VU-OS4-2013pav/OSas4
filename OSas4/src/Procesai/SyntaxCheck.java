@@ -38,11 +38,11 @@ public class SyntaxCheck extends ProcessBase {
 			}
 			
 			INFO inf = new INFO();
-			System.out.println("nuo kur = " + nuoKur);
-			System.out.println(Memory.get()[nuoKur].getWord().equals("#STR"));
+			//System.out.println("nuo kur = " + nuoKur);
+			//System.out.println(Memory.get()[nuoKur].getWord().equals("#STR"));
 			if (String.valueOf(Memory.get()[nuoKur].getWord()).equals("#STR")) {
-				System.out.println("if " + Memory.get()[nuoKur + 1]+ " == #" );
-				System.out.println("if " +Memory.get()[nuoKur + 1].getWord()[1] + " == B" );
+				//System.out.println("if " + Memory.get()[nuoKur + 1]+ " == #" );
+				//System.out.println("if " +Memory.get()[nuoKur + 1].getWord()[1] + " == B" );
 				if ((Memory.get()[nuoKur + 1].getWord()[0] == '#') && (Memory.get()[nuoKur + 1].getWord()[1] == 'B')) {
 					if (Character.isDigit((Memory.get()[nuoKur + 1].getWord()[2]))) {
 						if (Character.isDigit((Memory.get()[nuoKur + 1].getWord()[3]))) {
@@ -59,14 +59,14 @@ public class SyntaxCheck extends ProcessBase {
 				}else {
 				inf.o= false;
 				}
-			System.out.println("SYNTAX CHEKAS TURI::: "+resursai.size());
+			//System.out.println("SYNTAX CHEKAS TURI::: "+resursai.size());
 			Primityvai.naikintiResursa(resursai.get(0).nameI);
 			vieta++;
 			Primityvai.sukurtiResursa(Statiniai.VRstring.Sintakse_patikrinta, true, nameI, inf);
 			break;
 		case 3:
 			vieta++;
-			System.out.println("SYNTAX CHEKAS TURI::: "+resursai.size());
+			//System.out.println("SYNTAX CHEKAS TURI::: "+resursai.size());
 			Primityvai.atlaisvintiResursa(Statiniai.DRstring.Kanalu_irenginys, nameI);
 			break;
 		case 4:

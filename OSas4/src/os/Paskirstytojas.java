@@ -15,7 +15,7 @@ import resourcesINFO.ProgramosInfoHDD;
 
 public class Paskirstytojas {
 	public static void skirstyk() {
-		System.out.println("Skirstau..");
+		//System.out.println("Skirstau...");
 		for (int i = 0; i < VRSS.list.size(); i++) {
 			int maxPrioritetas = 0, kelintas = -1; //rastas didþiausias prioritetas ir kelintas procesas sàraðe
 			
@@ -65,7 +65,7 @@ public class Paskirstytojas {
 			
 			//Jei HDD resursas
 			if (RSS.list.get(i).resourceDescriptor.nameO == Statiniai.DRstring.HDD) {
-				System.out.println("Skirstau HDD");
+				//System.out.println("Skirstau HDD");
 				boolean aptarnavau = true;
 				while(aptarnavau) {
 					aptarnavau = false;
@@ -73,7 +73,7 @@ public class Paskirstytojas {
 					if (!RSS.list.get(i).list.isEmpty()) {	
 						int maxPrioritetas = 0, kelintas = -1; //rastas didþiausias prioritetas ir kelintas procesas sàraðe
 						for (int j = 0; j < RSS.list.get(i).list.size(); j++) {
-							System.out.println(RSS.list.get(i).list.get(j).howMuchResourceItNeeds + " <= " + ((HDDObject)((INFOhdd)RSS.list.get(i).resourceDescriptor.info).o).laisvuBlokuSk);
+							//System.out.println(RSS.list.get(i).list.get(j).howMuchResourceItNeeds + " <= " + ((HDDObject)((INFOhdd)RSS.list.get(i).resourceDescriptor.info).o).laisvuBlokuSk);
 							if (RSS.list.get(i).list.get(j).howMuchResourceItNeeds <= ((HDDObject)((INFOhdd)RSS.list.get(i).resourceDescriptor.info).o).laisvuBlokuSk) {
 								if (RSS.list.get(i).list.get(j).process.prioritetas > maxPrioritetas) {
 									maxPrioritetas = RSS.list.get(i).list.get(j).process.prioritetas;
@@ -98,11 +98,16 @@ public class Paskirstytojas {
 								if (0 == kiek)
 									break;
 							}
+							System.out.println("Skirstau " + RSS.list.get(i).list.get(kelintas).process.nameO + 
+									" Resursas: " + RSS.list.get(i).resourceDescriptor.nameO);
+							
 							RSS.list.get(i).list.get(kelintas).process.addRes(RSS.list.get(i).resourceDescriptor.nameO, RSS.list.get(i).resourceDescriptor.nameI);
 							RSS.list.get(i).list.get(kelintas).process.busena = Statiniai.ProcessState.READY;
 							PPS.list.add(RSS.list.get(i).list.get(kelintas).process);
 							RSS.list.get(i).list.remove(kelintas);
 							aptarnavau = true;
+							
+							
 						}
 					}
 				}
@@ -129,7 +134,7 @@ public class Paskirstytojas {
 						if (kelintas > -1) {
 							//Á proceso OA laukà sugrudami numeriai blokø, kuriuos gauna procesas
 							int kiek = RSS.list.get(i).list.get(kelintas).howMuchResourceItNeeds;
-							System.out.println("Kiek       !!!!!!!" + kiek);
+							//System.out.println("Kiek       !!!!!!!" + kiek);
 							int[] blokai = new int[kiek];
 							int k = 0;
 							for (int j = 0; j < ((ArrayList<Boolean>)((INFOuserMemory)RSS.list.get(i).resourceDescriptor.info).o).size(); j++) {
@@ -142,12 +147,18 @@ public class Paskirstytojas {
 								if (k == kiek)
 									break;
 							}
+							
+							System.out.println("Skirstau " + RSS.list.get(i).list.get(kelintas).process.nameO + 
+									" Resursas: " + RSS.list.get(i).resourceDescriptor.nameO);
+							
 							//RSS.list.get(i).list.get(kelintas).process.addRes(RSS.list.get(i).resourceDescriptor.nameO, RSS.list.get(i).resourceDescriptor.nameI);
 							RSS.list.get(i).list.get(kelintas).process.oa = blokai.clone();
 							RSS.list.get(i).list.get(kelintas).process.busena = Statiniai.ProcessState.READY;
 							PPS.list.add(RSS.list.get(i).list.get(kelintas).process);
 							RSS.list.get(i).list.remove(kelintas);
 							aptarnavau = true;
+							
+							
 						}	
 					}	
 				}
@@ -165,6 +176,9 @@ public class Paskirstytojas {
 							}
 						}
 						if (kelintas > -1) {
+							System.out.println("Skirstau " + RSS.list.get(i).list.get(kelintas).process.nameO + 
+									" Resursas: " + RSS.list.get(i).resourceDescriptor.nameO);
+							
 							RSS.list.get(i).list.get(kelintas).process.addRes(RSS.list.get(i).resourceDescriptor.nameO, RSS.list.get(i).resourceDescriptor.nameI);
 							RSS.list.get(i).list.get(kelintas).process.busena = Statiniai.ProcessState.READY;
 							PPS.list.add(RSS.list.get(i).list.get(kelintas).process);

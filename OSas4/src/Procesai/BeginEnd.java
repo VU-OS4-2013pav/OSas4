@@ -44,7 +44,7 @@ public class BeginEnd extends ProcessBase {
 			Primityvai.sukurtiProcesa(Pstring.Swapper, this.nameI, 8);
 			Primityvai.sukurtiProcesa(Pstring.Writer, this.nameI, 8);
 			Primityvai.sukurtiProcesa(Pstring.MainGovernor, this.nameI, 9);
-			Primityvai.sukurtiProcesa(Pstring.Input, this.nameI, 0);
+			Primityvai.sukurtiProcesa(Pstring.Input, this.nameI, -2);
 			Primityvai.sukurtiProcesa(Pstring.Idle, this.nameI, 1);
 			
 

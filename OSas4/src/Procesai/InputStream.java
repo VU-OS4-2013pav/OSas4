@@ -35,10 +35,10 @@ public class InputStream extends ProcessBase {
 			}
 			break;*/
 		case 2:
-			System.out.println("IS case2------------------------");
+			//System.out.println("IS case2------------------------");
 			if (Statiniai.readMem < Statiniai.vietaMem && !nuskaitymasBaigtas) {
 				for (int i = Statiniai.readMem; i < Statiniai.vietaMem; i++) {
-					System.out.println("for'as case2==========");
+					//System.out.println("for'as case2==========");
 					//Padidina nuskaitytø þodþiø skaièiø
 					nuskaitytiZodziai++;
 					//Tikrinam ar nuskaityta komanda nëra #END
@@ -71,7 +71,7 @@ public class InputStream extends ProcessBase {
 			*/
 			break;
 		case 3:
-			System.out.println("nuskaityti zodziai-----------------: "+nuskaitytiZodziai);
+			//System.out.println("nuskaityti zodziai-----------------: "+nuskaitytiZodziai);
 			if (!nuskaitymasBaigtas) {
 				vieta = 2;
 				Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, nameI, 1);
@@ -169,7 +169,9 @@ public class InputStream extends ProcessBase {
 			vieta = 10;
 			Primityvai.sukurtiResursa(Statiniai.VRstring.InputStream_pabaiga, true, father, null);
 			break;
-		
+		case 10:
+			Primityvai.prasytiResurso(Statiniai.VRstring.Neegzistuojantis, nameI, 1);
+			break;
 		}
 		
 	}

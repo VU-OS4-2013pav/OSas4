@@ -92,9 +92,9 @@ public class InputForm extends JFrame {
 					}
 				}
 				readField.setText("");
-				System.out.println("readmem: "+Statiniai.readMem);
-				for (int i = 0x0A00; i < Statiniai.vietaMem; i++)
-					System.out.println("i: "+i+". "+String.valueOf(Memory.get()[i].getWord()));
+//				System.out.println("readmem: "+Statiniai.readMem);
+//				for (int i = 0x0A00; i < Statiniai.vietaMem; i++)
+//					System.out.println("i: "+i+". "+String.valueOf(Memory.get()[i].getWord()));
 			}
 		});
 		readField = new JTextField(20);
@@ -164,8 +164,8 @@ public class InputForm extends JFrame {
 	}
 	
 	public static void refreshAll() {
-		/*Scanner scan = new Scanner(System.in);
-		scan.nextLine();*/
+//		Scanner scan = new Scanner(System.in);
+//		scan.nextLine();
 		
 		InputForm.refresh();
 		GUI.refresh();

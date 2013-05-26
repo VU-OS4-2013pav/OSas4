@@ -1,12 +1,10 @@
 package Procesai;
 
-import os.Planuotojas;
 import os.Primityvai;
 import os.Statiniai;
 import os.Statiniai.DRstring;
 import os.Statiniai.VRstring;
 import resources.VRSS;
-import resourcesINFO.INFO;
 import resourcesINFO.INFOv;
 import rm.Memory;
 
@@ -15,7 +13,7 @@ public class IInterrupt extends ProcessBase {
 	//boolean naujaUþduotis, MOSpabaiga, uzduotiesPaleidimas, uzduotiesIstrinimas;
 	
 	public void execute() {
-		System.out.println("IInterrupt pradzia.");
+		//System.out.println("IInterrupt pradzia.");
 		switch(vieta) {
 		case 0:
 			vieta++;

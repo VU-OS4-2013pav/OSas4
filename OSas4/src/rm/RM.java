@@ -164,7 +164,7 @@ public class RM {
 		//vykdo emuliatoriu
 		
 		word = Memory.get()[Integer.parseInt(String.valueOf(virtualToReal(registerToString(PC).toCharArray())), 16)].getWord();
-		System.out.println("VM WORDAS:: "+String.valueOf(word)+" PC::: "+registerToString(PC));
+		//System.out.println("VM WORDAS:: "+String.valueOf(word)+" PC::: "+registerToString(PC));
 		guessTheCommand(word);	
 		
 		/*if (MODE == 1) {
