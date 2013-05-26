@@ -41,18 +41,18 @@ public class Interrupt extends ProcessBase {
 			Object[] cpu = PL.getProcess(jgVardas).cpu;
 			
 			//Jei kaþkas ið PI
-			String regString = String.format("%H", ((char[])cpu[RM.PI])[0]);
-			if (!regString.equals("0")) {
-				if (regString.equals("1")) {
+			int regInt = (Integer)cpu[RM.PI];
+			if (regInt > 0) {
+				if (regInt == 1) {
 					System.out.println("VM baigia darbà aptikus pertraukimà: Neiteisingas adresas");
 				}
-				else if (regString.equals("2")) {
+				else if (regInt == 2) {
 					System.out.println("VM baigia darbà aptikus pertraukimà: Neiteisinga operacija");
 				}
-				else if (regString.equals("3")) {
+				else if (regInt == 3) {
 					System.out.println("VM baigia darbà aptikus pertraukimà: Perpildymas");
 				}
-				else if (regString.equals("4")) {
+				else if (regInt == 4) {
 					System.out.println("VM baigia darbà aptikus pertraukimà: Dalyba ið nulio");
 				}
 				INFO inf = new INFOv();
@@ -64,9 +64,9 @@ public class Interrupt extends ProcessBase {
 			}
 			
 			//Jei kaþkas ið SI
-			regString = String.format("%H", ((char[])cpu[RM.SI])[0]);
-			if (!regString.equals("0")) {
-				if (regString.equals("1")) {
+			regInt = (Integer)cpu[RM.SI];
+			if (regInt > 0) {
+				if (regInt == 1) {
 					System.out.println("VM baigia darbà aptikus pertraukimà: Supervizorinis veiksmas");
 				}
 				INFO inf = new INFOv();
@@ -79,36 +79,28 @@ public class Interrupt extends ProcessBase {
 			}
 			
 			//Jei TI
-			regString = String.format("%H", ((char[])cpu[RM.TI])[0]);
-			if (regString.equals("0")) {
+			regInt = (Integer)cpu[RM.TI];
+			if (regInt == 0) {
 				
 			}
 			
 			//Jei kaþkas ið DI
-			regString = String.format("%H", ((char[])cpu[RM.DI])[0]);
-			if (!regString.equals("0")) {
+			regInt = (Integer)cpu[RM.DI];
+			if (regInt > 0) {
 				//Jei iðvedimas á ekranà
-				if (regString.equals("3")) {
-					vieta++;
+				if (regInt == 3) {
+					vieta = 0;
 					INFO inf = new INFOv();
 					((Object[])inf.o)[0] = PPS.getProcess(jgVardas).sunus.get(0);
-					((Object[])inf.o)[1] = Integer.parseInt(String.format("%H%H%H%H", 
-							((char[])cpu[RM.CC])[0], 
-							((char[])cpu[RM.CC])[1], 
-							((char[])cpu[RM.CC])[2], 
-							((char[])cpu[RM.CC])[3]), 16);
+					((Object[])inf.o)[1] = (Integer)cpu[RM.CC];
 					Primityvai.sukurtiResursa(Statiniai.VRstring.Writer_pradzia, true, nameI, inf);
 					return;
 				}
 				//Jei nuskaitymas ið klaviatûros
-				if (regString.equals("6")) {
-					vieta++;
+				if (regInt == 6) {
+					vieta = 0;
 					INFO inf = new INFOv();
-					((Object[])inf.o)[0] = Integer.parseInt(String.format("%H%H%H%H", 
-							((char[])cpu[RM.CC])[0], 
-							((char[])cpu[RM.CC])[1], 
-							((char[])cpu[RM.CC])[2], 
-							((char[])cpu[RM.CC])[3]), 16);
+					((Object[])inf.o)[0] = (Integer)cpu[RM.CC];
 					Primityvai.sukurtiResursa(Statiniai.VRstring.VM_nori_ivedimo, true, nameI, inf);
 					return;
 				}
