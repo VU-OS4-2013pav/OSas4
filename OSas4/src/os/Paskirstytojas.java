@@ -19,8 +19,48 @@ public class Paskirstytojas {
 		for (int i = 0; i < VRSS.list.size(); i++) {
 			int maxPrioritetas = 0, kelintas = -1; //rastas didþiausias prioritetas ir kelintas procesas sàraðe
 			
+			//Jei tai yra praneðimas apie pertraukimà
+			if (VRSS.list.get(i).vardas == Statiniai.VRstring.Pranesimas_apie_pertraukima) {
+				//Jei yra resursø
+				if (!VRSS.list.get(i).resourceList.isEmpty()) {
+					//Jei yra laukianèiø procesø
+					if (!VRSS.list.get(i).processList.isEmpty()) {
+						for (int k = 0; k < VRSS.list.get(i).resourceList.size(); k++) {
+							//Jei resursas ant kurio esam nëra laisvas
+							if (!VRSS.list.get(i).resourceList.get(k).laisvas)
+								continue;
+							for (int j = 0; j < VRSS.list.get(i).processList.size(); j++) {
+								int jg = (Integer)((Object[])VRSS.list.get(i).resourceList.get(k).info.o)[1];
+								//Radom, kam ir kà reikia paskirti
+								if (VRSS.list.get(i).processList.get(j).process.nameI == jg) {
+									System.out.println("Skirstau " + VRSS.list.get(i).processList.get(j).process.nameO + 
+											" Resursas: " + VRSS.list.get(i).vardas + " nameI = " + VRSS.list.get(i).processList.get(j).process.nameI
+											+ " o paskirstyt reikëjo su nameI: " + jg);
+									
+									//Pridedam resursà á proceso turimø resursø sàraðà
+									VRSS.list.get(i).processList.get(j).process.addRes(VRSS.list.get(i).resourceList.get(k).nameO, VRSS.list.get(i).resourceList.get(k).nameI);
+									
+									//Pridedam procesà á pasiruoðusiu procesø sàraðà
+									PPS.list.add(VRSS.list.get(i).processList.get(j).process);
+									
+									//Pakeièiam proceso bûsenà á READY
+									VRSS.list.get(i).processList.get(j).process.busena = Statiniai.ProcessState.READY;
+									
+									//Paþymim resursà uþimtu
+									VRSS.list.get(i).resourceList.get(k).laisvas = false;
+									
+									//Iðtrinam procesà ið laukianèiø sàraðo
+									VRSS.list.get(i).processList.remove(j);
+									break;
+								}
+							}
+						}
+					}
+				}
+			}
+			
 			//Jei yra resursas, einam per visus jo laukianèius procesus, procesui su didþiausiu prioritetu já paskiriame
-			if (!VRSS.list.get(i).resourceList.isEmpty()) {
+			else if (!VRSS.list.get(i).resourceList.isEmpty()) {
 				boolean yraLaisvu = false;
 				int kelintasLaisvas = 0;
 				for (int j = 0; j < VRSS.list.get(i).resourceList.size(); j++)
