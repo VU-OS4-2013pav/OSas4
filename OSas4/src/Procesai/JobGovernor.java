@@ -169,6 +169,7 @@ public class JobGovernor extends ProcessBase {
 			}
 			for (int i = 0; i < cpu.length; i++)
 				cpu[i] = 0;
+			this.cpu[RM.SP] = 0x00FF;
 			this.cpu[RM.PTR] = oa2[oa2.length-1];
 			this.cpu[RM.PC] = pc;
 			System.out.println("=============================PC: "+this.cpu[RM.PC]+"   PTR: "+this.cpu[RM.PTR]);

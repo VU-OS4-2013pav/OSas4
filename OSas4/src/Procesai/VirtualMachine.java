@@ -7,52 +7,46 @@ import rm.RM;
 
 
 public class VirtualMachine extends ProcessBase {
+	int j;
+	char[] c;
+	String str;
 	@Override
 	public void execute() {
 		switch (vieta) {
 		case 0:
-			char[] c = new char[4];
-			int j = 3;
-			String str = Integer.toHexString((Integer)PL.getProcess(this.father).cpu[RM.PC]);
-			System.out.println("VM PC////////: "+str);
-			for (int i = str.length()-1; i >= 0; i--) {
-				c[j] = str.charAt(i);
-				j--;
-			}
-			if (j >= 0) {
-				for (int i = j; i >= 0; i--) {
-					c[i] = '0';
+			for (int k = 0; k < 6; k++) {
+				c = new char[4];
+				j = 3;
+				str = Integer.toHexString((Integer)PL.getProcess(this.father).cpu[k]);
+				for (int i = str.length() -1; i >= 0; i--) {
+					c[j] = str.charAt(i);
+					j--;
 				}
-			}
-			System.out.println("ASLDJNLAJFNSLKF: "+String.valueOf(c));
-			RM.stringToRegister(RM.PC, String.valueOf(c));
-			RM.stringToRegister(RM.PTR, Integer.toHexString((Integer)PL.getProcess(this.father).cpu[RM.PTR]));
-			System.out.println("VM PC: "+RM.registerToString(RM.PC));
-			vieta++;
-			// cia breako neturi buti!!!!
-		case 1:
-			char[] c1 = new char[4];
-			int j1 = 3;
-			String str1 = Integer.toHexString((Integer)PL.getProcess(this.father).cpu[RM.PC]);
-			for (int i = str1.length() -1; i >= 0; i--) {
-				c1[j1] = str1.charAt(i);
-				j1--;
-			}
-			if (j1 >= 0) {
-				for (int i = j1; i >= 0; i--) {
-					c1[i] = '0';
+				if (j >= 0) {
+					for (int i = j; i >= 0; i--) {
+						c[i] = '0';
+					}
 				}
+				RM.stringToRegister(k, String.valueOf(c));
 			}
-
-			
-			RM.stringToRegister(RM.PC, String.valueOf(c1));
+			RM.stringToRegister1B(RM.SR, Integer.toHexString((Integer)PL.getProcess(this.father).cpu[RM.SR]));
+			for (int k = 7; k < 11; k++) {
+				this.cpu[k] = 0;
+				RM.stringToRegister1B(k, "0");
+			}
+				
 			boolean run = true;
 			while(run) {
 				if (RM.runPC()) {
-					System.out.println("VM PC: "+RM.registerToString(RM.PC));
+					for (int i = 0; i < 6; i++) {
+						PL.getProcess(this.father).cpu[i] = Integer.parseInt(RM.registerToString(i), 16);
+					}
+					for (int i = 6; i < 11; i++) {
+						PL.getProcess(this.father).cpu[i] = Integer.parseInt(RM.registerToString1B(i), 16);
+					}
+					
 					INFOv inf = new INFOv();
 					((Object[])inf.o)[0] = this.father;
-					PL.getProcess(this.father).cpu[RM.PC] = Integer.parseInt(RM.registerToString(RM.PC), 16);
 					Primityvai.sukurtiResursa(VRstring.Pertraukimo_ivykis, true, this.nameI, inf);
 					run = false;
 				}
