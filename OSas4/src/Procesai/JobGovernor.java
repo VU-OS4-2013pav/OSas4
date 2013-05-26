@@ -52,7 +52,7 @@ public class JobGovernor extends ProcessBase {
 			}
 			if (kelintas >= 0) {
 				vieta++;
-				Primityvai.prasytiResurso(DRstring.Vartotojo_atmintis, nameI, hdd.programs.get(kelintas).oa+1);
+				Primityvai.prasytiResurso(DRstring.Vartotojo_atmintis, nameI, hdd.programs.get(kelintas).oa+2);
 			}
 			else {
 				vieta = 0;
@@ -61,19 +61,24 @@ public class JobGovernor extends ProcessBase {
 			break;
 		case 2:
 			// TVARKOMA PTR LENTELE
+			/*
+			 * oa[0]  stekas
+			 * oa[1..size-2] programa
+			 * oa[size-1] puslapiavimo lentele = ptr
+			 */
 			char[] c = new char[4];
 			int last = -1;
 			oa2 = new int[oa.length];
 			// adreso virtualizacija - skirta PTR lentelei
-			oa2[0] = oa[0]*0x100+0x8100;
+			oa2[oa2.length-1] = oa[oa.length-1]*0x100+0x8000;
 			
-			// imam sekanti bloka
-			int ptr = this.oa2[0]+1;
+			// imam zodi ptr lenteleje
+			int ptr = this.oa2[oa2.length-1];
 			
-			for (int i = 1; i < oa2.length; i++) {
+			for (int i = 0; i < oa2.length-1; i++) {
 				// adreso virtualizacija - isskirti blokai
 				
-				oa2[i] = oa[i]*0x100+0x8100;
+				oa2[i] = oa[i]*0x100+0x8000;
 				System.out.println("JG:::: oa2[i]="+oa2[i]);
 				// i char'a
 				for (int j = Integer.toHexString(this.oa2[i]).length()-1; j >= 0; j--) {
@@ -90,17 +95,20 @@ public class JobGovernor extends ProcessBase {
 				ptr++;
 			}
 			
-			// ptr sutvarkymas || oa[0]
-			for (int j = Integer.toHexString(ptr).length()-1; j >= 0; j--) {
-				last = j;
-				c[j] = (Integer.toHexString(ptr).charAt(j));
-			}
-			if (last > 0) {
-				for (int j = last-1; j >= 0; j--) {
-					c[j] = '0';
-				}
-			}
-			Memory.get()[oa2[0]].setWord(c);
+			oa2[oa2.length-1] = ptr;
+			
+//			// ptr sutvarkymas || oa[length-1]
+//			for (int j = Integer.toHexString(ptr).length()-1; j >= 0; j--) {
+//				last = j;
+//				c[j] = (Integer.toHexString(ptr).charAt(j));
+//			}
+//			if (last > 0) {
+//				for (int j = last-1; j >= 0; j--) {
+//					c[j] = '0';
+//				}
+//			}
+			
+			//Memory.get()[oa2[oa2.length-1]].setWord(c);
 
 			vieta++;
 			Primityvai.prasytiResurso(DRstring.Kanalu_irenginys, nameI, 1);
@@ -161,7 +169,7 @@ public class JobGovernor extends ProcessBase {
 			}
 			for (int i = 0; i < cpu.length; i++)
 				cpu[i] = 0;
-			this.cpu[RM.PTR] = oa2[0];
+			this.cpu[RM.PTR] = oa2[oa2.length-1];
 			this.cpu[RM.PC] = pc;
 			System.out.println("=============================PC: "+this.cpu[RM.PC]+"   PTR: "+this.cpu[RM.PTR]);
 			
