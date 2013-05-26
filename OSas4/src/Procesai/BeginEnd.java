@@ -45,7 +45,7 @@ public class BeginEnd extends ProcessBase {
 			Primityvai.sukurtiProcesa(Pstring.Writer, this.nameI, 8);
 			Primityvai.sukurtiProcesa(Pstring.MainGovernor, this.nameI, 9);
 			Primityvai.sukurtiProcesa(Pstring.Input, this.nameI, -2);
-			Primityvai.sukurtiProcesa(Pstring.Idle, this.nameI, 1);
+			Primityvai.sukurtiProcesa(Pstring.Idle, this.nameI, 0);
 			
 
 		//Blokuojasi ir laukia resurso <MOS darbo pabaiga>					

@@ -658,7 +658,7 @@ public class RM {
 		}
 		
 		else if ( Integer.parseInt(registerToString1B(TI), 16) == 0) {
-			stringToRegister1B(TI, "F");
+			//stringToRegister1B(TI, "F");
 			/*stringToRegister(CC, (Memory.get()[0x5]).toString());
 		    CALL();*/
 			return true;

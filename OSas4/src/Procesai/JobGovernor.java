@@ -212,6 +212,7 @@ public class JobGovernor extends ProcessBase {
 				}
 				else { // pratesti VM
 					vieta = 4;
+					Primityvai.keistiPrioriteta(this.nameI, 7);
 					Primityvai.aktyvuotiProcesa(this.sunus.get(0));
 					Primityvai.prasytiResurso(VRstring.Pranesimas_apie_pertraukima, nameI, 1);
 				}

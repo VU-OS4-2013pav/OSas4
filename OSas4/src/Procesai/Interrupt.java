@@ -1,7 +1,5 @@
 package Procesai;
 
-import javax.crypto.spec.PSource;
-
 import os.Primityvai;
 import os.Statiniai;
 import os.Statiniai.VRstring;
@@ -81,7 +79,19 @@ public class Interrupt extends ProcessBase {
 			//Jei TI
 			regInt = (Integer)cpu[RM.TI];
 			if (regInt == 0) {
-				
+				// sustabdom jo VM
+				Primityvai.stabdytiProcesa(PL.getProcess(jgVardas).sunus.get(0));
+				// pakeiciam JG prioriteta i 1
+				Primityvai.keistiPrioriteta(jgVardas, 1);
+				// atstatom timeri i F
+				PL.getProcess(jgVardas).cpu[RM.TI] = 0xF;
+				// sukuriam pranesima apie pertraukima to JG
+				INFO inf = new INFOv();
+				((Object[])inf.o)[0] = false;
+				((Object[])inf.o)[1] = jgVardas;
+				vieta = 0;
+				Primityvai.sukurtiResursa(Statiniai.VRstring.Pranesimas_apie_pertraukima, true, nameI, inf);
+				return;
 			}
 			
 			//Jei kaþkas ið DI

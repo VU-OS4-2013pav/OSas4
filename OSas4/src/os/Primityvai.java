@@ -147,7 +147,7 @@ public class Primityvai {
 
 	public static void sukurtiResursa(String name, boolean usable, int father, INFO inf) {
 		InputForm.refreshAll();
-		System.out.println(PL.getProcess(father).nameO+ " kuria " + name);
+		System.out.println(PL.getProcess(father).nameO+ "("+PL.getProcess(father).nameI+") kuria " + name);
 		
 		int i;
 		ResourceDescriptor.resourceID++;
