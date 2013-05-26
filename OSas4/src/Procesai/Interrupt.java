@@ -82,7 +82,7 @@ public class Interrupt extends ProcessBase {
 				// sustabdom jo VM
 				Primityvai.stabdytiProcesa(PL.getProcess(jgVardas).sunus.get(0));
 				// pakeiciam JG prioriteta i 1
-				Primityvai.keistiPrioriteta(jgVardas, 1);
+				Primityvai.keistiPrioriteta(jgVardas, 4);
 				// atstatom timeri i F
 				PL.getProcess(jgVardas).cpu[RM.TI] = 0xF;
 				// sukuriam pranesima apie pertraukima to JG
@@ -115,7 +115,10 @@ public class Interrupt extends ProcessBase {
 					return;
 				}
 			}
-			break;
+			
+			vieta = 1;
+			Primityvai.prasytiResurso(VRstring.Pertraukimo_ivykis, nameI, 1);
+			return;
 		}
 		
 	}
