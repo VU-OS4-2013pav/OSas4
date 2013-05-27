@@ -47,6 +47,11 @@ public class InputStream extends ProcessBase {
 						//Atlaisvinamas kanalø árenginysmes
 						vieta++;
 						nuskaitymasBaigtas = true;
+						// sunaikinami visi turimi klaviaturos pertraukimai
+						for (int j = 0; j < this.resursai.size(); j++) {
+							if (this.resursai.get(j).nameO.equals(VRstring.Klaviaturos_pertraukimas))
+								Primityvai.naikintiResursa(this.resursai.get(j).nameI);
+						}
 						Primityvai.atlaisvintiResursa(Statiniai.DRstring.Kanalu_irenginys, nameI);
 						return;
 					} else {	
@@ -54,6 +59,8 @@ public class InputStream extends ProcessBase {
 					}
 				}
 			}
+			
+			
 			
 		/*	if (!nuskaitymasBaigtas) {
 				vieta = 2;
@@ -109,23 +116,26 @@ public class InputStream extends ProcessBase {
 					for (int j = 0; j < VRSS.list.get(Statiniai.VRint.Sintakse_patikrinta).resourceList.size(); j++)
 						if (VRSS.list.get(Statiniai.VRint.Sintakse_patikrinta).resourceList.get(j).nameI == resursai.get(i).nameI) {
 							sintaksesResursas = VRSS.list.get(Statiniai.VRint.Sintakse_patikrinta).resourceList.get(j);
+							Primityvai.naikintiResursa(VRSS.list.get(Statiniai.VRint.Sintakse_patikrinta).resourceList.get(j).nameI);
 							break;
 						}
 					break;
 				}
+			
+			
 			if (sintaksesResursas == null)
 				System.out.println("Input stream neturi sintaksës resurso.. Baisi klaida");
 			if ((boolean)sintaksesResursas.info.o) {
 				//Jei visa sintaksë teisinga
 				System.out.println("Sintaksë teisinga!");
 				vieta++;
-				Primityvai.prasytiResurso(Statiniai.DRstring.HDD, nameI, 1);
+				Primityvai.prasytiResurso(DRstring.HDD, nameI, 1);
 				return;
 			} else {
 				//Jei sintaksë neteisinga
 				System.out.println("Uþduotyje buvo klaidø!");
 				vieta = 9;
-				Primityvai.atlaisvintiResursa(Statiniai.DRstring.Kanalu_irenginys, nameI);
+				Primityvai.atlaisvintiResursa(DRstring.Kanalu_irenginys, nameI);
 				return;
 			}
 			
@@ -133,7 +143,7 @@ public class InputStream extends ProcessBase {
 			//Kopijuoja uþduotá á HDD
 			HDDObject hdd = null;
 			for (int i = 0; i < resursai.size(); i++)
-				if (resursai.get(i).nameO == Statiniai.DRstring.HDD) {
+				if (resursai.get(i).nameO == DRstring.HDD) {
 					hdd = ((HDDObject)(RSS.list.get(Statiniai.DRint.HDD).resourceDescriptor.info).o);
 					break;
 				}

@@ -37,6 +37,7 @@ public class MainGovernor extends ProcessBase {
 				for (int i = 0; i < VRSS.list.get(VRint.MainGovernor_pazadinimas).resourceList.size(); i++) {
 					if (VRSS.list.get(VRint.MainGovernor_pazadinimas).resourceList.get(i).nameI == this.resursai.get(res).nameI) {
 						rd = VRSS.list.get(VRint.MainGovernor_pazadinimas).resourceList.get(i);
+						
 					}
 				}
 

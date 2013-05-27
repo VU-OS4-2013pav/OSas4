@@ -31,12 +31,13 @@ public class Loader extends ProcessBase {
 				HDDObject hdd = ((HDDObject)(RSS.list.get(DRint.HDD).resourceDescriptor.info.o));
 				
 				String pavadinimas = null;
-				int kuris = -1;
+				//int kuris = -1;
 				
 				for (int i = 0; i < VRSS.list.get(VRint.Loader_pradzia).resourceList.size(); i++) 
 					if (VRSS.list.get(VRint.Loader_pradzia).resourceList.get(i).nameI == resursai.get(0).nameI) {
 						pavadinimas = (String)((Object[])VRSS.list.get(VRint.Loader_pradzia).resourceList.get(i).info.o)[0];
-						kuris = i;
+						Primityvai.naikintiResursa(VRSS.list.get(VRint.Loader_pradzia).resourceList.get(i).nameI);
+						//kuris = i;
 						break; //Radom ko reikia, galim nebetæst paieðkos
 					}
 				
@@ -53,7 +54,8 @@ public class Loader extends ProcessBase {
 						((Object[])inf.o)[0] = true;
 						((Object[])inf.o)[1] = pavadinimas;
 						
-						vieta = 3;
+						vieta = 4;
+						
 						Primityvai.sukurtiResursa(Statiniai.VRstring.MainGovernor_pazadinimas, true, this.nameI, inf);
 						return;
 					}
@@ -73,13 +75,13 @@ public class Loader extends ProcessBase {
 		case 2:
 			// isveda klaidos pranesima, atlaisvina kanalus
 			System.out.println("Nurodyta programa HDD neegzistuoja. Loader.");
-			vieta = 3;
+			vieta = 4;
 			Primityvai.atlaisvintiResursa(DRstring.Kanalu_irenginys, this.nameI);
 			return;
-		case 3:
-			vieta = 4;
-			Primityvai.atlaisvintiResursa(Statiniai.VRstring.Loader_pradzia, nameI);
-			return;
+//		case 3:
+//			vieta = 4;
+//			Primityvai.naikintiResursa(Statiniai.VRstring.Loader_pradzia, nameI);
+//			return;
 		case 4:
 			vieta = 5;
 			Primityvai.sukurtiResursa(VRstring.Loader_pabaiga, true, this.nameI, new INFO());
