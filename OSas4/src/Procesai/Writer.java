@@ -4,11 +4,9 @@ import os.Primityvai;
 import os.Statiniai;
 import os.Statiniai.DRstring;
 import os.Statiniai.VRstring;
-import resources.RSS;
 import resources.ResourceDescriptor;
 import resources.VRSS;
 import resourcesINFO.INFO;
-import resourcesINFO.INFOv;
 import rm.ChannelDevice;
 
 

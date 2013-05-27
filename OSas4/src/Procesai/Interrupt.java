@@ -112,21 +112,36 @@ public class Interrupt extends ProcessBase {
 					
 					// randam JG pagal vidiná vardà
 					ProcessBase jg = PL.getProcess(jgVardas);
-					int iKur = (int) jg.cpu[RM.AA]; // virtualus adresas
-					//virtualizacija
-				   char[] a = { 
-				     Integer.toHexString((int) jg.cpu[RM.PTR]).charAt(0),
-				     Integer.toHexString((int) jg.cpu[RM.PTR]).charAt(1),
-				     Integer.toHexString(iKur).charAt(0),
-				     Integer.toHexString(iKur).charAt(1)
-				   };
+					 int iKur = (int) jg.cpu[RM.CC]; // virtualus adresas
+					   
+					   char[] c = new char[4];
+					   int j = 3;
+					   String str = Integer.toHexString(iKur);
+					   
+					   for (int i = str.length() -1; i >= 0; i--) {
+					    c[j] = str.charAt(i);
+					    j--;
+					   }
+					   if (j >= 0) {
+					    for (int i = j; i >= 0; i--) {
+					     c[i] = '0';
+					    }
+					   }
+					   
+					   //virtualizacija
+					   char[] a = { 
+					     Integer.toHexString((int) jg.cpu[RM.PTR]).charAt(0),
+					     Integer.toHexString((int) jg.cpu[RM.PTR]).charAt(1),
+					     c[0],
+					     c[1]
+					   };
 
-				   char[] addressR = {
-				     Memory.get()[Integer.parseInt(String.valueOf(a), 16)].getWord()[0],
-				     Memory.get()[Integer.parseInt(String.valueOf(a), 16)].getWord()[1],
-				     Integer.toHexString(iKur).charAt(2),
-				     Integer.toHexString(iKur).charAt(3)
-				   };
+					   char[] addressR = {
+					     Memory.get()[Integer.parseInt(String.valueOf(a), 16)].getWord()[0],
+					     Memory.get()[Integer.parseInt(String.valueOf(a), 16)].getWord()[1],
+					     c[2],
+					     c[3]
+					   };
 					
 					((Object[])inf.o)[0] = addressR; //Adresas nuo kurio pradedam vest
 					((Object[])inf.o)[1] = jg.cpu[RM.CC]; //kiek reikia iðvest
