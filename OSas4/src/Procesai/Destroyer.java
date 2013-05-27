@@ -4,6 +4,7 @@ import os.Primityvai;
 import os.Statiniai;
 import os.Statiniai.DRstring;
 import os.Statiniai.VRint;
+import os.Statiniai.VRstring;
 import resources.RSS;
 import resources.VRSS;
 import resourcesINFO.HDDObject;
@@ -67,12 +68,16 @@ public class Destroyer extends ProcessBase {
 			
 			return;
 		case 3:
-			vieta++;
-			Primityvai.atlaisvintiResursa(Statiniai.VRstring.Destroyer_XDD_pradzia, nameI);
-			return;
-		case 4:
+			vieta = 5;
+			
+			for (int i = 0; i < this.resursai.size(); i++) {
+				if (this.resursai.get(i).nameO.equals(VRstring.Destroyer_XDD_pradzia)) {
+					Primityvai.naikintiResursa(this.resursai.get(i).nameI);
+				}
+			}
+
 			//atlaisvina kanalu irengini
-			vieta++;
+
 			Primityvai.atlaisvintiResursa(DRstring.Kanalu_irenginys, this.nameI);
 			return;
 		case 5:
