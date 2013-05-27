@@ -20,6 +20,13 @@ public class IInterrupt extends ProcessBase {
 			Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, nameI, 1);
 			return;
 		case 1:
+			//naikinam klaviatûros pertraukimo resursà
+			for (int i = 0; i < resursai.size(); i++)
+				if (resursai.get(i).nameO == Statiniai.VRstring.Klaviaturos_pertraukimas) {
+					Primityvai.naikintiResursa(resursai.get(i).nameI);
+					break;
+				}
+			
 			// jeigu vm nori ivedimo
 			if (!VRSS.list.get(Statiniai.VRint.VM_nori_ivedimo).resourceList.isEmpty()) {
 				vieta = 2;
@@ -79,14 +86,20 @@ public class IInterrupt extends ProcessBase {
 		case 3:
 			Primityvai.naikintiProcesa(this.sunus.get(0), this);
 			vieta = 1;
+			//naikinam input stream pabaigos resursà
+			for (int i = 0; i < resursai.size(); i++) 
+				if (resursai.get(i).nameO == Statiniai.VRstring.InputStream_pabaiga) {
+					Primityvai.naikintiResursa(resursai.get(i).nameI);
+					break;
+				}
 			Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, this.nameI, 1);
 			return;
 		case 4:
-			vieta = 0;
+			vieta = 9;
 			Primityvai.prasytiResurso(VRstring.Destroyer_XDD_pabaiga, this.nameI, 1);
 			return;
 		case 5:
-			vieta = 0;
+			vieta = 8;
 			Primityvai.prasytiResurso(VRstring.Loader_pabaiga, this.nameI, 1);
 			return;
 		case 6:
@@ -98,6 +111,20 @@ public class IInterrupt extends ProcessBase {
 			((Object[])inf.o)[0] = false;
 			vieta = 6;
 			Primityvai.sukurtiResursa(Statiniai.VRstring.Pranesimas_apie_pertraukima, true, nameI, inf);
+			return;
+		case 8:
+			for (int i = 0; i < resursai.size(); i++)
+				if (resursai.get(i).nameO == Statiniai.VRstring.Loader_pabaiga)
+					Primityvai.naikintiResursa(resursai.get(i).nameI);
+			vieta = 1;
+			Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, nameI, 1);
+			return;
+		case 9:
+			for (int i = 0; i < resursai.size(); i++)
+				if (resursai.get(i).nameO == Statiniai.VRstring.Destroyer_XDD_pabaiga)
+					Primityvai.naikintiResursa(resursai.get(i).nameI);
+			vieta = 1;
+			Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, nameI, 1);
 			return;
 		}
 
