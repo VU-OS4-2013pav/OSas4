@@ -25,6 +25,7 @@ public class Interrupt extends ProcessBase {
 			for (int i = 0; i < VRSS.list.get(Statiniai.VRint.Pertraukimo_ivykis).resourceList.size(); i++)
 				if (VRSS.list.get(Statiniai.VRint.Pertraukimo_ivykis).resourceList.get(i).nameI == resursai.get(0).nameI) {
 					resursas = VRSS.list.get(Statiniai.VRint.Pertraukimo_ivykis).resourceList.get(i);
+					Primityvai.naikintiResursa(VRSS.list.get(Statiniai.VRint.Pertraukimo_ivykis).resourceList.get(i).nameI);
 					break; //radom ko reikia
 				}
 			
@@ -82,7 +83,7 @@ public class Interrupt extends ProcessBase {
 				// sustabdom jo VM
 				Primityvai.stabdytiProcesa(PL.getProcess(jgVardas).sunus.get(0));
 				// pakeiciam JG prioriteta i 1
-				Primityvai.keistiPrioriteta(jgVardas, 4);
+				//Primityvai.keistiPrioriteta(jgVardas, 4);
 				// atstatom timeri i F
 				PL.getProcess(jgVardas).cpu[RM.TI] = 0xF;
 				// sukuriam pranesima apie pertraukima to JG
@@ -118,6 +119,10 @@ public class Interrupt extends ProcessBase {
 			
 			vieta = 1;
 			Primityvai.prasytiResurso(VRstring.Pertraukimo_ivykis, nameI, 1);
+			return;
+		case 2:
+			vieta = 0;
+			
 			return;
 		}
 		

@@ -59,7 +59,8 @@ public class Planuotojas {
 				PPS.list.get(kelintas).busena = Statiniai.ProcessState.RUN;
 				
 				//Vykdom procesà
-				if (PPS.list.get(kelintas).nameO.equals(Pstring.VirtualMachine)) {
+				if (PPS.list.get(kelintas).nameO.equals(Pstring.VirtualMachine) 
+						|| PPS.list.get(kelintas).nameO.equals(Pstring.JobGovernor)) {
 					// permetam VM i saraso gala
 					ProcessBase proc = PPS.list.get(kelintas);
 					PPS.list.remove(kelintas);
