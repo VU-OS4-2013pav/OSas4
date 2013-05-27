@@ -184,6 +184,17 @@ public class JobGovernor extends ProcessBase {
 			int resNameI = -1;
 			INFO inf2 = null;
 			
+			System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + resursai.size());
+			for (int i = 0; i < resursai.size(); i++) {
+				System.out.println(resursai.get(i).nameO);
+				if (resursai.get(i).nameO.equals(Statiniai.VRstring.Pranesimas_apie_pertraukima)) {
+					System.out.println("VRSS turi: " + VRSS.list.get(Statiniai.VRint.Pranesimas_apie_pertraukima).resourceList.size());
+					for (int j = 0; j < VRSS.list.get(Statiniai.VRint.Pranesimas_apie_pertraukima).resourceList.size(); j++)
+						if (VRSS.list.get(Statiniai.VRint.Pranesimas_apie_pertraukima).resourceList.get(j).nameI == resursai.get(i).nameI)
+							System.out.println("Yra ir VRSS");
+						else System.out.println("VRSS nera");
+				}
+			}
 			for (int i = 0; i < this.resursai.size(); i++) {
 				if (this.resursai.get(i).nameO.equals(VRstring.Pranesimas_apie_pertraukima)) {
 					resNameI = this.resursai.get(i).nameI;
