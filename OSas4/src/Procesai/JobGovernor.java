@@ -37,6 +37,8 @@ public class JobGovernor extends ProcessBase {
 			// issitraukiam info apie nauja vm info lauka ir programos varda
 			INFO inf = VRSS.list.get(VRint.Info_apie_nauja_VM).resourceList.get(0).info;
 			
+			Primityvai.naikintiResursa(VRSS.list.get(VRint.Info_apie_nauja_VM).resourceList.get(0).nameI);
+			
 			String programName = (String) (((Object[])inf.o)[0]);
 
 			
