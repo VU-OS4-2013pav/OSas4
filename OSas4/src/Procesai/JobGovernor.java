@@ -223,11 +223,9 @@ public class JobGovernor extends ProcessBase {
 			Primityvai.prasytiResurso(VRstring.Neegzistuojantis, nameI, 1);
 			return;
 		case 6:
-			vieta++;
-			Primityvai.sukurtiProcesa(Statiniai.Pstring.VirtualMachine, this.nameI, 3);
-			return;
-		case 7:
+			//vieta++;
 			vieta = 4;
+			Primityvai.sukurtiProcesa(Statiniai.Pstring.VirtualMachine, this.nameI, 3);			
 			Primityvai.prasytiResurso(VRstring.Pranesimas_apie_pertraukima, nameI, 1);
 			return;
 		}
