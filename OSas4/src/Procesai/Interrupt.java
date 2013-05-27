@@ -7,6 +7,7 @@ import resources.ResourceDescriptor;
 import resources.VRSS;
 import resourcesINFO.INFO;
 import resourcesINFO.INFOv;
+import rm.Memory;
 import rm.RM;
 
 
@@ -103,8 +104,38 @@ public class Interrupt extends ProcessBase {
 				if (regInt == 3) {
 					vieta = 0;
 					INFO inf = new INFOv();
-					((Object[])inf.o)[0] = PPS.getProcess(jgVardas).sunus.get(0);
-					((Object[])inf.o)[1] = (Integer)cpu[RM.CC];
+					
+					//o[0] IA
+					//o[1] CC
+					//o[2] IO
+					//o[3] OO
+					
+					// randam JG pagal vidiná vardà
+					ProcessBase jg = PL.getProcess(jgVardas);
+					int iKur = (int) jg.cpu[RM.AA]; // virtualus adresas
+					//virtualizacija
+				   char[] a = { 
+				     Integer.toHexString((int) jg.cpu[RM.PTR]).charAt(0),
+				     Integer.toHexString((int) jg.cpu[RM.PTR]).charAt(1),
+				     Integer.toHexString(iKur).charAt(0),
+				     Integer.toHexString(iKur).charAt(1)
+				   };
+
+				   char[] addressR = {
+				     Memory.get()[Integer.parseInt(String.valueOf(a), 16)].getWord()[0],
+				     Memory.get()[Integer.parseInt(String.valueOf(a), 16)].getWord()[1],
+				     Integer.toHexString(iKur).charAt(2),
+				     Integer.toHexString(iKur).charAt(3)
+				   };
+					
+					((Object[])inf.o)[0] = addressR; //Adresas nuo kurio pradedam vest
+					((Object[])inf.o)[1] = jg.cpu[RM.CC]; //kiek reikia iðvest
+					((Object[])inf.o)[2] = 1; //IO = 1 vedam ið vidinës
+					((Object[])inf.o)[3] = 3; //OO = 2 vedam á ekranà
+					((Object[])inf.o)[4] = jgVardas; //jg vidinis vardas
+					
+					/*((Object[])inf.o)[0] = PPS.getProcess(jgVardas).sunus.get(0);
+					((Object[])inf.o)[1] = (Integer)cpu[RM.CC];*/
 					Primityvai.stabdytiProcesa(PL.getProcess(jgVardas).sunus.get(0));
 					Primityvai.sukurtiResursa(Statiniai.VRstring.Writer_pradzia, true, nameI, inf);
 					return;

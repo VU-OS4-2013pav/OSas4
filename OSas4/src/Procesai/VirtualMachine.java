@@ -51,7 +51,6 @@ public class VirtualMachine extends ProcessBase {
 					run = false;
 					Primityvai.sukurtiResursa(VRstring.Pertraukimo_ivykis, true, this.nameI, inf);
 					return;
-					
 				}
 			}
 			return;
