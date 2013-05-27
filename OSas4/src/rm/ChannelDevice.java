@@ -74,8 +74,7 @@ public class ChannelDevice {
 						
 						c = Memory.get()[j].toString().charAt(i);
 						if (c != 0x7F) {
-							//GUI.printChar(c);
-							//TODO RM print
+							GUI.printChar(c);
 						}
 						else {
 							stop = true;
@@ -85,7 +84,7 @@ public class ChannelDevice {
 					if (!stop)
 						j++;
 				}
-				//GUI.printChar((char)0xA);			
+				GUI.printChar((char)0xA);			
 			} // end case 13
 			break;			
 			} // end switch

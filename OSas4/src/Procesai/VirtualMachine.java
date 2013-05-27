@@ -18,6 +18,7 @@ public class VirtualMachine extends ProcessBase {
 				c = new char[4];
 				j = 3;
 				str = Integer.toHexString((Integer)PL.getProcess(this.father).cpu[k]);
+				//if (str.length() > 0)
 				for (int i = str.length() -1; i >= 0; i--) {
 					c[j] = str.charAt(i);
 					j--;

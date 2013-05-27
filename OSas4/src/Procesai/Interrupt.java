@@ -11,6 +11,7 @@ import rm.RM;
 
 
 public class Interrupt extends ProcessBase {
+	int jgVardas;
 	@Override
 	public void execute() {
 		switch(vieta) {
@@ -33,7 +34,7 @@ public class Interrupt extends ProcessBase {
 				System.out.println("Nerastas resursas Interrupt!");
 			}
 			
-			int jgVardas = (Integer)((Object[])resursas.info.o)[0]; //Iðsipleðiam JG 
+			jgVardas = (Integer)((Object[])resursas.info.o)[0]; //Iðsipleðiam JG 
 			
 			//Apdorojami pertraukimo ávykiai
 			
@@ -104,6 +105,7 @@ public class Interrupt extends ProcessBase {
 					INFO inf = new INFOv();
 					((Object[])inf.o)[0] = PPS.getProcess(jgVardas).sunus.get(0);
 					((Object[])inf.o)[1] = (Integer)cpu[RM.CC];
+					Primityvai.stabdytiProcesa(PL.getProcess(jgVardas).sunus.get(0));
 					Primityvai.sukurtiResursa(Statiniai.VRstring.Writer_pradzia, true, nameI, inf);
 					return;
 				}
@@ -112,6 +114,7 @@ public class Interrupt extends ProcessBase {
 					vieta = 0;
 					INFO inf = new INFOv();
 					((Object[])inf.o)[0] = (Integer)cpu[RM.CC];
+					Primityvai.stabdytiProcesa(PL.getProcess(jgVardas).sunus.get(0));
 					Primityvai.sukurtiResursa(Statiniai.VRstring.VM_nori_ivedimo, true, nameI, inf);
 					return;
 				}

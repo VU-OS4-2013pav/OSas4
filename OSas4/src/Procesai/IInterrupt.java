@@ -6,12 +6,15 @@ import os.Statiniai.DRstring;
 import os.Statiniai.VRstring;
 import resources.VRSS;
 import resourcesINFO.INFOv;
+import rm.ChannelDevice;
 import rm.Memory;
+import rm.RM;
 
 
 public class IInterrupt extends ProcessBase {
 	//boolean naujaUþduotis, MOSpabaiga, uzduotiesPaleidimas, uzduotiesIstrinimas;
-	
+	INFOv inf =  null;
+
 	public void execute() {
 		//System.out.println("IInterrupt pradzia.");
 		switch(vieta) {
@@ -26,9 +29,11 @@ public class IInterrupt extends ProcessBase {
 					Primityvai.naikintiResursa(resursai.get(i).nameI);
 					break;
 				}
-			
+
 			// jeigu vm nori ivedimo
-			if (!VRSS.list.get(Statiniai.VRint.VM_nori_ivedimo).resourceList.isEmpty()) {
+			if (!VRSS.list.get(Statiniai.VRint.VM_nori_ivedimo).resourceList.isEmpty() 
+					&& Character.valueOf(Memory.get()[Statiniai.readMem].getWord()[0]).equals('.') 
+					&& Character.valueOf(Memory.get()[Statiniai.readMem].getWord()[1]).equals('.')) {
 				vieta = 2;
 				Primityvai.prasytiResurso(DRstring.Kanalu_irenginys, this.nameI, 1);
 				return;
@@ -76,13 +81,70 @@ public class IInterrupt extends ProcessBase {
 				Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, nameI, 1);
 				return;
 			}
-			
+
 		case 2:
-			//Kopijuoja kas ávesta
+			// issitraukiam VM inner name
+			char[] vm = new char[2];
+			vm[0] = Memory.get()[Statiniai.readMem].getWord()[2];
+			vm[1] =	Memory.get()[Statiniai.readMem].getWord()[3];
+			int vmName = Integer.parseInt(String.valueOf(vm));
+			Statiniai.readMem++;
+			
+
+			// randam JG pagal VM father name
+			ProcessBase jg = PL.getProcess(PL.getProcess(vmName).father);
+			int iKur = (int) jg.cpu[RM.CC]; // virtualus adresas
+			
+			char[] c = new char[4];
+			int j = 3;
+			String str = Integer.toHexString(iKur);
+			//if (str.length() > 0)
+			for (int i = str.length() -1; i >= 0; i--) {
+				c[j] = str.charAt(i);
+				j--;
+			}
+			if (j >= 0) {
+				for (int i = j; i >= 0; i--) {
+					c[i] = '0';
+				}
+			}
+			
+			// kiek kopijuosim
+			int kiek = Statiniai.vietaMem - Statiniai.readMem;
+			
+			//virtualizacija
+			char[] a = { 
+					Integer.toHexString((int) jg.cpu[RM.PTR]).charAt(0),
+					Integer.toHexString((int) jg.cpu[RM.PTR]).charAt(1),
+					c[0],
+					c[1]
+			};
+
+			char[] addressR = {
+					Memory.get()[Integer.parseInt(String.valueOf(a), 16)].getWord()[0],
+					Memory.get()[Integer.parseInt(String.valueOf(a), 16)].getWord()[1],
+					c[2],
+					c[3]
+			}; 
+
+			// nustatom chaneliu reiksmes (reikia adresu virtualizacijos is VA -> RA!!!)
+			ChannelDevice.setValueOfChannel(ChannelDevice.IO, 1);
+			ChannelDevice.setValueOfChannel(ChannelDevice.OO, 1);
+			ChannelDevice.setValueOfChannel(ChannelDevice.IA, Statiniai.readMem); // is kur
+			ChannelDevice.setValueOfChannel(ChannelDevice.OA, Integer.parseInt(String.valueOf(addressR), 16)); // i kur
+			ChannelDevice.c = kiek; 
+
+			// paleidziam runDevice
+			ChannelDevice.runDevice();
+			
+			inf = new INFOv();
+			((Object[])inf.o)[0] = false;
+			((Object[])inf.o)[1] = jg.nameI;
+			// baigiam ivedima
 			vieta = 7;
 			Primityvai.atlaisvintiResursa(Statiniai.DRstring.Kanalu_irenginys, nameI);
 			return;
-			
+
 		case 3:
 			Primityvai.naikintiProcesa(this.sunus.get(0), this);
 			vieta = 1;
@@ -104,11 +166,10 @@ public class IInterrupt extends ProcessBase {
 			return;
 		case 6:
 			vieta = 1;
+			inf = null;
 			Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, this.nameI, 1);
 			return;
 		case 7:
-			INFOv inf = new INFOv();
-			((Object[])inf.o)[0] = false;
 			vieta = 6;
 			Primityvai.sukurtiResursa(Statiniai.VRstring.Pranesimas_apie_pertraukima, true, nameI, inf);
 			return;

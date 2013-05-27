@@ -87,8 +87,8 @@ public class GUI extends JFrame implements ActionListener {
 	JScrollPane HDDscrollPane;
 	static JTable HDDmemoryTable;
 	
-//	JScrollPane scrollConsole;
-//	static JTextArea console = new JTextArea();
+	JScrollPane scrollConsole;
+	static JTextArea console = new JTextArea();
 	
 	public GUI() {
 		showHDDTable.addActionListener(this);
@@ -177,9 +177,9 @@ public class GUI extends JFrame implements ActionListener {
         panelButtons.add(showHDDTable);
         framePanel.add(panelButtons);
         
-//        scrollConsole = new JScrollPane(console);
-//        console.setWrapStyleWord(true);
-//        console.setLineWrap(true);
+        scrollConsole = new JScrollPane(console);
+        console.setWrapStyleWord(true);
+        console.setLineWrap(true);
 //        framePanel.add(scrollConsole);      
 
 //        nextCommand.addActionListener(this);
@@ -192,7 +192,7 @@ public class GUI extends JFrame implements ActionListener {
       	panelRM.setMaximumSize(new Dimension(WIDTH, 100));
       	panelMD.setMaximumSize(new Dimension(WIDTH, 50));
       	panelButtons.setMaximumSize(new Dimension(WIDTH, 50));
-//      	scrollConsole.setSize(WIDTH, 200);
+      	scrollConsole.setSize(WIDTH, 200);
       	
       	this.setBounds(0, 0, WIDTH, HEIGHT-250);
       	this.setMinimumSize(new Dimension(WIDTH, HEIGHT-250));
@@ -382,13 +382,13 @@ public class GUI extends JFrame implements ActionListener {
 		HDDmemoryTable.setEnabled(false);
 	}
 	
-	/*public static void printChar(char c) {
+	public static void printChar(char c) {
 		console.append(Character.toString(c));
 	}
 	
 	public static void printStream(String s) {
 		console.append(s+"\n");
-	}*/
+	}
 	
 	public void showHide() {
 		if (isVisible()) {
