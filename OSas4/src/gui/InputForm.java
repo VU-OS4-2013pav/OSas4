@@ -91,6 +91,23 @@ public class InputForm extends JFrame {
 						Statiniai.vietaMem++;
 					}
 				}
+				else if (readField.getText().substring(0, 2).equals("..")){
+					RM.regOS = 1; // vadinas ivedimas gali buti tvarkingas. statom interrupta ir kisam i memory
+					for (int i = 0; i < readField.getText().length() / 4; i++) {
+						Memory.addWord(Statiniai.vietaMem, readField.getText().substring(i*4, i*4+4));
+						Statiniai.vietaMem++;
+					}
+					String str = readField.getText().substring(readField.getText().length() / 4*4);
+					char[] c = new char[4];
+					for (int i = 0; i < str.length(); i++) {
+						c[i] = str.charAt(i);
+					}
+					for (int i = str.length(); i < 4; i++) {
+						c[i] = '0';
+					}
+					Memory.addWord(Statiniai.vietaMem, String.valueOf(c));
+					Statiniai.vietaMem++;
+				}
 				readField.setText("");
 //				System.out.println("readmem: "+Statiniai.readMem);
 //				for (int i = 0x0A00; i < Statiniai.vietaMem; i++)

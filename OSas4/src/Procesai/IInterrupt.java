@@ -137,6 +137,13 @@ public class IInterrupt extends ProcessBase {
 			// paleidziam runDevice
 			ChannelDevice.runDevice();
 			
+			// sunaikinam VM nori ivedimo
+			for (int i = 0; i < this.resursai.size(); i++) {
+				if (this.resursai.get(i).nameI == vmName)
+					this.resursai.remove(i);
+					
+			}
+
 			inf = new INFOv();
 			((Object[])inf.o)[0] = false;
 			((Object[])inf.o)[1] = jg.nameI;
