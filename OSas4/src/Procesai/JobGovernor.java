@@ -191,14 +191,17 @@ public class JobGovernor extends ProcessBase {
 				}
 			}
 			
+			ResourceDescriptor r2 = null;
 			for (int i = 0; i < VRSS.list.get(VRint.Pranesimas_apie_pertraukima).resourceList.size(); i++) {
 				if (VRSS.list.get(VRint.Pranesimas_apie_pertraukima).resourceList.get(i).nameI == resNameI) {
 					inf2 = VRSS.list.get(VRint.Pranesimas_apie_pertraukima).resourceList.get(i).info;
+					r2 = VRSS.list.get(VRint.Pranesimas_apie_pertraukima).resourceList.get(i);
 				}
 			}
 			
 			if (inf2 != null) {
 				if ((boolean)(((Object[])inf2.o)[0]) == true) { // baigti VM
+					Primityvai.naikintiResursa(r2.nameI);
 					Primityvai.naikintiProcesa(this.sunus.get(0), this);
 					
 					Primityvai.atlaisvintiResursa(DRstring.Vartotojo_atmintis, this.nameI, true);
@@ -212,6 +215,7 @@ public class JobGovernor extends ProcessBase {
 					return;
 				}
 				else { // pratesti VM
+					Primityvai.naikintiResursa(r2.nameI);
 					vieta = 4;
 					Primityvai.aktyvuotiProcesa(this.sunus.get(0));
 					Primityvai.prasytiResurso(VRstring.Pranesimas_apie_pertraukima, nameI, 1);
@@ -227,6 +231,9 @@ public class JobGovernor extends ProcessBase {
 		case 6:
 			//vieta++;
 			vieta = 4;
+			for (int i = 0; i < resursai.size(); i++)
+				if (resursai.get(i).nameO.equals(Statiniai.VRstring.Pranesimas_apie_pertraukima))
+					Primityvai.naikintiResursa(resursai.get(i).nameI);
 			Primityvai.sukurtiProcesa(Statiniai.Pstring.VirtualMachine, this.nameI, 3);			
 			Primityvai.prasytiResurso(VRstring.Pranesimas_apie_pertraukima, nameI, 1);
 			return;
