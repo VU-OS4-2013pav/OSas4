@@ -97,10 +97,17 @@ public class Primityvai {
 		PPS.list.add(proc);
 		PL.addProcess(proc);
 		PL.getProcess(proc.father).sunus.add(proc.nameI);
+		return;
 		
 	}
 
 	public static void prasytiResurso(String isorinis, int kas, int kiek) {
+		prasytiResurso(isorinis, kas, kiek, true);
+		Paskirstytojas.skirstyk();
+		return;
+	}
+	
+	private static void prasytiResurso(String isorinis, int kas, int kiek, boolean bePlanuotojo) {
 		InputForm.refreshAll();
 		System.out.println(PL.getProcess(kas).nameO + " paprase " + isorinis);
 		
@@ -142,10 +149,10 @@ public class Primityvai {
 		if (PL.getProcess(kas).busena == ProcessState.RUN) {
 			PL.getProcess(kas).busena = ProcessState.BLOCKED;
 		}
-		Paskirstytojas.skirstyk();
+		
 	}
 
-	public static void sukurtiResursa(String name, boolean usable, int father, INFO inf) {
+	private static void sukurtiResursa(String name, boolean usable, int father, INFO inf, boolean bePlanuotojo) {
 		InputForm.refreshAll();
 		System.out.println(PL.getProcess(father).nameO+ "("+PL.getProcess(father).nameI+") kuria " + name);
 		
@@ -177,11 +184,17 @@ public class Primityvai {
 		}	
 		// ideda i tevo-proceso sukurtu resursu sarasa
 		PL.getProcess(father).addResToPL(res.nameO, res.nameI);
-		Paskirstytojas.skirstyk();
+		return;
 		
 	}
 	
-	public static void atlaisvintiResursa(String name, Object procORname) { //proceso id (int), arba programos vardas (int)
+	public static void sukurtiResursa(String name, boolean usable, int father, INFO inf) {
+		sukurtiResursa(name, usable, father, inf, true);
+		Paskirstytojas.skirstyk();
+		return;
+	}
+	
+	public static void atlaisvintiResursa(String name, Object procORname, boolean bePlanuotojo) { //proceso id (int), arba programos vardas (int)
 		InputForm.refreshAll();
 		System.out.println("Atlaisvinamas resursas vardu: "+name);
 		
@@ -239,7 +252,13 @@ public class Primityvai {
 			break;
 		}
 		
+		return;
+	}
+	
+	public static void atlaisvintiResursa(String name, Object procORname) {
+		atlaisvintiResursa(name, procORname, true);
 		Paskirstytojas.skirstyk();
+		return;
 	}
 	
 	public static void naikintiProcesa(int name, ProcessBase father) {
@@ -301,7 +320,7 @@ public class Primityvai {
 				if (proc.resursai.get(i).nameI < 4) {
 					 if (proc.resursai.get(i).nameO != DRstring.HDD) {
 						 //System.out.println("nelygu HDD!!!! "+proc.resursai.get(i).nameO);
-						 atlaisvintiResursa(proc.resursai.get(i).nameO, proc.nameI);
+						 atlaisvintiResursa(proc.resursai.get(i).nameO, proc.nameI, true);
 					 }
 				} else {
 					Primityvai.naikintiResursa(proc.resursai.get(i).nameI);
@@ -423,7 +442,7 @@ public class Primityvai {
 		else {
 			System.out.println("Resursas vidiniu vardu "+name+" neegzistuoja.");
 		}
-		//Paskirstytojas.skirstyk();
+		return;
 	}
 	
 	public static void stabdytiProcesa(int name) {

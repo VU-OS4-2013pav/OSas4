@@ -137,7 +137,8 @@ public class InputForm extends JFrame {
 		
 		resourcesField.setText("");
 		for (i = 0; i < RSS.list.size(); i++) {
-			resourcesField.append(RSS.list.get(i).resourceDescriptor.toString()+"\n");
+			if (RSS.list.get(i).resourceDescriptor != null)
+				resourcesField.append(RSS.list.get(i).resourceDescriptor.toString()+"\n");
 		}
 		for (i = 0; i < VRSS.list.size(); i++) {
 			for (j = 0; j < VRSS.list.get(i).resourceList.size(); i++)

@@ -18,7 +18,7 @@ public class IInterrupt extends ProcessBase {
 		case 0:
 			vieta++;
 			Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, nameI, 1);
-			break;
+			return;
 		case 1:
 			// jeigu vm nori ivedimo
 			if (!VRSS.list.get(Statiniai.VRint.VM_nori_ivedimo).resourceList.isEmpty()) {
@@ -30,7 +30,7 @@ public class IInterrupt extends ProcessBase {
 			else if(String.valueOf(Memory.get()[Statiniai.readMem].getWord()).equals(".NEW")) {
 				Statiniai.readMem++;
 
-				Primityvai.sukurtiProcesa(Statiniai.Pstring.InputStream, this.nameI, 8);
+				Primityvai.sukurtiProcesa(Statiniai.Pstring.InputStream, this.nameI, 8); 
 				vieta = 3;
 				Primityvai.prasytiResurso(VRstring.InputStream_pabaiga, this.nameI, 1);
 				return;
@@ -72,13 +72,10 @@ public class IInterrupt extends ProcessBase {
 			
 		case 2:
 			//Kopijuoja kas ávesta
+			vieta = 7;
 			Primityvai.atlaisvintiResursa(Statiniai.DRstring.Kanalu_irenginys, nameI);
-			INFOv inf = new INFOv();
-			((Object[])inf.o)[0] = false;
-			vieta = 6;
-			Primityvai.sukurtiResursa(Statiniai.VRstring.Pranesimas_apie_pertraukima, true, nameI, inf);
-			
 			return;
+			
 		case 3:
 			Primityvai.naikintiProcesa(this.sunus.get(0), this);
 			vieta = 1;
@@ -95,6 +92,12 @@ public class IInterrupt extends ProcessBase {
 		case 6:
 			vieta = 1;
 			Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, this.nameI, 1);
+			return;
+		case 7:
+			INFOv inf = new INFOv();
+			((Object[])inf.o)[0] = false;
+			vieta = 6;
+			Primityvai.sukurtiResursa(Statiniai.VRstring.Pranesimas_apie_pertraukima, true, nameI, inf);
 			return;
 		}
 

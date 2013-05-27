@@ -29,7 +29,7 @@ public class JobGovernor extends ProcessBase {
 		case 0:
 			vieta++;
 			Primityvai.prasytiResurso(VRstring.Info_apie_nauja_VM, nameI, 1);
-			break;
+			return;
 		case 1:
 			// issitraukiam hdd deskriptoriaus info lauka
 			hdd = ((HDDObject)(RSS.list.get(DRint.HDD).resourceDescriptor.info.o));
@@ -53,12 +53,14 @@ public class JobGovernor extends ProcessBase {
 			if (kelintas >= 0) {
 				vieta++;
 				Primityvai.prasytiResurso(DRstring.Vartotojo_atmintis, nameI, hdd.programs.get(kelintas).oa+2);
+				return;
 			}
 			else {
 				vieta = 0;
 				System.out.println("JG. Programa nerasta.");
+				return;
 			}
-			break;
+
 		case 2:
 			// TVARKOMA PTR LENTELE
 			/*
@@ -112,9 +114,8 @@ public class JobGovernor extends ProcessBase {
 
 			vieta++;
 			Primityvai.prasytiResurso(DRstring.Kanalu_irenginys, nameI, 1);
-			break;
+			return;
 		case 3:
-			// TODO suvaryti koda i atminti pagal taisykles!!!!
 			// turim ptr su vartotojo atmintim - i kur
 			// turim hdd deskriptoriu su paskirtais blokais ir hdd atminti - is kur
 			
@@ -176,9 +177,7 @@ public class JobGovernor extends ProcessBase {
 			
 			vieta = 6;
 			Primityvai.atlaisvintiResursa(DRstring.Kanalu_irenginys, this.nameI);
-			
-			
-			break;
+			return;
 		case 4:
 			int resNameI = -1;
 			INFO inf2 = null;
@@ -200,7 +199,7 @@ public class JobGovernor extends ProcessBase {
 				if ((boolean)(((Object[])inf2.o)[0]) == true) { // baigti VM
 					Primityvai.naikintiProcesa(this.sunus.get(0), this);
 					
-					Primityvai.atlaisvintiResursa(DRstring.Vartotojo_atmintis, this.nameI);
+					Primityvai.atlaisvintiResursa(DRstring.Vartotojo_atmintis, this.nameI, true);
 					
 					INFOv inf3 = new INFOv();
 					((Object[])inf3.o)[0] = false;
@@ -208,34 +207,29 @@ public class JobGovernor extends ProcessBase {
 					
 					vieta++;
 					Primityvai.sukurtiResursa(VRstring.MainGovernor_pazadinimas, true, this.nameI, inf3);
-
+					return;
 				}
 				else { // pratesti VM
 					vieta = 4;
-					Primityvai.keistiPrioriteta(this.nameI, 7);
 					Primityvai.aktyvuotiProcesa(this.sunus.get(0));
 					Primityvai.prasytiResurso(VRstring.Pranesimas_apie_pertraukima, nameI, 1);
+					return;
 				}
 			}
 			else 
 				System.out.println("JobGovernor klaida. Resursas Pranesimas apie pertraukima nerastas.");
-			
-			
-			break;
+			return;
 		case 5:
 			Primityvai.prasytiResurso(VRstring.Neegzistuojantis, nameI, 1);
-			break;
+			return;
 		case 6:
 			vieta++;
 			Primityvai.sukurtiProcesa(Statiniai.Pstring.VirtualMachine, this.nameI, 3);
-			break;
+			return;
 		case 7:
 			vieta = 4;
-			
-			
-			
 			Primityvai.prasytiResurso(VRstring.Pranesimas_apie_pertraukima, nameI, 1);
-			break;
+			return;
 		}
 		
 	}

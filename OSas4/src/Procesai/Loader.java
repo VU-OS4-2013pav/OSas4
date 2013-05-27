@@ -22,7 +22,7 @@ public class Loader extends ProcessBase {
 		case 0:
 			vieta++;
 			Primityvai.prasytiResurso(VRstring.Loader_pradzia, nameI, 1);
-			break;
+			return;
 		case 1:
 			// ar egzistuoja toks resursas
 			if (!VRSS.list.get(VRint.Loader_pradzia).resourceList.isEmpty()) {
@@ -69,7 +69,7 @@ public class Loader extends ProcessBase {
 				System.err.println("Kazkas tai atsitiko. Loader. Neegzistuoja!");
 			}
 			
-			break;
+			return;
 		case 2:
 			// isveda klaidos pranesima, atlaisvina kanalus
 			System.out.println("Nurodyta programa HDD neegzistuoja. Loader.");

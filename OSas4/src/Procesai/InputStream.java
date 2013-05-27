@@ -26,7 +26,7 @@ public class InputStream extends ProcessBase {
 			//Blokuojasi ir laukia kanalø árenginys
 			vieta = 2;
 			Primityvai.prasytiResurso(DRstring.Kanalu_irenginys, nameI, 1);
-			break;
+			return;
 		/*case 1:
 			vieta++;
 			if (Statiniai.readMem == Statiniai.vietaMem) {
@@ -69,12 +69,13 @@ public class InputStream extends ProcessBase {
 				break;
 			}
 			*/
-			break;
+			return;
 		case 3:
 			//System.out.println("nuskaityti zodziai-----------------: "+nuskaitytiZodziai);
 			if (!nuskaitymasBaigtas) {
 				vieta = 2;
 				Primityvai.prasytiResurso(VRstring.Klaviaturos_pertraukimas, nameI, 1);
+				return;
 			}
 			else {
 				vieta = 5;
@@ -82,10 +83,10 @@ public class InputStream extends ProcessBase {
 				((Object[])inf.o)[0] = nuoKur;
 				((Object[])inf.o)[1] = nuskaitytiZodziai;
 				Primityvai.sukurtiResursa(Statiniai.VRstring.Sintakses_tikrinimas, true, nameI, inf);
-				break;
+				return;
 			}
 			
-			break;
+			
 		/*case 4:
 			vieta++;
 			Primityvai.prasytiResurso(VRstring.Sintakse_patikrinta, nameI, 1);
@@ -94,12 +95,12 @@ public class InputStream extends ProcessBase {
 			//Blokuojasi ir laukia sintaksë patikrinta resurso
 			vieta = 6;
 			Primityvai.prasytiResurso(VRstring.Sintakse_patikrinta, nameI, 1);
-			break;
+			return;
 		case 6:
 			//Blokuojasi ir laukia kanalø árenginys
 			vieta++;
 			Primityvai.prasytiResurso(DRstring.Kanalu_irenginys, nameI, 1);
-			break;
+			return;
 		case 7:
 			//Tikrinama ar buvo klaidu ar nebuvo
 			ResourceDescriptor sintaksesResursas = null;
@@ -119,14 +120,15 @@ public class InputStream extends ProcessBase {
 				System.out.println("Sintaksë teisinga!");
 				vieta++;
 				Primityvai.prasytiResurso(Statiniai.DRstring.HDD, nameI, 1);
+				return;
 			} else {
 				//Jei sintaksë neteisinga
 				System.out.println("Uþduotyje buvo klaidø!");
 				vieta = 9;
 				Primityvai.atlaisvintiResursa(Statiniai.DRstring.Kanalu_irenginys, nameI);
-				
+				return;
 			}
-			break;
+			
 		case 8:
 			//Kopijuoja uþduotá á HDD
 			HDDObject hdd = null;
@@ -164,14 +166,14 @@ public class InputStream extends ProcessBase {
 			vieta = 9;
 			Primityvai.atlaisvintiResursa(Statiniai.DRstring.Kanalu_irenginys, nameI);
 			
-			break;
+			return;
 		case 9:
 			vieta = 10;
 			Primityvai.sukurtiResursa(Statiniai.VRstring.InputStream_pabaiga, true, father, null);
-			break;
+			return;
 		case 10:
 			Primityvai.prasytiResurso(Statiniai.VRstring.Neegzistuojantis, nameI, 1);
-			break;
+			return;
 		}
 		
 	}

@@ -21,6 +21,7 @@ public class Idle extends ProcessBase {
 		}
 		System.out.println("Idle pabaiga.");
 		Planuotojas.planuok();
+		return;
 		
 	}
 

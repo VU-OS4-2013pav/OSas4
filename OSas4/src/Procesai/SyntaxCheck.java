@@ -18,11 +18,11 @@ public class SyntaxCheck extends ProcessBase {
 		case 0:
 			vieta++;
 			Primityvai.prasytiResurso(VRstring.Sintakses_tikrinimas, nameI, 1);
-			break;
+			return;
 		case 1:
 			vieta++;
 			Primityvai.prasytiResurso(DRstring.Kanalu_irenginys, nameI, 1);
-			break;
+			return;
 		case 2:
 			//Bëgam per visus resursus, ieðkom turimo
 			for (int i = 0; i < VRSS.list.get(VRint.Sintakses_tikrinimas).resourceList.size(); i++) {
@@ -63,16 +63,16 @@ public class SyntaxCheck extends ProcessBase {
 			Primityvai.naikintiResursa(resursai.get(0).nameI);
 			vieta++;
 			Primityvai.sukurtiResursa(Statiniai.VRstring.Sintakse_patikrinta, true, nameI, inf);
-			break;
+			return;
 		case 3:
 			vieta++;
 			//System.out.println("SYNTAX CHEKAS TURI::: "+resursai.size());
 			Primityvai.atlaisvintiResursa(Statiniai.DRstring.Kanalu_irenginys, nameI);
-			break;
+			return;
 		case 4:
 			vieta = 1;
 			Primityvai.prasytiResurso(VRstring.Sintakses_tikrinimas, nameI, 1);
-			break;
+			return;
 		}
 		
 	}

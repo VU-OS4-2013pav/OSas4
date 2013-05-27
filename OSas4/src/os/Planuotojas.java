@@ -1,6 +1,9 @@
 package os;
 
+import os.Statiniai.Pint;
 import os.Statiniai.Pstring;
+import os.Statiniai.VRint;
+import os.Statiniai.VRstring;
 import gui.InputForm;
 import Procesai.PL;
 import Procesai.PPS;
@@ -36,7 +39,7 @@ public class Planuotojas {
 			}
 		}
 		// INPUT PALEIDIMAS! NEISTRINTI!!!! INPUT PRIORITETO NIEKUR NEKEISTI!!!!
-		if (Primityvai.processId >= 10) {
+		if (Primityvai.processId >= 10 && !PL.processList.get(Pint.INPUT).processList.isEmpty()) {
 			InputForm.refreshAll();
 			if (runKelintas > -1)
 				PPS.list.get(runKelintas).busena = Statiniai.ProcessState.READY;

@@ -19,13 +19,13 @@ public class Destroyer extends ProcessBase {
 			// blokuojasi ir laukia destroyer pradzia
 			vieta++;
 			Primityvai.prasytiResurso(Statiniai.VRstring.Destroyer_XDD_pradzia, this.nameI, 1);
-			break;
+			return;
 		case 1:
 			// gavo destroyer pradzia
 			// blokuojasi ir laukia kanalu irenginys
 			vieta++;
 			Primityvai.prasytiResurso(Statiniai.DRstring.Kanalu_irenginys, this.nameI, 1);
-			break;
+			return;
 		case 2:
 			// gavo kanalu irengini. ar egzistuoja nurodyta programa atmintyje?
 			
@@ -65,21 +65,21 @@ public class Destroyer extends ProcessBase {
 				System.out.println("Progrma is HDD neistrinta. Pavadinimas: "+VRSS.list.get(VRint.Destroyer_XDD_pradzia).resourceList.get(0).nameO);
 			}
 			
-			break;
+			return;
 		case 3:
 			vieta++;
 			Primityvai.atlaisvintiResursa(Statiniai.VRstring.Destroyer_XDD_pradzia, nameI);
-			break;
+			return;
 		case 4:
 			//atlaisvina kanalu irengini
 			vieta++;
 			Primityvai.atlaisvintiResursa(DRstring.Kanalu_irenginys, this.nameI);
-			break;
+			return;
 		case 5:
 			// sukuria destroyer pabaiga ir grizta i pradzia
 			vieta = 0;
 			Primityvai.sukurtiResursa(Statiniai.VRstring.Destroyer_XDD_pabaiga, true, this.nameI, new INFO());
-			break;
+			return;
 		}
 		
 	}

@@ -17,7 +17,7 @@ public class Interrupt extends ProcessBase {
 		case 0: 
 			vieta++;
 			Primityvai.prasytiResurso(VRstring.Pertraukimo_ivykis, nameI, 1);
-			break;
+			return;
 		case 1:
 			//Ádentifikuoja virtual machine tëvà JG
 			ResourceDescriptor resursas = null;
@@ -120,11 +120,7 @@ public class Interrupt extends ProcessBase {
 			vieta = 1;
 			Primityvai.prasytiResurso(VRstring.Pertraukimo_ivykis, nameI, 1);
 			return;
-		case 2:
-			vieta = 0;
-			
-			return;
-		}
+		} 
 		
 	}
 }

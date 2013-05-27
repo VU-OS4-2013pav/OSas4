@@ -52,7 +52,7 @@ public class BeginEnd extends ProcessBase {
 			vieta++;		
 			Primityvai.prasytiResurso(VRstring.MOS_darbo_pabaiga, 0, 1);
 			
-			break;
+			return; 
 		case 1:
 			//Èia kaip ir viskas baigiasi sulaukus resurso... Naikinama viskas
 			/*for (int i=1; i < PL.processList.size(); i++) {
@@ -62,7 +62,8 @@ public class BeginEnd extends ProcessBase {
 			}*/
 			Primityvai.naikintiProcesa(this.nameI, this);
 			System.out.println("OS'as baige darba.");
-			break;
+			return;
+			//System.exit(0);
 		}
 		
 	}

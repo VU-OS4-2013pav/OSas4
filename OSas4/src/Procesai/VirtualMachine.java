@@ -47,11 +47,13 @@ public class VirtualMachine extends ProcessBase {
 					
 					INFOv inf = new INFOv();
 					((Object[])inf.o)[0] = this.father;
-					Primityvai.sukurtiResursa(VRstring.Pertraukimo_ivykis, true, this.nameI, inf);
 					run = false;
+					Primityvai.sukurtiResursa(VRstring.Pertraukimo_ivykis, true, this.nameI, inf);
+					return;
+					
 				}
 			}
-			break;
+			return;
 		}
 		
 	}
