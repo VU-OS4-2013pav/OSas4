@@ -7,6 +7,7 @@ import os.Statiniai.VRstring;
 import resources.ResourceDescriptor;
 import resources.VRSS;
 import resourcesINFO.INFO;
+import resourcesINFO.INFOv;
 import rm.ChannelDevice;
 
 
@@ -47,10 +48,10 @@ public class Writer extends ProcessBase {
 					break;
 				}
 			}
-			ChannelDevice.setValueOfChannel(0, (int)((Object[])tempResource.info.o)[0]);
-			ChannelDevice.c = (int)((Object[])tempResource.info.o)[1];
-			ChannelDevice.setValueOfChannel(2, (int)((Object[])tempResource.info.o)[2]);
-			ChannelDevice.setValueOfChannel(3, (int)((Object[])tempResource.info.o)[3]);
+			ChannelDevice.setValueOfChannel(0, (Integer)((Object[])tempResource.info.o)[0]);
+			ChannelDevice.c = (Integer)((Object[])tempResource.info.o)[1];
+			ChannelDevice.setValueOfChannel(2, (Integer)((Object[])tempResource.info.o)[2]);
+			ChannelDevice.setValueOfChannel(3, (Integer)((Object[])tempResource.info.o)[3]);
 			jg = (Integer)((Object[])tempResource.info.o)[4];
 			//Po ðito stebuklo turëtø bûti iðvedimas
 			ChannelDevice.runDevice();
@@ -59,7 +60,7 @@ public class Writer extends ProcessBase {
 			Primityvai.atlaisvintiResursa(Statiniai.DRstring.Kanalu_irenginys, nameI);
 			return;
 		case 3:
-			INFO in = new INFO();
+			INFOv in = new INFOv();
 			((Object[])in.o)[0] = false; //VM darbo baigti nereikia
 			((Object[])in.o)[1] = jg;
 			vieta++;

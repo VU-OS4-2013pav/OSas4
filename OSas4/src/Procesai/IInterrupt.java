@@ -34,6 +34,7 @@ public class IInterrupt extends ProcessBase {
 			if (!VRSS.list.get(Statiniai.VRint.VM_nori_ivedimo).resourceList.isEmpty() 
 					&& Character.valueOf(Memory.get()[Statiniai.readMem].getWord()[0]).equals('.') 
 					&& Character.valueOf(Memory.get()[Statiniai.readMem].getWord()[1]).equals('.')) {
+				Primityvai.naikintiResursa(VRSS.list.get(Statiniai.VRint.VM_nori_ivedimo).resourceList.get(0).nameI);
 				vieta = 2;
 				Primityvai.prasytiResurso(DRstring.Kanalu_irenginys, this.nameI, 1);
 				return;
@@ -139,10 +140,12 @@ public class IInterrupt extends ProcessBase {
 			
 			// sunaikinam VM nori ivedimo
 			for (int i = 0; i < this.resursai.size(); i++) {
-				if (this.resursai.get(i).nameI == vmName)
-					this.resursai.remove(i);
+				if (this.resursai.get(i).nameO.equals(VRstring.VM_nori_ivedimo))
+					Primityvai.naikintiResursa(this.resursai.get(i).nameI);
 					
 			}
+			
+			Statiniai.readMem =  Statiniai.readMem + kiek;
 
 			inf = new INFOv();
 			((Object[])inf.o)[0] = false;

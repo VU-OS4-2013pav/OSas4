@@ -112,7 +112,7 @@ public class Interrupt extends ProcessBase {
 					
 					// randam JG pagal vidiná vardà
 					ProcessBase jg = PL.getProcess(jgVardas);
-					 int iKur = (int) jg.cpu[RM.CC]; // virtualus adresas
+					 int iKur = (int) jg.cpu[RM.AA]; // virtualus adresas
 					   
 					   char[] c = new char[4];
 					   int j = 3;
@@ -143,7 +143,9 @@ public class Interrupt extends ProcessBase {
 					     c[3]
 					   };
 					
-					((Object[])inf.o)[0] = addressR; //Adresas nuo kurio pradedam vest
+					   
+					   
+					((Object[])inf.o)[0] = Integer.parseInt(String.valueOf(addressR), 16); //Adresas nuo kurio pradedam vest
 					((Object[])inf.o)[1] = jg.cpu[RM.CC]; //kiek reikia iðvest
 					((Object[])inf.o)[2] = 1; //IO = 1 vedam ið vidinës
 					((Object[])inf.o)[3] = 3; //OO = 2 vedam á ekranà

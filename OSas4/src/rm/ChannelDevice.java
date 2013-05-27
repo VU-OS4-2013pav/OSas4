@@ -64,7 +64,14 @@ public class ChannelDevice {
 			break;
 			
 			case 3 : { // ->isvedimo srautas
-				char c = ' ';
+				
+				for (int j = Integer.parseInt(registerToString(IA), 16); j < Integer.parseInt(registerToString(IA), 16)+c; j++)
+					for (int i=0; i < 4; i++) {
+						char d = Memory.get()[j].toString().charAt(i);
+						GUI.printChar(d);
+					}
+				
+				/*char c = ' ';
 				int i;
 				boolean stop = false;
 				int j = Integer.parseInt(registerToString(IA), 16);
@@ -84,7 +91,7 @@ public class ChannelDevice {
 					if (!stop)
 						j++;
 				}
-				GUI.printChar((char)0xA);			
+				GUI.printChar((char)0xA);*/			
 			} // end case 13
 			break;			
 			} // end switch

@@ -180,12 +180,12 @@ public class GUI extends JFrame implements ActionListener {
         scrollConsole = new JScrollPane(console);
         console.setWrapStyleWord(true);
         console.setLineWrap(true);
-//        framePanel.add(scrollConsole);      
+        framePanel.add(scrollConsole);      
 
 //        nextCommand.addActionListener(this);
         add(framePanel);
         
-        framePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+       // framePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
     //    framePanel.setMaximumSize(new Dimension(700, 700));
         
         
@@ -194,7 +194,7 @@ public class GUI extends JFrame implements ActionListener {
       	panelButtons.setMaximumSize(new Dimension(WIDTH, 50));
       	scrollConsole.setSize(WIDTH, 200);
       	
-      	this.setBounds(0, 0, WIDTH, HEIGHT-250);
+      	this.setBounds(0, 0, WIDTH, HEIGHT-190);
       	this.setMinimumSize(new Dimension(WIDTH, HEIGHT-250));
       	this.setMaximumSize(new Dimension(WIDTH+50, HEIGHT));
         
