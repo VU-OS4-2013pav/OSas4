@@ -8,6 +8,7 @@ import os.Statiniai.DRint;
 import os.Statiniai.DRstring;
 import os.Statiniai.ProcessState;
 import os.Statiniai.Pstring;
+import os.Statiniai.VRstring;
 import resources.ProcessNeedsResource;
 import resources.RS;
 import resources.RSS;
@@ -414,10 +415,10 @@ public class Primityvai {
 			
 			// deskriptorius ismetamas is procesu turimu resursu saraso
 			for (j = 0; j < PL.processList.size(); j++) {
-				if (PL.getProcess(j) != null)
-					for (i = 0; i < PL.getProcess(j).resursai.size(); i++) {
-						if (PL.getProcess(j).resursai.get(i).nameI == name) {
-							PL.getProcess(j).resursai.remove(i);
+				for (int k = 0; k < PL.processList.get(j).processList.size(); k++)	
+					for (i = 0; i < PL.processList.get(j).processList.get(k).resursai.size(); i++) {
+						if (PL.processList.get(j).processList.get(k).resursai.get(i).nameI == name) {
+							PL.processList.get(j).processList.get(k).resursai.remove(i);
 						}
 					}
 			}
