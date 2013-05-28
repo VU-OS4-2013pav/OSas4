@@ -152,22 +152,31 @@ public class JobGovernor extends ProcessBase {
 					if (HDD.get()[isKur].getWord()[1] == '!') { // bloko keitimas
 						if (kelintasDEM == 1)
 							pc = Integer.valueOf(String.valueOf(bl), 16)*0x100;
-						iKur = hdm.get(Integer.valueOf(String.valueOf(bl), 16));
-						isKur++;
+						//iKur = hdm.get(Integer.valueOf(String.valueOf(bl), 16)-1);
+						iKur = oa2[Integer.valueOf(String.valueOf(bl), 16)];
+						//isKur++;
 					}
 					else if (HDD.get()[isKur].getWord()[1] == '*') { // zodzio keitimas
 						if (kelintasDEM == 1)
 							pc = 0x100+Integer.valueOf(String.valueOf(bl), 16);
 						else if (kelintasDEM == 2)
 							pc = pc+Integer.valueOf(String.valueOf(bl), 16);
+						//iKur = (iKur / 0x100)*0x100 + Integer.valueOf(String.valueOf(bl), 16)-1;
 						iKur = (iKur / 0x100)*0x100 + Integer.valueOf(String.valueOf(bl), 16);
-						isKur++;
+						//		oa2[Integer.valueOf(String.valueOf(bl), 16)];
+						//isKur++;
 					}
 					
 					//System.out.println("iKUR JG!!!!!!!!!!!!!!!!!!!!!!!!!"+iKur);
 				}
-				Memory.get()[iKur].setWord(HDD.get()[isKur].getWord());
-				iKur++;
+				char[] bl = new char[2];
+				bl[0] = HDD.get()[isKur].getWord()[0];
+				bl[1] = HDD.get()[isKur].getWord()[1];
+				if (!String.valueOf(bl).equals("#!") && !String.valueOf(bl).equals("#*")) {
+					Memory.get()[iKur].setWord(HDD.get()[isKur].getWord());
+					iKur++;
+				}
+					
 				isKur++;
 			}
 			for (int i = 0; i < cpu.length; i++)
@@ -184,17 +193,17 @@ public class JobGovernor extends ProcessBase {
 			int resNameI = -1;
 			INFO inf2 = null;
 			
-			System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + resursai.size());
-			for (int i = 0; i < resursai.size(); i++) {
-				System.out.println(resursai.get(i).nameO);
-				if (resursai.get(i).nameO.equals(Statiniai.VRstring.Pranesimas_apie_pertraukima)) {
-					System.out.println("VRSS turi: " + VRSS.list.get(Statiniai.VRint.Pranesimas_apie_pertraukima).resourceList.size());
-					for (int j = 0; j < VRSS.list.get(Statiniai.VRint.Pranesimas_apie_pertraukima).resourceList.size(); j++)
-						if (VRSS.list.get(Statiniai.VRint.Pranesimas_apie_pertraukima).resourceList.get(j).nameI == resursai.get(i).nameI)
-							System.out.println("Yra ir VRSS");
-						else System.out.println("VRSS nera");
-				}
-			}
+			//System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + resursai.size());
+//			for (int i = 0; i < resursai.size(); i++) {
+//				//System.out.println(resursai.get(i).nameO);
+//				if (resursai.get(i).nameO.equals(Statiniai.VRstring.Pranesimas_apie_pertraukima)) {
+//					//System.out.println("VRSS turi: " + VRSS.list.get(Statiniai.VRint.Pranesimas_apie_pertraukima).resourceList.size());
+//					for (int j = 0; j < VRSS.list.get(Statiniai.VRint.Pranesimas_apie_pertraukima).resourceList.size(); j++)
+//						if (VRSS.list.get(Statiniai.VRint.Pranesimas_apie_pertraukima).resourceList.get(j).nameI == resursai.get(i).nameI)
+//							System.out.println("Yra ir VRSS");
+//						else System.out.println("VRSS nera");
+//				}
+//			}
 			for (int i = 0; i < this.resursai.size(); i++) {
 				if (this.resursai.get(i).nameO.equals(VRstring.Pranesimas_apie_pertraukima)) {
 					resNameI = this.resursai.get(i).nameI;

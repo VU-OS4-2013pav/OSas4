@@ -18,7 +18,7 @@ public class MainGovernor extends ProcessBase {
 		switch(vieta) {
 		case 0:
 			vieta++;
-			System.out.println("AS ESU CASE 0!!!!!!!!!!!!!!!!!!!!!");
+			//System.out.println("AS ESU CASE 0!!!!!!!!!!!!!!!!!!!!!");
 			Primityvai.prasytiResurso(VRstring.MainGovernor_pazadinimas, nameI, 1);
 			return;
 		case 1:
@@ -31,7 +31,7 @@ public class MainGovernor extends ProcessBase {
 					break;
 				}
 			}
-			System.out.println("AS ESU CASE 1 po MG pazadinimo radimo!!!!!!!!!!!!!!!!!!!!!! i:"+res);
+			//System.out.println("AS ESU CASE 1 po MG pazadinimo radimo!!!!!!!!!!!!!!!!!!!!!! i:"+res);
 			if (res >= 0) { // jeigu toks resursas egzistuoja...
 				// issitraukiam ta resursa
 				ResourceDescriptor rd = null;
@@ -76,7 +76,7 @@ public class MainGovernor extends ProcessBase {
 					Primityvai.naikintiResursa(this.resursai.get(i).nameI);
 			}
 			
-			System.out.println("AS ESU CASE 1 galeeeeeeeeeeeeeeeee!!!!!!!!!!!!!!!!!!!!!");
+			//System.out.println("AS ESU CASE 1 galeeeeeeeeeeeeeeeee!!!!!!!!!!!!!!!!!!!!!");
 			vieta = 1;
 			Primityvai.prasytiResurso(VRstring.MainGovernor_pazadinimas, this.nameI, 1);
 			return;

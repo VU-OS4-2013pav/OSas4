@@ -1,5 +1,6 @@
 package Procesai;
 
+import gui.InputForm;
 import os.Primityvai;
 import os.Statiniai.VRstring;
 import resourcesINFO.INFOv;
@@ -40,6 +41,7 @@ public class VirtualMachine extends ProcessBase {
 				
 			boolean run = true;
 			while(run) {
+				InputForm.refreshAll();
 				if (RM.runPC()) {
 					for (int i = 0; i < 6; i++) {
 						PL.getProcess(this.father).cpu[i] = Integer.parseInt(RM.registerToString(i), 16);

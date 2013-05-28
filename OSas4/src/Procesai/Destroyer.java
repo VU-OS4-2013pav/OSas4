@@ -43,7 +43,7 @@ public class Destroyer extends ProcessBase {
 			
 			if (pavadinimas == null)
 				System.out.println("Destroyer pradþia neatsineðë pavadinimo!");
-			System.out.println("pavadinimas: " + pavadinimas);
+			//System.out.println("pavadinimas: " + pavadinimas);
 			HDDObject hdd = ((HDDObject)(RSS.list.get(0).resourceDescriptor.info.o));
 			
 			boolean yra = false;

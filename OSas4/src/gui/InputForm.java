@@ -43,7 +43,7 @@ public class InputForm extends JFrame {
 		processLabel = new JLabel("Procesai: ");
 		formPanel.add(processLabel);
 		
-		processField = new JTextArea(11, 52);
+		processField = new JTextArea(20, 52);
 		processField.setEditable(false);
 		scrollProcess = new JScrollPane(processField);
 		processField.setWrapStyleWord(true);
@@ -55,7 +55,7 @@ public class InputForm extends JFrame {
 		resourcesLabel = new JLabel("Resursai: ");
 		formPanel.add(resourcesLabel);
 		
-		resourcesField = new JTextArea(11, 52);
+		resourcesField = new JTextArea(5, 52);
 		resourcesField.setEditable(false);
 		scrollResources = new JScrollPane(resourcesField);
 		resourcesField.setWrapStyleWord(true);
@@ -67,7 +67,7 @@ public class InputForm extends JFrame {
 		waitingLabel = new JLabel("Kas ko laukia:");
 		formPanel.add(waitingLabel);
 		
-		waitingField = new JTextArea(11, 52);
+		waitingField = new JTextArea(7, 52);
 		waitingField.setEditable(false);
 		scrollWaiting = new JScrollPane(waitingField);
 		waitingField.setWrapStyleWord(true);
