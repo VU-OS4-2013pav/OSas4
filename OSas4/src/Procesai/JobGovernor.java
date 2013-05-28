@@ -136,7 +136,7 @@ public class JobGovernor extends ProcessBase {
 			 #*xy	Þodþio numeris xy
 			 */
 			int kelintasDEM = 0;
-			int pc = -1;
+			int pc = 0x0100;
 			int iKur = oa2[1];
 			// nustatom is nuo kur pradedam mesti koda - +3 praleidzia #STR, bloku skaiciu ir programos varda
 			int isKur = hdm.get(0)*0x0100+3;

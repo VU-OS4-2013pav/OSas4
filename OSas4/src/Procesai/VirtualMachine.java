@@ -19,10 +19,12 @@ public class VirtualMachine extends ProcessBase {
 				j = 3;
 				str = Integer.toHexString((Integer)PL.getProcess(this.father).cpu[k]);
 				//if (str.length() > 0)
-				for (int i = str.length() -1; i >= 0; i--) {
-					c[j] = str.charAt(i);
-					j--;
-				}
+				if (str.length() > 0)
+					//System.out.println("STRINGO IIIILgis:"+str.length()+". k="+k+". str="+str+". cpu[k]:"+(Integer)PL.getProcess(this.father).cpu[k]);
+					for (int i = str.length() -1; i >= 0; i--) {
+						c[j] = str.charAt(i);
+						j--;
+					}
 				if (j >= 0) {
 					for (int i = j; i >= 0; i--) {
 						c[i] = '0';

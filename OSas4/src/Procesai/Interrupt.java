@@ -30,17 +30,17 @@ public class Interrupt extends ProcessBase {
 					Primityvai.naikintiResursa(VRSS.list.get(Statiniai.VRint.Pertraukimo_ivykis).resourceList.get(i).nameI);
 					break; //radom ko reikia
 				}
-			
+
 			if (resursas == null) {
 				System.out.println("Nerastas resursas Interrupt!");
 			}
-			
+
 			jgVardas = (Integer)((Object[])resursas.info.o)[0]; //Iðsipleðiam JG 
-			
+
 			//Apdorojami pertraukimo ávykiai
-			
+
 			Object[] cpu = PL.getProcess(jgVardas).cpu;
-			
+
 			//Jei kaþkas ið PI
 			int regInt = (Integer)cpu[RM.PI];
 			if (regInt > 0) {
@@ -63,7 +63,7 @@ public class Interrupt extends ProcessBase {
 				Primityvai.sukurtiResursa(Statiniai.VRstring.MainGovernor_pazadinimas, true, nameI, inf);
 				return;
 			}
-			
+
 			//Jei kaþkas ið SI
 			regInt = (Integer)cpu[RM.SI];
 			if (regInt > 0) {
@@ -76,9 +76,9 @@ public class Interrupt extends ProcessBase {
 				vieta = 0;
 				Primityvai.sukurtiResursa(Statiniai.VRstring.MainGovernor_pazadinimas, true, nameI, inf);
 				return;
-				
+
 			}
-			
+
 			//Jei TI
 			regInt = (Integer)cpu[RM.TI];
 			if (regInt == 0) {
@@ -96,7 +96,7 @@ public class Interrupt extends ProcessBase {
 				Primityvai.sukurtiResursa(Statiniai.VRstring.Pranesimas_apie_pertraukima, true, nameI, inf);
 				return;
 			}
-			
+
 			//Jei kaþkas ið DI
 			regInt = (Integer)cpu[RM.DI];
 			if (regInt > 0) {
@@ -104,53 +104,53 @@ public class Interrupt extends ProcessBase {
 				if (regInt == 3) {
 					vieta = 0;
 					INFO inf = new INFOv();
-					
+
 					//o[0] IA
 					//o[1] CC
 					//o[2] IO
 					//o[3] OO
-					
+
 					// randam JG pagal vidiná vardà
 					ProcessBase jg = PL.getProcess(jgVardas);
-					 int iKur = (int) jg.cpu[RM.AA]; // virtualus adresas
-					   
-					   char[] c = new char[4];
-					   int j = 3;
-					   String str = Integer.toHexString(iKur);
-					   
-					   for (int i = str.length() -1; i >= 0; i--) {
-					    c[j] = str.charAt(i);
-					    j--;
-					   }
-					   if (j >= 0) {
-					    for (int i = j; i >= 0; i--) {
-					     c[i] = '0';
-					    }
-					   }
-					   
-					   //virtualizacija
-					   char[] a = { 
-					     Integer.toHexString((int) jg.cpu[RM.PTR]).charAt(0),
-					     Integer.toHexString((int) jg.cpu[RM.PTR]).charAt(1),
-					     c[0],
-					     c[1]
-					   };
+					int iKur = (int) jg.cpu[RM.AA]; // virtualus adresas
 
-					   char[] addressR = {
-					     Memory.get()[Integer.parseInt(String.valueOf(a), 16)].getWord()[0],
-					     Memory.get()[Integer.parseInt(String.valueOf(a), 16)].getWord()[1],
-					     c[2],
-					     c[3]
-					   };
-					
-					   
-					   
+					char[] c = new char[4];
+					int j = 3;
+					String str = Integer.toHexString(iKur);
+
+					for (int i = str.length() -1; i >= 0; i--) {
+						c[j] = str.charAt(i);
+						j--;
+					}
+					if (j >= 0) {
+						for (int i = j; i >= 0; i--) {
+							c[i] = '0';
+						}
+					}
+
+					//virtualizacija
+					char[] a = { 
+							Integer.toHexString((int) jg.cpu[RM.PTR]).charAt(0),
+							Integer.toHexString((int) jg.cpu[RM.PTR]).charAt(1),
+							c[0],
+							c[1]
+					};
+
+					char[] addressR = {
+							Memory.get()[Integer.parseInt(String.valueOf(a), 16)].getWord()[0],
+							Memory.get()[Integer.parseInt(String.valueOf(a), 16)].getWord()[1],
+							c[2],
+							c[3]
+					};
+
+
+
 					((Object[])inf.o)[0] = Integer.parseInt(String.valueOf(addressR), 16); //Adresas nuo kurio pradedam vest
 					((Object[])inf.o)[1] = jg.cpu[RM.CC]; //kiek reikia iðvest
 					((Object[])inf.o)[2] = 1; //IO = 1 vedam ið vidinës
 					((Object[])inf.o)[3] = 3; //OO = 2 vedam á ekranà
 					((Object[])inf.o)[4] = jgVardas; //jg vidinis vardas
-					
+
 					/*((Object[])inf.o)[0] = PPS.getProcess(jgVardas).sunus.get(0);
 					((Object[])inf.o)[1] = (Integer)cpu[RM.CC];*/
 					Primityvai.stabdytiProcesa(PL.getProcess(jgVardas).sunus.get(0));
@@ -158,7 +158,7 @@ public class Interrupt extends ProcessBase {
 					return;
 				}
 				//Jei nuskaitymas ið klaviatûros
-				if (regInt == 6) {
+				else if (regInt == 6) {
 					vieta = 0;
 					INFO inf = new INFOv();
 					((Object[])inf.o)[0] = (Integer)cpu[RM.CC];
@@ -166,12 +166,109 @@ public class Interrupt extends ProcessBase {
 					Primityvai.sukurtiResursa(Statiniai.VRstring.VM_nori_ivedimo, true, nameI, inf);
 					return;
 				}
+				else if (regInt == 1) { // jei tarp ram'o
+					vieta = 0;
+					INFO inf = new INFOv();
+					
+					// randam JG pagal vidiná vardà
+					ProcessBase jg = PL.getProcess(jgVardas);
+					
+					((Object[])inf.o)[0] = 1; //IO = 1 vedam ið vidinës
+					((Object[])inf.o)[1] = 1; //OO = 1 vidine
+					
+					// aa is kur
+					// bb i kur
+					// cc kiek
+
+//					[0] IO
+//					[1] OO
+//					[2] IA
+//					[3] OA
+//					[4] kiek – cc
+//					[5] jg vidinis
+
+					// BB i kur
+					int iKur = (int) jg.cpu[RM.BB]; // virtualus adresas
+
+					char[] c = new char[4];
+					int j = 3;
+					String str = Integer.toHexString(iKur);
+
+					for (int i = str.length() -1; i >= 0; i--) {
+						c[j] = str.charAt(i);
+						j--;
+					}
+					if (j >= 0) {
+						for (int i = j; i >= 0; i--) {
+							c[i] = '0';
+						}
+					}
+
+					//virtualizacija
+					char[] a = { 
+							Integer.toHexString((int) jg.cpu[RM.PTR]).charAt(0),
+							Integer.toHexString((int) jg.cpu[RM.PTR]).charAt(1),
+							c[0],
+							c[1]
+					};
+
+					char[] addressR = {
+							Memory.get()[Integer.parseInt(String.valueOf(a), 16)].getWord()[0],
+							Memory.get()[Integer.parseInt(String.valueOf(a), 16)].getWord()[1],
+							c[2],
+							c[3]
+					};
+					
+					((Object[])inf.o)[3] = Integer.parseInt(String.valueOf(addressR), 16);
+					
+					// AA is kur
+					iKur = (int) jg.cpu[RM.AA]; // virtualus adresas
+
+					c = new char[4];
+					j = 3;
+					str = Integer.toHexString(iKur);
+
+					for (int i = str.length() -1; i >= 0; i--) {
+						c[j] = str.charAt(i);
+						j--;
+					}
+					if (j >= 0) {
+						for (int i = j; i >= 0; i--) {
+							c[i] = '0';
+						}
+					}
+
+					//virtualizacija
+					char[] a1 = { 
+							Integer.toHexString((int) jg.cpu[RM.PTR]).charAt(0),
+							Integer.toHexString((int) jg.cpu[RM.PTR]).charAt(1),
+							c[0],
+							c[1]
+					};
+
+					char[] addressR1 = {
+							Memory.get()[Integer.parseInt(String.valueOf(a1), 16)].getWord()[0],
+							Memory.get()[Integer.parseInt(String.valueOf(a1), 16)].getWord()[1],
+							c[2],
+							c[3]
+					};
+					
+					((Object[])inf.o)[2] = Integer.parseInt(String.valueOf(addressR1), 16);
+
+					 //Adresas nuo kurio pradedam vest
+					((Object[])inf.o)[4] = jg.cpu[RM.CC]; //kiek reikia iðvest
+
+					((Object[])inf.o)[5] = jgVardas; //jg vidinis vardas
+
+					Primityvai.stabdytiProcesa(PL.getProcess(jgVardas).sunus.get(0));
+					Primityvai.sukurtiResursa(Statiniai.VRstring.Swapper_pradzia, true, nameI, inf);
+				}
 			}
-			
+
 			vieta = 1;
 			Primityvai.prasytiResurso(VRstring.Pertraukimo_ivykis, nameI, 1);
 			return;
 		} 
-		
+
 	}
 }
